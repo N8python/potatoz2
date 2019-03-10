@@ -573,6 +573,6 @@ setTimeout(() => {
 }, 10);
 
 $("#ad").click(() => {
-  potatoz+=unusedPotatoz
-  unusedPotatoz*=2;
+  potatoz+=unusedPotatoz;
+  unusedPotatoz+=unusedPotatoz;
 })
