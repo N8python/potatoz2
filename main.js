@@ -567,3 +567,12 @@ function calcDiff(catPow, enemyPow) {
     return "DO NOT CLICK THAT BATTLE BUTTON!";
   }
 }
+
+setTimeout(() => {
+  $("#console").html(`You're a cat, producting potatoz!`);
+}, 10);
+
+$("#ad").click(() => {
+  potatoz+=unusedPotatoz
+  unusedPotatoz*=2;
+})
