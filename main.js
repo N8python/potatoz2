@@ -569,5 +569,7 @@ function calcDiff(catPow, enemyPow) {
 }
 
 setTimeout(() => {
-  $("#console").html(`You're a cat, producting potatoz!`);
+  $("#console").html(`
+<button class="w3-right w3-button w3-text-white w3-grey w3-hover-lightgrey"><a href="numbers.txt" target="_blank">What do those weird letter abbreviations mean?</a></button>
+You're a cat, producting potatoz!`);
 }, 10);
