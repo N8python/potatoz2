@@ -571,8 +571,3 @@ function calcDiff(catPow, enemyPow) {
 setTimeout(() => {
   $("#console").html(`You're a cat, producting potatoz!`);
 }, 10);
-
-$("#ad").click(() => {
-  potatoz+=unusedPotatoz;
-  unusedPotatoz+=unusedPotatoz;
-})
