@@ -288,8 +288,8 @@ function format(number, decPlaces = 2) {
   return number;
 }
 let updateId = setInterval(() => {
-  $("#potatozAmount").html(`Potatoz: ${format(potatoz)}`);
-  $("#unusedPotatozAmount").html(`Unused potatoz: ${format(unusedPotatoz)}`);
+  $("#potatozAmount").html(`Totes potatoz: ${format(potatoz)}`);
+  $("#unusedPotatozAmount").html(`Available potatoz: ${format(unusedPotatoz)}`);
   $("#buyAPatch").html(`Buy a patch for ${format(patchPrice)} potatoes.`);
   $("#patchesAmount").html(`Patches: ${format(patches)}`);
   $("#patchMax").html(`Patch Max: ${format(patchMax)}`);
