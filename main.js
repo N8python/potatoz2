@@ -340,7 +340,7 @@ let updateId = setInterval(() => {
     $("#creat").html(`Creativity: ${format(creativity)}`);
     $("#ideas").html(`Ideas: ${format(ideas)}`);
     $("#increaseIQ").html(`+1 IQ for ${format(iqCost)} potatoes`);
-    $("#productionPercentDisplay").html(`Percent alocated to production: ${$("#productionPercent").val()}%`)
+    $("#productionPercentDisplay").html(`Percent allocated to production: ${$("#productionPercent").val()}%`)
     $("#weapons").html(`Weapons Equipped: ${(potatoLaunchers) ? "<br> Potato Launchers" : ""} ${(taterBombs) ? "<br> Tater Tot Bombs" : ""}`);
     $("#stratCount").html(`Strategums: ${strats}`);
 }, 1);
