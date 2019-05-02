@@ -567,7 +567,7 @@ function calcDiff(catPow, enemyPow) {
     return "DO NOT CLICK THAT BATTLE BUTTON!";
   }
 }
-
+function askReset(){ if(confirm("Are you sure you want to reset the game? You will lose all progress.") == true) reset(); }
 setTimeout(() => {
   $("#console").html(`
 <button class="w3-right w3-button w3-text-white w3-grey w3-hover-lightgrey"><a href="numbers.txt" target="_blank">What do those weird letter abbreviations mean?</a></button>
