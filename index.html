@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="A clciker game about potatoz.">
+    <meta name="keywords" content="Potatoes, potatoes, Potatoz, potatoes, Cats, cats, Clicker games, clicker games, Clicker Games">
+    <meta name="viewport" content="user-scalable=no" />
+    <title>Potatoz</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body class="w3-margin">
+    <header id="console" class="w3-border w3-padding" style="height: 75px; overflow: auto;">
+        <button class="w3-right w3-button w3-text-white w3-grey w3-hover-lightgrey"><a href="numbers.txt" target="_blank">What do those weird letter abbreviations mean?</a></button> You're a cat, producting potatoz!
+    </header>
+    <br>
+    <br>
+    <br>
+    <header>
+        <h1 id="unusedPotatozAmount">Available Potatoes: 0</h1>
+    </header>
+    <button id="potatozPlus" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Make Potato</button>
+    <br>
+    <section class="col-container w3-margin-top">
+        <section class="w3-border w3-margin-top w3-padding col" style="width:300px;">
+            <h5>Potatonomics:</h5>
+            <p id="potatozAmount">Total Potatoz: 0</p>
+            <div id="advancedPotatonomics">
+                <p id="pPerSec">Potatoz per sec: 0</p>
+                <p id="patchProduces">Each patch produces: 1 per sec</p>
+                <p id="farmProduces">Each farm produces: 1 per sec</p>
+            </div>
+        </section>
+        <section id="patches" class="w3-border w3-margin-top w3-padding col" style="width:300px;">
+            <h5 id="patchesAmount">Patches: 0</h5>
+            <button id="buyAPatch" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Buy a patch for 50 potatoes.</button>
+            <p id="patchMax">Patch Max: 5</p>
+        </section>
+        <section id="farms" class="w3-border w3-margin-top w3-padding col" style="width:300px;">
+            <h5 id="farmAmount">Farms: 0</h5>
+            <button id="buyAFarm" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Buy a farm for 200K potatoes.</button>
+            <p id="farmMax">Farm Max: 2</p>
+        </section>
+    </section>
+    <br>
+    <section class="col-container w3-margin-top">
+        <section id="brain" class="w3-border w3-margin-top w3-padding col" style="width:300px;">
+            <h5>Your Brain:</h5>
+            <p id="iq">IQ: 20</p> <button id="increaseIQ" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">+1 IQ for 5 potatoes</button>
+            <br> <br> <button id="convertAll" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Convert all Thoughts to Ideas and Creativity</button>
+            <p id="thoughts">Thoughts: 0 / 10B</p>
+            <div id="thoughtProduction">
+                <p id="productionPercentDisplay">Percent allocated to production: 1%</p>
+                <input id="productionPercent" class="w3-input" type="range" min="1" max="100">
+            </div>
+        </section>
+        <section id="buyThoughts" class="w3-border w3-margin-top w3-padding col" style="width:300px;">
+            <button id="buyCreat" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Convert 5 thoughts to 1 creativity</button>
+            <button id="buyIdea" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Convert 10 thoughts to 1 idea</button>
+            <p id="creat">Creativity: 0</p>
+            <p id="ideas">Ideas: 0</p>
+        </section>
+    </section>
+    <section id="cats" class="col-container w3-margin-top">
+        <section class="w3-border w3-margin-top w3-padding col" style="width:300px">
+            <h5 id="catAmount">Cats: 0 / 0</h5>
+            <button id="buyACat" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Buy a cat for 1M potatoes.</button>
+            <br>
+            <br>
+            <button id="recallAllCats" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Recall all cats</button>
+        </section>
+        <section id="farmerCats" class="w3-border w3-margin-top w3-padding col" style="width:300px">
+            <h5 id="farmerCatAmount">Farmer Cats: 0</h5>
+            <button id="assignFarmer" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Assign <input type="text" id="numFarmerCats" style="width: 50px" value="1"> Farmer Cats</button>
+            <p id="eachBoostFarmer">Each farmer cat adds a 10% boost to potato production.</p>
+            <p id="totalBoostFarmer">Total Farmer Cat Boost: 0%</p>
+        </section>
+        <section id="studentCats" class="w3-border w3-margin-top w3-padding col" style="width:300px">
+            <h5 id="studentCatAmount">Student Cats: 0</h5>
+            <button id="assignStudent" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Assign <input type="text" id="numStudentCats" style="width: 50px" value="1"> Student Cats</button>
+            <p id="eachBoostStudent">Each student cat generates 0.001 IQ per second.</p>
+            <p id="totalBoostStudent">Total IQ Per Second: 0</p>
+        </section>
+        <section id="surveyorCats" class="w3-border w3-margin-top w3-padding col" style="width:300px">
+            <h5 id="surveyorCatAmount">Surveyor Cats: 0</h5>
+            <button id="assignSurveyor" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Assign <input type="text" id="numSurveyorCats" style="width: 50px" value="1"> Surveyor Cats</button>
+            <p id="eachBoostSurveyor">Each surveyor cat generates 0.001 farm max per second.</p>
+            <p id="totalBoostSurveyor">Total Farm Max Added Per Sec: 0</p>
+        </section>
+    </section>
+    <section id="battles" class="col-container w3-margin-top">
+        <section id="soldierCats" class="w3-border w3-margin-top w3-padding col" style="width:300px">
+            <h5 id="soldierCatAmount">Soldier Cat: 0</h5>
+            <button id="assignSoldier" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Assign Soldier <input type="text" id="numSoldierCats" style="width: 50px" value="1">  Cats</button>
+            <p id="weapons">Weapons Equipped:
+
+            </p>
+            <section id="strategums">
+                <button id="buyStrategum" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Purchase strategum for 1M creativity, 1M ideas</button>
+                <p id="stratCount">Strategums: 0</p>
+            </section>
+        </section>
+        <section id="chaplainCats" class="w3-border w3-margin-top w3-padding col" style="width:300px">
+            <h5 id="chaplainCatAmount">Chaplian Cats: 0</h5>
+            <button id="assignChaplain" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Assign <input type="text" id="numChaplainCats" style="width: 50px" value="1"> Chaplain Cats</button>
+            <p id="eachBoostChaplain">Each chaplain cat provides +0.0001 boost per second.</p>
+            <p id="totalBoostChaplain">Total boost added per sec: 0</p>
+        </section>
+        <section id="battleField" class="w3-border w3-margin-top w3-padding col" style="width:300px">
+            <p id="percentConquered">Percent of the World Conquered: 0%</p>
+            <p id="battleDiff"></p>
+            <button id="battle" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Battle</button>
+            <br>
+            <br>
+            <canvas id="canvas" width="200px" height="120px"></canvas>
+        </section>
+    </section>
+    <section id="projects">
+        <h2>Projects:</h2>
+    </section>
+    <br>
+    <a style="background:red; color:white;" id="ad" href="mailto:?subject=Play%20This%20Game&body=Check%20out%20this%20cool%20game%20I%20found%20at%20potatoz.net">Enjoying potatoz, tell a friend!</a>
+    <a style="display:none;" href="https://clustrmaps.com/site/1amtl" title="Visit tracker"><img src="//www.clustrmaps.com/map_v2.png?d=ljRDZ4hpR6brBGH3RJI3_p_E4c0osI2zs-IjS4jbuuk&cl=ffffff"></a>
+    <button onclick="askForReset()" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Restart Game (Do this if you are migrating from Potatoz 1)</button>
+    <script src="addMessage.js"></script>
+    <script src="MasMas.min.js"></script>
+    <script src="battle.js"></script>
+    <script src="project.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+The following letter abbreviations correspond to the following numbers:
+  K - thousand
+  M - million
+  B - billion
+  T - trillion
+  q - quadrillion
+  Q - quintillion
+  s - sextillion
+  S - septillion
+  O - octillion
+  N - nonillion
+  D - decillion
