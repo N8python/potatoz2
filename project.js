@@ -676,7 +676,7 @@ let takeOverTheWorld = new Project({
     creatCost: parseNum("10s"),
     potatoCost: parseNum("10s"),
     effect: () => {
-        addMessage('"Not cookies, nor paperclips, nor money, nor catnip can stop us. POTATOZ FOREVER!" - THe cat national anthem');
+        addMessage('"Not cookies, nor paperclips, nor money, nor catnip can stop us. POTATOZ FOREVER!" - The cat national anthem');
         projects.push(metafolding);
     }
 });
@@ -699,9 +699,8 @@ let metafolding = new Project({
         addMessage("Bonnie, my cat, for starting it all.");
         addMessage("Since you worked so hard, you get a reward.");
         addMessage("An animaiton. After a game of buttons and text.");
-        addMessage('See this animation: <a href="Potatoz.mp4" target="_blank">here</a>')
-        reset();
-        addMessage("Game reset. Reload the page to play again.");
+        addMessage('See this animation: <a href="Potatoz.mp4" target="_blank">here</a>');
+        addMessage("You can keep playing, but there are no new projects or features to be found. Reset when you are ready.");
     }
 })
 let projectKey = {
