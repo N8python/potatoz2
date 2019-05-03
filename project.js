@@ -699,7 +699,7 @@ let metafolding = new Project({
         addMessage("Bonnie, my cat, for starting it all.");
         addMessage("Since you worked so hard, you get a reward.");
         addMessage("An animaiton. After a game of buttons and text.");
-        addMessage('See this animation: <a href="Potatoz.webm" target="_blank">here</a>')
+        addMessage('See this animation: <a href="Potatoz.mp4" target="_blank">here</a>')
         reset();
         addMessage("Game reset. Reload the page to play again.");
     }
