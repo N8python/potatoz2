@@ -78,68 +78,61 @@
  * A utility that wraps some common jQuery calls to make code more succinct.
  * Most methods use the rest parameter to take a variable number of parameters and perform a single action on them.
  */
-class JQueryHelper {
-
-    /**
-     * Shows any number of jQuery selections
-     * 
-     * @param  {...any} selections A variable number of jQuery selections. 
-     */
-    show(...selections) {
-        for (var selection of selections) {
-            selection.show();
-        }
+const jQueryHelper = {
+  /**
+    * Shows any number of jQuery selections
+    * 
+    * @param  {...any} selections A variable number of jQuery selections. Uses the "rest parameter"
+    * @param  {...any} selections A variable number of jQuery selections. 
+  */
+  show (...selections) {
+    selections.forEach(selection => {
+      selection.show();
+    });
+  },
+  /**
+    * Hides any number of jQuery selections
+    * 
+    * @param  {...any} selections A variable number of jQuery selections. Uses the "rest parameter"
+    * @param  {...any} selections A variable number of jQuery selections. 
+  */
+  hide (...selections) {
+    selections.forEach(selection => {
+      selection.hide();
+    });
+  },
+  /**
+  * Sets the disabled attribute of a set of selections to ""
+   * 
+   * @param  {...any} selections 
+  */
+  disable (...selections) {
+    selections.forEach(selection => {
+      selections.attr("disabled", "");
+    })
+  },
+  /**
+    * Removes the disabled attribute from a set of selections
+   * 
+   * @param  {...any} selections 
+  */
+  enable (...selections) {
+    selections.forEach(selection => {
+      selections.removeAttr("disabled");
+    })
+  },
+  /**
+    * Overwrite the text of the span inside of a selection. 
+   * Used primarily to update values upon interval. 
+   *
+  * @param  {...[string, any]} selectionsAndValues A [String, Any] array of selections and their values
+   */
+  setSpanValues (...selectionsAndValues) {
+    for(let [selection, value] of selectionsAndValues) {
+      $(selection).find("span").text(value);
     }
-
-    /**
-     * Hides any number of jQuery selections
-     * 
-     * @param  {...any} selections A variable number of jQuery selections. 
-     */
-    hide(...selections) {
-        for (var selection of selections) {
-            selection.hide();
-        }
-    }
-
-    /**
-     * Overwrite the text of the span inside of a selection. 
-     * Used primarily to update values upon interval.
-     * 
-     * @param  {...any} selectionsAndValues A [String, Any] array of selections and their values
-     */
-    setSpanValues(...selectionsAndValues) {
-        for (var sav of selectionsAndValues) {
-            // Destructuring
-            const [selection, value] = sav;
-            $(selection).find("span").text(value);
-        }
-    }
-
-    /**
-     * Sets the disabled attribute of a set of selections to ""
-     * 
-     * @param  {...any} selections 
-     */
-    disable(...selections) {
-        for (var selection of selections) {
-            selection.attr("disabled", "");
-        }
-    }
-
-    /**
-     * Removes the disabled attribute from a set of selections
-     * 
-     * @param  {...any} selections 
-     */
-    enable(...selections) {
-        for (var selection of selections) {
-            selection.removeAttr("disabled");
-        }
-    }
-
+  }
 }
-const jqueryHelper = new JQueryHelper();
 
 let randInt = new Random().getRandomNumber;
 projects = projects.map(project => projectKey[project.title]);
