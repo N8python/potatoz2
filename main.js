@@ -1,83 +1,134 @@
-localStore("potatoz", 0);
-localStore("unusedPotatoz", 0);
-localStore("doneMessages", []);
-localStore("patchPrice", 20);
-localStore("patches", 0);
-localStore("patchBoost", 1);
-localStore("patchMax", 5);
-localStore("patchFertilizer", false);
-localStore("patchMultiplier", 1.2);
-localStore("farmPrice", 250000);
-localStore("farms", 0);
-localStore("farmBoost", 1);
-localStore("farmMax", 2);
-localStore("farmsIrrigated", false);
-localStore("farmsUnlocked", false);
-localStore("cats", 0);
-localStore("availableCats", 0)
-localStore("catPrice", 1000000)
-localStore("catsUnlocked", false)
-localStore("farmers", 0);
-localStore("farmerBoost", 0.1);
-localStore("farmerReduce", false);
-localStore("farmerCatsUnlocked", false);
-localStore("students", 0);
-localStore("studentBoost", 0.001);
-localStore("studentCatsUnlocked", false);
-localStore("surveyors", 0);
-localStore("surveyorBoost", 0.001);
-localStore("surveyorCatsUnlocked", false);
-localStore("surveyorFarm", false);
-localStore("soldierCats", 0);
-localStore("soldierCatsUnlocked", false);
-localStore("chaplains", 0);
-localStore("chaplainBoost", 0.0001)
-localStore("chaplainCatsUnlocked", false);
-localStore("battlesUnlocked", false);
-localStore("battleIntensity", 1);
-localStore("selfReflectionUnlocked", false);
-localStore("iq", 20);
-localStore("iqButton", false);
-localStore("iqCost", 10)
-localStore("thoughts", 0);
-localStore("thoughtBoost", 1);
-localStore("thoughtSlider", false);
-localStore("creativity", 0);
-localStore("ideas", 0);
-localStore("projects", []);
-localStore("advancedNomics", false);
-localStore("raidChance", 0.05);
-localStore("percentWorldConquered", 0);
-localStore("potatoLaunchers", false);
-localStore("scouts", false);
-localStore("stratsUnlocked", false);
-localStore("strats", 0);
-localStore("taterBombs", false);
-localStore("flankingUnlocked", false);
-localStore("takeoverAdded", false);
+/**
+ * Load or initialize a set of game values. Under the hood this calls the localStore
+ * function of MasMas.min.js, which sets every parameter globally upon load.
+ * 
+ * 
+ * @param initialObject object of string-any pairs
+ */
+(function initializeLocalStorage(initialObject) {
+    for (const [key, value] of Object.entries(initialObject)) {
+        localStore(key, value);
+    }
+})({
+    potatoz: 0,
+    unusedPotatoz: 0,
+    doneMessages: [],
+    patchPrice: 20,
+    patches: 0,
+    patchBoost: 1,
+    patchMax: 5,
+    patchFertilizer: false,
+    patchMultiplier: 1.2,
+    farmPrice: 250000,
+    farms: 0,
+    farmBoost: 1,
+    farmMax: 2,
+    farmsIrrigated: false,
+    farmsUnlocked: false,
+    cats: 0,
+    availableCats: 0,
+    catPrice: 1000000,
+    catsUnlocked: false,
+    farmers: 0,
+    farmerBoost: 0.1,
+    farmerReduce: false,
+    farmerCatsUnlocked: false,
+    students: 0,
+    studentBoost: 0.001,
+    studentCatsUnlocked: false,
+    surveyors: 0,
+    surveyorBoost: 0.001,
+    surveyorCatsUnlocked: false,
+    surveyorFarm: false,
+    soldierCats: 0,
+    soldierCatsUnlocked: false,
+    chaplains: 0,
+    chaplainBoost: 0.0001,
+    chaplainCatsUnlocked: false,
+    battlesUnlocked: false,
+    battleIntensity: 1,
+    selfReflectionUnlocked: false,
+    iq: 20,
+    iqButton: false,
+    iqCost: 10,
+    thoughts: 0,
+    thoughtBoost: 1,
+    thoughtSlider: false,
+    creativity: 0,
+    ideas: 0,
+    projects: [],
+    advancedNomics: false,
+    raidChance: 0.05,
+    percentWorldConquered: 0,
+    potatoLaunchers: false,
+    scouts: false,
+    stratsUnlocked: false,
+    strats: 0,
+    taterBombs: false,
+    flankingUnlocked: false,
+    takeoverAdded: false,
+});
+
+/**
+ * A utility that wraps some common jQuery calls to make code more succinct.
+ */
+class JQueryHelper {
+
+    /**
+     * Shows any number of jQuery selections
+     * 
+     * @param  {...any} selections A variable number of jQuery selections. Uses the "rest parameter"
+     */
+    show(...selections) {
+        for (var selection of selections) {
+            selection.show();
+        }
+    }
+
+    /**
+     * Shows any number of jQuery selections
+     * 
+     * @param  {...any} selections A variable number of jQuery selections. Uses the "rest parameter"
+     */
+    hide(...selections) {
+        for (var selection of selections) {
+            selection.hide();
+        }
+    }
+}
+const jqueryHelper = new JQueryHelper();
+
 let randInt = new Random().getRandomNumber;
 projects = projects.map(project => projectKey[project.title]);
 projects.forEach(project => {
     project.set = false;
 });
-$("#patches").hide();
-$("#brain").hide();
-$("#buyThoughts").hide();
-$("#projects").hide();
-$("#advancedPotatonomics").hide();
-$("#increaseIQ").hide();
-$("#convertAll").hide();
-$("#thoughtProduction").hide();
-$("#farms").hide();
-$("#farmProduces").hide();
-$("#cats").hide();
-$("#farmerCats").hide();
-$("#studentCats").hide();
-$("#surveyorCats").hide();
-$("#battles").hide();
-$("#battleField").hide();
-$("#strategums").hide();
-$("#chaplainCats").hide();
+
+//////////
+// Initialize which UI elements are visible or hidden
+//////////
+
+jqueryHelper.hide(
+    $("#patches"), 
+    $("#brain"), 
+    $("#buyThoughts"), 
+    $("#projects"), 
+    $("#advancedPotatonomics"), 
+    $("#increaseIQ"), 
+    $("#convertAll"), 
+    $("#thoughtProduction"), 
+    $("#farms"), 
+    $("#farmProduces"), 
+    $("#cats"), 
+    $("#farmerCats"), 
+    $("#studentCats"), 
+    $("#surveyorCats"), 
+    $("#battles"), 
+    $("#battleField"), 
+    $("#strategums"), 
+    $("#chaplainCats"),
+)
+
 if (patchFertilizer) {
     setInterval(() => {
         patchBoost = (patchBoost + 0.05).A();
@@ -88,16 +139,13 @@ if (farmsIrrigated) {
         farmBoost = (farmBoost + 0.1).A();
     }, 5000)
 }
-if (doneMessages.includes("patches")) {
-    $("#patches").show();
-}
+// Though this could just call `$("#patches").show()`, we use JQueryHelper for consistency
+if (doneMessages.includes("patches")) jqueryHelper.show($("#patches"));
 if (doneMessages.includes("self")) {
-    $("#brain").show();
-    $("#buyThoughts").show();
-    $("#projects").show();
+    jqueryHelper.show($("#brain"), $("#buyThoughts"), $("#projects"));
 }
 if (advancedNomics) {
-    $("#advancedPotatonomics").show();
+    jqueryHelper.show($("#advancedPotatonomics"));
 }
 if (iqButton) {
     $("#increaseIQ").show();
@@ -137,6 +185,10 @@ if (stratsUnlocked) {
 if (chaplainCatsUnlocked) {
     $("#chaplainCats").show();
 }
+
+//////////
+// Set click handlers
+//////////
 $("#potatozPlus").click(() => {
     potatoz++;
     unusedPotatoz++;
