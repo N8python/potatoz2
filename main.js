@@ -144,7 +144,7 @@ projects.forEach(project => {
 // Initialize which UI elements are visible or hidden
 //////////
 
-jqueryHelper.hide(
+jQueryHelper.hide(
     $("#patches"), 
     $("#brain"), 
     $("#buyThoughts"), 
@@ -175,52 +175,52 @@ if (farmsIrrigated) {
         farmBoost = (farmBoost + 0.1).A();
     }, 5000)
 }
-// Though this could just call `$("#patches").show()`, we use JQueryHelper for consistency
+// Though this could just call `$("#patches").show()`, we use jQueryHelper for consistency
 if (doneMessages.includes("patches")) {
-    jqueryHelper.show($("#patches"));
+    jQueryHelper.show($("#patches"));
 }
 if (doneMessages.includes("self")) {
-    jqueryHelper.show($("#brain"), $("#buyThoughts"), $("#projects"));
+    jQueryHelper.show($("#brain"), $("#buyThoughts"), $("#projects"));
 }
 if (advancedNomics) {
-    jqueryHelper.show($("#advancedPotatonomics"));
+    jQueryHelper.show($("#advancedPotatonomics"));
 }
 if (iqButton) {
-    jqueryHelper.show($("#increaseIQ"));
+    jQueryHelper.show($("#increaseIQ"));
 }
 if (selfReflectionUnlocked) {
-    jqueryHelper.show($("#convertAll"));
+    jQueryHelper.show($("#convertAll"));
 }
 if (thoughtSlider) {
-    jqueryHelper.show($("#thoughtProduction"));
+    jQueryHelper.show($("#thoughtProduction"));
 }
 if (farmsUnlocked) {
-    jqueryHelper.show($("#farms"), $("#farmProduces"));
-    jqueryHelper.hide($("#patchProduces"));
+    jQueryHelper.show($("#farms"), $("#farmProduces"));
+    jQueryHelper.hide($("#patchProduces"));
 }
 if (catsUnlocked) {
-    jqueryHelper.show($("#cats"));
+    jQueryHelper.show($("#cats"));
 }
 if (farmerCatsUnlocked) {
-    jqueryHelper.show($("#farmerCats"));
+    jQueryHelper.show($("#farmerCats"));
 }
 if (studentCatsUnlocked) {
-    jqueryHelper.show($("#studentCats"));
+    jQueryHelper.show($("#studentCats"));
 }
 if (surveyorCatsUnlocked) {
-    jqueryHelper.show($("#surveyorCats"));
+    jQueryHelper.show($("#surveyorCats"));
 }
 if (soldierCatsUnlocked) {
-    jqueryHelper.show($("#battles"));
+    jQueryHelper.show($("#battles"));
 }
 if (battlesUnlocked) {
-    jqueryHelper.show($("#battleField"));
+    jQueryHelper.show($("#battleField"));
 }
 if (stratsUnlocked) {
-    jqueryHelper.show($("#strategums"));
+    jQueryHelper.show($("#strategums"));
 }
 if (chaplainCatsUnlocked) {
-    jqueryHelper.show($("#chaplainCats"));
+    jQueryHelper.show($("#chaplainCats"));
 }
 
 //////////
@@ -396,7 +396,7 @@ function format(number, decPlaces = 2) {
 // todo: A better way to do this is with reactive components
 // todo: finish adding these value updates using the helper, and add corresponding spans to index.html
 let updateId = setInterval(() => {
-    jqueryHelper.setSpanValues(
+    jQueryHelper.setSpanValues(
         [$("#potatozAmount"), format(potatoz)],
         [$("#unusedPotatozAmount"), format(unusedPotatoz)],
         [$("#buyAPatch"), format(patchPrice)],
@@ -442,13 +442,13 @@ let updateId = setInterval(() => {
 let consoleId = setInterval(() => {
     if (potatoz > 19 && !doneMessages.includes("patches") && !farmsUnlocked) {
         doneMessages.push("patches");
-        jqueryHelper.show($("#patches"));
+        jQueryHelper.show($("#patches"));
         addMessage("If you put a potato in the ground, maybe another one will grow. Hmmm.");
         addMessage("Potato patches are now available for purchase. They generate one potato a second.");
     }
     if (potatoz > 249 && !doneMessages.includes("self")) {
         doneMessages.push("self");
-        jqueryHelper.show($("#brain"), $("#buyThoughts"), $("#projects"));
+        jQueryHelper.show($("#brain"), $("#buyThoughts"), $("#projects"));
         projects.push(wateringCans);
         addMessage("Self-awareness achieved. Thoughts to be redirected to maximize potato production.");
         addMessage("Rumor is that potatoes make you smarter.");
@@ -490,7 +490,7 @@ let updatePotatoz = setInterval(() => {
     iq = (iq + students * studentBoost).A();
     farmMax = (farmMax + surveyors * surveyorBoost).A();
     if (surveyorFarm) farms = (farms + surveyors * surveyorBoost).A();
-    jqueryHelper.setSpanValues(
+    jQueryHelper.setSpanValues(
         [$("#pPerSec"), format(incAmount)],
         [$("#patchProduces"), format(patchBoost)],
         [$("#farmProduces"), format(farmBoost*5000)]
@@ -511,25 +511,25 @@ let updatePotatoz = setInterval(() => {
     }
 }, 1000);
 
-// todo: finish applying JQueryHelper refactor
+// todo: finish applying jQueryHelper refactor
 let updateButtons = setInterval(() => {
     if (!(unusedPotatoz >= patchPrice && patches < patchMax)) {
-        jqueryHelper.disable($("#buyAPatch"));
+        jQueryHelper.disable($("#buyAPatch"));
     } else {
-        jqueryHelper.enable($("#buyAPatch"));
+        jQueryHelper.enable($("#buyAPatch"));
     }
     if (!(unusedPotatoz >= farmPrice && farms < Math.floor(farmMax))) {
-        jqueryHelper.disable($("#buyAFarm"));
+        jQueryHelper.disable($("#buyAFarm"));
     } else {
-        jqueryHelper.enable($("#buyAFarm"));
+        jQueryHelper.enable($("#buyAFarm"));
     }
     if (!(unusedPotatoz >= catPrice)) {
-        jqueryHelper.disable($("#buyACat"));
+        jQueryHelper.disable($("#buyACat"));
     } else {
-        jqueryHelper.enable($("#buyACat"));
+        jQueryHelper.enable($("#buyACat"));
     }
     if (!(availableCats > 0)) {
-        jqueryHelper.disable(
+        jQueryHelper.disable(
             $("#assignFarmer"), 
             $("#assignStudent"), 
             $("#assignSurveyor"), 
@@ -537,7 +537,7 @@ let updateButtons = setInterval(() => {
             $("#assignChaplain")
         );
     } else {
-        jqueryHelper.enable(
+        jQueryHelper.enable(
             $("#assignFarmer"), 
             $("#assignStudent"), 
             $("#assignSurveyor"), 
