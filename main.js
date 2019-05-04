@@ -404,6 +404,8 @@ let updateId = setInterval(() => {
         [$("#buyAFarm"), format(farmPrice)],
         [$("#farmAmount"), format(farms)],
         [$("#farmMax"), format(farmMax)],
+        [$("#creat"), format(creativity)],
+        [$("#ideas"), format(ideas)]
     );
 
     $("#patchMax").html(`Patch Max: ${format(patchMax)}`);
@@ -432,8 +434,6 @@ let updateId = setInterval(() => {
   `);
     $("#iq").html(`IQ: ${format(iq)}`);
     $("#thoughts").html(`Thoughts: ${format(thoughts)}`);
-    $("#creat").html(`Creativity: ${format(creativity)}`);
-    $("#ideas").html(`Ideas: ${format(ideas)}`);
     $("#increaseIQ").html(`+1 IQ for ${format(iqCost)} potatoes`);
     $("#productionPercentDisplay").html(`Percent allocated to production: ${$("#productionPercent").val()}%`)
     $("#weapons").html(`Weapons Equipped: ${(potatoLaunchers) ? "<br> Potato Launchers" : ""} ${(taterBombs) ? "<br> Tater Tot Bombs" : ""}`);
