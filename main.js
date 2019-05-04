@@ -128,7 +128,7 @@ const jQueryHelper = {
   * @param  {...[string, any]} selectionsAndValues A [String, Any] array of selections and their values
    */
   setSpanValues (...selectionsAndValues) {
-    for(let [selection, value] of selectionsAndValues) {
+    for(const [selection, value] of selectionsAndValues) {
       $(selection).find("span").text(value);
     }
   }
