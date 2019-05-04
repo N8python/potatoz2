@@ -1,3 +1,7 @@
+// todo: saving all of these values to window is a JavaScript antipattern. A better way to capture these
+//       variables is to put them inside of a global game object, which is itself saved to localStorage.
+//       See the following link for a tutorial: https://coderwall.com/p/ewxn9g/storing-and-retrieving-objects-with-localstorage-html5
+
 /**
  * Load or initialize a set of game values. Under the hood this calls the localStore
  * function of MasMas.min.js, which sets every parameter globally upon load.
@@ -86,13 +90,27 @@ class JQueryHelper {
     }
 
     /**
-     * Shows any number of jQuery selections
+     * Hides any number of jQuery selections
      * 
      * @param  {...any} selections A variable number of jQuery selections. Uses the "rest parameter"
      */
     hide(...selections) {
         for (var selection of selections) {
             selection.hide();
+        }
+    }
+
+    /**
+     * Overwrite the text of the span inside of a selection. 
+     * Used primarily to update values upon interval.
+     * 
+     * @param  {...any} selectionsAndValues A [String, Any] array of selections and their values
+     */
+    setSpanValues(...selectionsAndValues) {
+        for (var sav of selectionsAndValues) {
+            // Destructuring assignment
+            const [selection, value] = sav;
+            $(selection).find("span").text(value);
         }
     }
 }
@@ -140,7 +158,9 @@ if (farmsIrrigated) {
     }, 5000)
 }
 // Though this could just call `$("#patches").show()`, we use JQueryHelper for consistency
-if (doneMessages.includes("patches")) jqueryHelper.show($("#patches"));
+if (doneMessages.includes("patches")) {
+    jqueryHelper.show($("#patches"));
+}
 if (doneMessages.includes("self")) {
     jqueryHelper.show($("#brain"), $("#buyThoughts"), $("#projects"));
 }
@@ -148,42 +168,41 @@ if (advancedNomics) {
     jqueryHelper.show($("#advancedPotatonomics"));
 }
 if (iqButton) {
-    $("#increaseIQ").show();
+    jqueryHelper.show($("#increaseIQ"));
 }
 if (selfReflectionUnlocked) {
-    $("#convertAll").show();
+    jqueryHelper.show($("#convertAll"));
 }
 if (thoughtSlider) {
-    $("#thoughtProduction").show();
+    jqueryHelper.show($("#thoughtProduction"));
 }
 if (farmsUnlocked) {
-    $("#farms").show();
-    $("#farmProduces").show();
-    $("#patchProduces").hide();
+    jqueryHelper.show($("#farms"), $("#farmProduces"));
+    jqueryHelper.hide($("#patchProduces"));
 }
 if (catsUnlocked) {
-    $("#cats").show();
+    jqueryHelper.show($("#cats"));
 }
 if (farmerCatsUnlocked) {
-    $("#farmerCats").show();
+    jqueryHelper.show($("#farmerCats"));
 }
 if (studentCatsUnlocked) {
-    $("#studentCats").show();
+    jqueryHelper.show($("#studentCats"));
 }
 if (surveyorCatsUnlocked) {
-    $("#surveyorCats").show();
+    jqueryHelper.show($("#surveyorCats"));
 }
 if (soldierCatsUnlocked) {
-    $("#battles").show();
+    jqueryHelper.show($("#battles"));
 }
 if (battlesUnlocked) {
-    $("#battleField").show();
+    jqueryHelper.show($("#battleField"));
 }
 if (stratsUnlocked) {
-    $("#strategums").show();
+    jqueryHelper.show($("#strategums"));
 }
 if (chaplainCatsUnlocked) {
-    $("#chaplainCats").show();
+    jqueryHelper.show($("#chaplainCats"));
 }
 
 //////////
@@ -355,15 +374,23 @@ function format(number, decPlaces = 2) {
 
     return number;
 }
+
+// todo: A better way to do this is with reactive components
+// todo: finish adding these value updates using the helper, and add corresponding spans to index.html
 let updateId = setInterval(() => {
-    $("#potatozAmount").html(`Total Potatoz: ${format(potatoz)}`);
-    $("#unusedPotatozAmount").html(`Available potatoz: ${format(unusedPotatoz)}`);
-    $("#buyAPatch").html(`Buy a patch for ${format(patchPrice)} potatoes.`);
-    $("#patchesAmount").html(`Patches: ${format(patches)}`);
+    jqueryHelper.setSpanValues(
+        [$("#potatozAmount"), format(potatoz)],
+        [$("#unusedPotatozAmount"), format(unusedPotatoz)],
+        [$("#buyAPatch"), format(patchPrice)],
+        [$("#patchesAmount"), format(patches)],
+        [$("#buyAFarm"), format(farmPrice)],
+        [$("#farmAmount"), format(farms)],
+        [$("#farmMax"), format(farmMax)],
+    );
+    // todo: the following identifiers have spans wrapping their values but the JqueryHelper logic isn't leveraged 
+    //       yet. It should still work, but remember to update these as well: pPerSec, patchProduces, farmProduces,
+
     $("#patchMax").html(`Patch Max: ${format(patchMax)}`);
-    $("#buyAFarm").html(`Buy a farm for ${format(farmPrice)} potatoes.`);
-    $("#farmAmount").html(`Farms: ${format(farms)}`);
-    $("#farmMax").html(`Farm Max: ${format(farmMax)}`);
     $("#buyACat").html(`Buy a cat for ${format(catPrice)} potatoes.`);
     $("#catAmount").html(`Cats: ${format(availableCats.A())} / ${format(cats.A())}`);
     $("#eachBoostFarmer").html(`Each farmer cat adds a ${format(farmerBoost*100)}% boost to potato production.`);
@@ -395,7 +422,7 @@ let updateId = setInterval(() => {
     $("#productionPercentDisplay").html(`Percent allocated to production: ${$("#productionPercent").val()}%`)
     $("#weapons").html(`Weapons Equipped: ${(potatoLaunchers) ? "<br> Potato Launchers" : ""} ${(taterBombs) ? "<br> Tater Tot Bombs" : ""}`);
     $("#stratCount").html(`Strategums: ${strats}`);
-}, 1);
+}, 200); // Any animation that happens in ~200ms or less is perceived as near-instantaneous for humans, so extra computing resources aren't required for faster intervals
 let consoleId = setInterval(() => {
     if (potatoz > 19 && !doneMessages.includes("patches") && !farmsUnlocked) {
         doneMessages.push("patches");
@@ -456,7 +483,7 @@ let updatePotatoz = setInterval(() => {
         if (!thoughtSlider) {
             thoughts += thoughtInc;
         } else {
-            let sliderAmount = Number($("#productionPercent").val())
+            let sliderAmount = Number($("#productionPercent").val()) // todo: this will need to capture the span value
             let thoughtsForProduction = thoughtInc * sliderAmount / 100
             thoughtInc -= thoughtsForProduction;
             thoughtInc = Math.floor(thoughtInc);
@@ -611,6 +638,7 @@ function dogRaid() {
     unusedPotatoz -= potatoesLost;
 }
 
+// todo: this is a good opportunity to use a switch statement or some other structure
 function calcDiff(catPow, enemyPow) {
     if (potatoLaunchers) catPow += (catPow * 5);
     if (taterBombs) catPow *= 2;
