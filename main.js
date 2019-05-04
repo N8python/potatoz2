@@ -1,6 +1,7 @@
 // todo: saving all of these values to window is a JavaScript antipattern. A better way to capture these
 //       variables is to put them inside of a global game object, which is itself saved to localStorage.
 //       See the following link for a tutorial: https://coderwall.com/p/ewxn9g/storing-and-retrieving-objects-with-localstorage-html5
+// todo: reduce magic numbers. It'll make it easier to tweak numeric scaling based on user feedback
 
 /**
  * Load or initialize a set of game values. Under the hood this calls the localStore
@@ -75,13 +76,14 @@
 
 /**
  * A utility that wraps some common jQuery calls to make code more succinct.
+ * Most methods use the rest parameter to take a variable number of parameters and perform a single action on them.
  */
 class JQueryHelper {
 
     /**
      * Shows any number of jQuery selections
      * 
-     * @param  {...any} selections A variable number of jQuery selections. Uses the "rest parameter"
+     * @param  {...any} selections A variable number of jQuery selections. 
      */
     show(...selections) {
         for (var selection of selections) {
@@ -92,7 +94,7 @@ class JQueryHelper {
     /**
      * Hides any number of jQuery selections
      * 
-     * @param  {...any} selections A variable number of jQuery selections. Uses the "rest parameter"
+     * @param  {...any} selections A variable number of jQuery selections. 
      */
     hide(...selections) {
         for (var selection of selections) {
@@ -108,11 +110,34 @@ class JQueryHelper {
      */
     setSpanValues(...selectionsAndValues) {
         for (var sav of selectionsAndValues) {
-            // Destructuring assignment
+            // Destructuring
             const [selection, value] = sav;
             $(selection).find("span").text(value);
         }
     }
+
+    /**
+     * Sets the disabled attribute of a set of selections to ""
+     * 
+     * @param  {...any} selections 
+     */
+    disable(...selections) {
+        for (var selection of selections) {
+            selection.attr("disabled", "");
+        }
+    }
+
+    /**
+     * Removes the disabled attribute from a set of selections
+     * 
+     * @param  {...any} selections 
+     */
+    enable(...selections) {
+        for (var selection of selections) {
+            selection.removeAttr("disabled");
+        }
+    }
+
 }
 const jqueryHelper = new JQueryHelper();
 
@@ -387,8 +412,6 @@ let updateId = setInterval(() => {
         [$("#farmAmount"), format(farms)],
         [$("#farmMax"), format(farmMax)],
     );
-    // todo: the following identifiers have spans wrapping their values but the JqueryHelper logic isn't leveraged 
-    //       yet. It should still work, but remember to update these as well: pPerSec, patchProduces, farmProduces,
 
     $("#patchMax").html(`Patch Max: ${format(patchMax)}`);
     $("#buyACat").html(`Buy a cat for ${format(catPrice)} potatoes.`);
@@ -426,15 +449,13 @@ let updateId = setInterval(() => {
 let consoleId = setInterval(() => {
     if (potatoz > 19 && !doneMessages.includes("patches") && !farmsUnlocked) {
         doneMessages.push("patches");
-        $("#patches").show();
+        jqueryHelper.show($("#patches"));
         addMessage("If you put a potato in the ground, maybe another one will grow. Hmmm.");
         addMessage("Potato patches are now available for purchase. They generate one potato a second.");
     }
     if (potatoz > 249 && !doneMessages.includes("self")) {
         doneMessages.push("self");
-        $("#brain").show();
-        $("#buyThoughts").show();
-        $("#projects").show();
+        jqueryHelper.show($("#brain"), $("#buyThoughts"), $("#projects"));
         projects.push(wateringCans);
         addMessage("Self-awareness achieved. Thoughts to be redirected to maximize potato production.");
         addMessage("Rumor is that potatoes make you smarter.");
@@ -466,7 +487,8 @@ let updatePotatoz = setInterval(() => {
     potatoz += incAmount;
     unusedPotatoz += incAmount;
     if (chaplainCatsUnlocked) {
-        let chaplainPlus = (chaplains * chaplainBoost).A();
+        let chaplainPlus = (chaplains * chaplainBoost).A(); 
+        // todo: if boosts were captured in an object, it could be iterated on to apply this transformationA
         farmBoost += chaplainPlus;
         farmerBoost += chaplainPlus;
         studentBoost += chaplainPlus;
@@ -475,9 +497,11 @@ let updatePotatoz = setInterval(() => {
     iq = (iq + students * studentBoost).A();
     farmMax = (farmMax + surveyors * surveyorBoost).A();
     if (surveyorFarm) farms = (farms + surveyors * surveyorBoost).A();
-    $("#pPerSec").html(`Potatoz per sec: ${format(incAmount)}`);
-    $("#patchProduces").html(`Each patch produces: ${format(patchBoost)} per sec`)
-    $("#farmProduces").html(`Each farm produces: ${format(farmBoost*5000)} per sec`)
+    jqueryHelper.setSpanValues(
+        [$("#pPerSec"), format(incAmount)],
+        [$("#patchProduces"), format(patchBoost)],
+        [$("#farmProduces"), format(farmBoost*5000)]
+    )
     if (doneMessages.includes("self")) {
         let thoughtInc = Math.floor((Math.ceil(iq ** 2 / 200)) * thoughtBoost);
         if (!thoughtSlider) {
@@ -494,34 +518,39 @@ let updatePotatoz = setInterval(() => {
     }
 }, 1000);
 
+// todo: finish applying JQueryHelper refactor
 let updateButtons = setInterval(() => {
     if (!(unusedPotatoz >= patchPrice && patches < patchMax)) {
-        $("#buyAPatch").attr("disabled", "");
+        jqueryHelper.disable($("#buyAPatch"));
     } else {
-        $("#buyAPatch").removeAttr("disabled");
+        jqueryHelper.enable($("#buyAPatch"));
     }
     if (!(unusedPotatoz >= farmPrice && farms < Math.floor(farmMax))) {
-        $("#buyAFarm").attr("disabled", "");
+        jqueryHelper.disable($("#buyAFarm"));
     } else {
-        $("#buyAFarm").removeAttr("disabled");
+        jqueryHelper.enable($("#buyAFarm"));
     }
     if (!(unusedPotatoz >= catPrice)) {
-        $("#buyACat").attr("disabled", "");
+        jqueryHelper.disable($("#buyACat"));
     } else {
-        $("#buyACat").removeAttr("disabled");
+        jqueryHelper.enable($("#buyACat"));
     }
     if (!(availableCats > 0)) {
-        $("#assignFarmer").attr("disabled", "");
-        $("#assignStudent").attr("disabled", "");
-        $("#assignSurveyor").attr("disabled", "");
-        $("#assignSoldier").attr("disabled", "");
-        $("#assignChaplain").attr("disabled", "");
+        jqueryHelper.disable(
+            $("#assignFarmer"), 
+            $("#assignStudent"), 
+            $("#assignSurveyor"), 
+            $("#assignSoldier"), 
+            $("#assignChaplain")
+        );
     } else {
-        $("#assignFarmer").removeAttr("disabled");
-        $("#assignStudent").removeAttr("disabled");
-        $("#assignSurveyor").removeAttr("disabled");
-        $("#assignSoldier").removeAttr("disabled");
-        $("#assignChaplain").removeAttr("disabled");
+        jqueryHelper.enable(
+            $("#assignFarmer"), 
+            $("#assignStudent"), 
+            $("#assignSurveyor"), 
+            $("#assignSoldier"), 
+            $("#assignChaplain")
+        );
     }
     if (availableCats === cats) {
         $("#recallAllCats").attr("disabled", "");
