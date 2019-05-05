@@ -36,12 +36,12 @@ class Project {
                 this.$elem.remove();
                 this.done = true;
             }
-        })
+        });
         $("#projects").append(this.$elem);
     }
 }
 
-let wateringCans = new Project({
+var wateringCans = new Project({
     title: "Watering Cans",
     phrase: "When you water plants, they tend to grow faster.",
     description: "Patch production is increased by 50% <br> as you employ the use of watering cans.",
@@ -52,11 +52,11 @@ let wateringCans = new Project({
         patchBoost = (patchBoost * 1.5).A();
         projects.push(potatonalysis);
         projects.push(bribeForPatches);
-        addMessage('"A river flows out of Eden to water the potato..." - The Potato Bible')
+        addMessage('"A river flows out of Eden to water the potato..." - The Potato Bible');
     }
 });
 
-let potatonalysis = new Project({
+var potatonalysis = new Project({
     title: "Potatonalysis",
     phrase: "If you carry this two here, you're suddenly a genius.",
     description: "Advanced tracking of potato generation becomes available.",
@@ -67,11 +67,11 @@ let potatonalysis = new Project({
         $("#advancedPotatonomics").show();
         advancedNomics = true;
         projects.push(potatoMath);
-        addMessage('"I spy with my little eye..., something brownish, bland, and round." - Bonnie, the cat')
+        addMessage('"I spy with my little eye..., something brownish, bland, and round." - Bonnie, the cat');
     }
 });
 
-let bribeForPatches = new Project({
+var bribeForPatches = new Project({
     title: "Bribe your owner for Gardening Space",
     phrase: "I give you some potatoes, you give me your front yard.",
     description: "Your patch max increases by 5.",
@@ -82,11 +82,11 @@ let bribeForPatches = new Project({
         patchMax += 5;
         projects.push(patchArc);
         projects.push(fertilizer);
-        addMessage('"Across history, corrupt officials have been susceptible to bribes. Especially potato bribes." - Beeba, the cat')
+        addMessage('"Across history, corrupt officials have been susceptible to bribes. Especially potato bribes." - Beeba, the cat');
     }
 });
 
-let patchArc = new Project({
+var patchArc = new Project({
     title: "Patch Architecture",
     phrase: "Potatoes in a row, potatoes in a collum, potatoes everywhere.",
     description: "Patch production increases by 75%.",
@@ -99,7 +99,7 @@ let patchArc = new Project({
     }
 });
 
-let fertilizer = new Project({
+var fertilizer = new Project({
     title: "Fertilizer",
     phrase: "An eco-friendly solution for the contents of litter boxes.",
     description: "Patches generate more potatoes as time goes on.",
@@ -111,13 +111,13 @@ let fertilizer = new Project({
         patchFertilizer = true;
         setInterval(() => {
             patchBoost = (patchBoost + 0.05).A();
-        }, 5000)
-        projects.push(turnTheBackyard)
-        addMessage('"Now we\'re really environmentally friendly. No sewage!" - Bonnie')
+        }, 5000);
+        projects.push(turnTheBackyard);
+        addMessage('"Now we\'re really environmentally friendly. No sewage!" - Bonnie');
     }
 });
 
-let potatoMath = new Project({
+var potatoMath = new Project({
     title: "Potato Math",
     phrase: "2 + 2 = Potato.",
     description: "The rate at which patches increase in price is halved.",
@@ -131,7 +131,7 @@ let potatoMath = new Project({
     }
 });
 
-let potateanTheorem = new Project({
+var potateanTheorem = new Project({
     title: "Potatean Theorem",
     phrase: "a^2 + b^2 = (potato)^2",
     description: "The price of producing a patch is divided by 4.",
@@ -141,11 +141,11 @@ let potateanTheorem = new Project({
     effect: () => {
         patchPrice = Math.floor(patchPrice / 4);
         projects.push(potatoDiet);
-        addMessage('"There is roundness in the humming of the potatoes, there is blandness in the spacing of potatoes." - Potatogras')
+        addMessage('"There is roundness in the humming of the potatoes, there is blandness in the spacing of potatoes." - Potatogras');
     }
 });
 
-let potatoCabin = new Project({
+var potatoCabin = new Project({
     title: "Potato Cabin",
     phrase: "A cabin of the potatoes, by the potatoes, for the potatoes.",
     description: "Your patch maximum increases by 10.",
@@ -155,11 +155,11 @@ let potatoCabin = new Project({
     ideaCost: 10,
     effect: () => {
         patchMax += 10;
-        addMessage('"A cabin for storing potatoes - the greatest breakthrough of our century." - Bonnie')
+        addMessage('"A cabin for storing potatoes - the greatest breakthrough of our century." - Bonnie');
     }
 });
 
-let turnTheBackyard = new Project({
+var turnTheBackyard = new Project({
     title: "Turn the Backyard",
     phrase: "Come to the potato side.",
     description: "As the backyard becomes available to you, <br> your patch maximum increases by 30.",
@@ -174,7 +174,7 @@ let turnTheBackyard = new Project({
     }
 });
 
-let ropeCat = new Project({
+var ropeCat = new Project({
     title: "Rope your next door neighbor's cat into it.",
     phrase: "Two brains are better than one.",
     description: "Thought production is doubled.",
@@ -185,11 +185,11 @@ let ropeCat = new Project({
     effect: () => {
         thoughtBoost *= 2;
         projects.push(driveYourOwnerOut);
-        addMessage('"Hey, Beeba, thanks for helping out!" - Bonnie')
+        addMessage('"Hey, Beeba, thanks for helping out!" - Bonnie');
     }
 });
 
-let potatoDiet = new Project({
+var potatoDiet = new Project({
     title: "Potato Diet",
     phrase: "Who needs cat food?",
     description: "IQ can now be increased by consuming potatoes.",
@@ -204,7 +204,7 @@ let potatoDiet = new Project({
     }
 });
 
-let productiveThinking = new Project({
+var productiveThinking = new Project({
     title: "Productive Thinking",
     phrase: "Don't think about video games. Think about this, which is a video game.",
     description: "You can now select a percent of thoughts to be allocated to ideas and creativity",
@@ -218,11 +218,11 @@ let productiveThinking = new Project({
         projects.push(industryPatches);
         projects.push(selfReflection);
         addMessage('"Think productively. But only about potatoes." - Beeba');
-        addMessage("The slider controls what percent of thoughts are automatically converted to creativity and ideas.")
+        addMessage("The slider controls what percent of thoughts are automatically converted to creativity and ideas.");
     }
 });
 
-let selfReflection = new Project({
+var selfReflection = new Project({
     title: "Self Reflection",
     phrase: "What you did wrong, can do better, and a bunch of other cheesy stuff.",
     description: "Cats can now look back on what they did and convert thoughts to creativity and ideas en masse.",
@@ -237,7 +237,7 @@ let selfReflection = new Project({
     }
 });
 
-let industryPatches = new Project({
+var industryPatches = new Project({
     title: "Industry Patches",
     phrase: "Who knew patches could consume fossil fuels?",
     description: "Patches produce 500% more potatoes.",
@@ -247,11 +247,11 @@ let industryPatches = new Project({
     ideaCost: 50,
     effect: () => {
         patchBoost *= 5;
-        addMessage('"So much for being eco-friendly. I thought we had something going with the fertitlizer." - Bonnie')
+        addMessage('"So much for being eco-friendly. I thought we had something going with the fertitlizer." - Bonnie');
     }
 });
 
-let driveYourOwnerOut = new Project({
+var driveYourOwnerOut = new Project({
     title: "Drive Your Owner Out",
     phrase: "I give you potatoes, you give me all your life savings, <br> and everything you've ever loved.",
     description: "Leads to great things.",
@@ -265,7 +265,7 @@ let driveYourOwnerOut = new Project({
     }
 });
 
-let theFarm = new Project({
+var theFarm = new Project({
     title: "The Farm",
     phrase: "We are better together.",
     description: "All patches merge into a single farm, generating 5000 potatoes a second, <br> and an era comes to an end.",
@@ -286,7 +286,7 @@ let theFarm = new Project({
     }
 });
 
-let organizedFarms = new Project({
+var organizedFarms = new Project({
     title: "Organized Farms",
     phrase: "You... there... farm - drop and give me 20!",
     description: "Farms produce 25% more potatoes, and your farm max increases by 8.",
@@ -302,7 +302,7 @@ let organizedFarms = new Project({
     }
 });
 
-let irrigation = new Project({
+var irrigation = new Project({
     title: "Irrigation",
     phrase: "A river flows out of Eden to water the... Oop! Nope! Come this way river!",
     description: "Farm's production slowly increases.",
@@ -313,14 +313,14 @@ let irrigation = new Project({
     effect: () => {
         setInterval(() => {
             farmBoost = (farmBoost + 0.1).A();
-        }, 5000)
+        }, 5000);
         farmsIrrigated = true;
         addMessage('"Irrigation is almost as good as a sink." - Beeba');
         projects.push(fences);
     }
 });
 
-let fences = new Project({
+var fences = new Project({
     title: "Fences",
     phrase: "Dogs can't climb fences.",
     description: "The dog reign of terror comes to an end.",
@@ -330,12 +330,12 @@ let fences = new Project({
     ideaCost: parseNum("10K"),
     effect: () => {
         raidChance /= 10;
-        addMessage('"A dog that climbs a mountain first has to get over the fence that the cats built." - Bonnie')
+        addMessage('"A dog that climbs a mountain first has to get over the fence that the cats built." - Bonnie');
         projects.push(superFarms);
     }
 });
 
-let superFarms = new Project({
+var superFarms = new Project({
     title: "Superfarms",
     phrase: "Like superman, but for farms.",
     description: "Farms are now 100x better.",
@@ -345,12 +345,12 @@ let superFarms = new Project({
     ideaCost: parseNum("1M"),
     effect: () => {
         farmBoost *= 100;
-        addMessage('"How these farms farms are going to save Louis Lane, I do not know." - Beeba')
+        addMessage('"How these farms farms are going to save Louis Lane, I do not know." - Beeba');
         projects.push(unlockSoldierCats);
     }
 });
 
-let unlockSoldierCats = new Project({
+var unlockSoldierCats = new Project({
     title: "Soldier Cats",
     phrase: "To capture the annoying dog raiders.",
     description: "Soldier cats become available. They help guard against dog raids.",
@@ -362,12 +362,12 @@ let unlockSoldierCats = new Project({
         $("#battles").show();
         soldierCatsUnlocked = true;
         addMessage('Soldier cats now available. Battle with them for more resources.');
-        addMessage('"The only thing we have to fear is the carrot itself." - Potatodore Roosevelt')
-        projects.push(battles)
+        addMessage('"The only thing we have to fear is the carrot itself." - Potatodore Roosevelt');
+        projects.push(battles);
     }
 });
 
-let unlockCats = new Project({
+var unlockCats = new Project({
     title: "Cats",
     phrase: "More cats, more happiness.",
     description: "Paves the way for feline employment.",
@@ -385,7 +385,7 @@ let unlockCats = new Project({
         projects.push(surveyorCats);
     }
 });
-let farmerCats = new Project({
+var farmerCats = new Project({
     title: "Farmer Cats",
     phrase: "Give a cat a straw hat, would you look at that!",
     description: "Cats can now be assigned to be farmer cats, <br> which boost potato production 10%.",
@@ -396,12 +396,12 @@ let farmerCats = new Project({
     effect: () => {
         $("#farmerCats").show();
         farmerCatsUnlocked = true;
-        addMessage('"You need to have thumbs to plant crops. But we don\'t care." - Bonnie')
+        addMessage('"You need to have thumbs to plant crops. But we don\'t care." - Bonnie');
         projects.push(enhancedFarmerCats);
     }
 });
 
-let enhancedFarmerCats = new Project({
+var enhancedFarmerCats = new Project({
     title: "Enhanced Farmer Cats",
     phrase: "Farmer cats on steroids.",
     description: "Farmer cats performance increases 5x, and farmer cats now reduce the price of farms over time.",
@@ -412,12 +412,12 @@ let enhancedFarmerCats = new Project({
     effect: () => {
         farmerBoost *= 5;
         farmerReduce = true;
-        addMessage('"Steroids are illegal in baseball, not in farming." - Beeba')
-        projects.push(superFarmerCats)
+        addMessage('"Steroids are illegal in baseball, not in farming." - Beeba');
+        projects.push(superFarmerCats);
     }
 });
 
-let superFarmerCats = new Project({
+var superFarmerCats = new Project({
     title: "Super Farmer Cats",
     phrase: "Hoes galore!",
     description: "Farmer cats performance increase 10x.",
@@ -426,12 +426,12 @@ let superFarmerCats = new Project({
     creatCost: 1000,
     ideaCost: 600,
     effect: () => {
-        addMessage('"Aspire to be Clark Kent." - Beeba, to the farmer cats.')
+        addMessage('"Aspire to be Clark Kent." - Beeba, to the farmer cats.');
         farmerBoost *= 10;
     }
 });
 
-let studentCats = new Project({
+var studentCats = new Project({
     title: "Student Cats",
     phrase: "Even cats have to do homework.",
     description: "Student cats become available. Each student cat generates 0.001 IQ per second.",
@@ -442,12 +442,12 @@ let studentCats = new Project({
     effect: () => {
         $("#studentCats").show();
         studentCatsUnlocked = true;
-        addMessage('"Back to school." - Bonnie')
-        projects.push(quizzes)
+        addMessage('"Back to school." - Bonnie');
+        projects.push(quizzes);
     }
 });
 
-let quizzes = new Project({
+var quizzes = new Project({
     title: "Quizzes",
     phrase: "If you give someone quizzes, and stress, them out, they somehow get smarter.",
     description: "Student cat performance increase 10x.",
@@ -462,7 +462,7 @@ let quizzes = new Project({
     }
 });
 
-let tests = new Project({
+var tests = new Project({
     title: "Tests",
     phrase: "Tests. Harder than quizzes, so they must make you even smarter.",
     description: "Student cat performance increases 5x.",
@@ -471,13 +471,13 @@ let tests = new Project({
     creatCost: 4000,
     ideaCost: 1000,
     effect: () => {
-        addMessage('"I got an 87..." - Student Cat #2"')
+        addMessage('"I got an 87..." - Student Cat #2"');
         studentBoost *= 5;
         projects.push(popQuizzes);
     }
 });
 
-let popQuizzes = new Project({
+var popQuizzes = new Project({
     title: "Pop Quizzes",
     phrase: "Surprise!",
     description: "Student cat performance increases 20x.",
@@ -489,9 +489,9 @@ let popQuizzes = new Project({
         addMessage('"I guess there is something to scaring students after all..." - Bonnie');
         studentBoost *= 20;
     }
-})
+});
 
-let surveyorCats = new Project({
+var surveyorCats = new Project({
     title: "Surveyor Cats",
     phrase: "Cats with fancy eyeglasses that smoke pipes. And survey land.",
     description: "Surveyor cats are become available. Each generates 0.01 farm max per second.",
@@ -507,7 +507,7 @@ let surveyorCats = new Project({
     }
 });
 
-let betterGlasses = new Project({
+var betterGlasses = new Project({
     title: "Better Glasses",
     phrase: "So the cats can see the land they are surveying.",
     description: "Surveyor cat performance increase 5x",
@@ -518,11 +518,11 @@ let betterGlasses = new Project({
     effect: () => {
         surveyorBoost *= 5;
         addMessage('"Night vision was not meant for examining land." - Bonnie');
-        projects.push(farmerSurveyors)
+        projects.push(farmerSurveyors);
     }
 });
 
-let farmerSurveyors = new Project({
+var farmerSurveyors = new Project({
     title: "Farmer Surveyors",
     phrase: "Surveyors with seeds.",
     description: "Surveyor cats now generate additional farms.",
@@ -537,7 +537,7 @@ let farmerSurveyors = new Project({
 
 });
 
-let battles = new Project({
+var battles = new Project({
     title: "Battles",
     phrase: "Expository forces of cats venture out to warmonger, and to gather resources.",
     description: "Battling becomes available, where you can use your soldier cats to fight battles to gather resources.",
@@ -555,7 +555,7 @@ let battles = new Project({
     }
 });
 
-let potatoLaunchersUnlock = new Project({
+var potatoLaunchersUnlock = new Project({
     title: "Potato Launchers",
     phrase: "Potato BOOM! Potato BOOM!",
     description: "Potato launchers turn potatoes into battling power.",
@@ -570,7 +570,7 @@ let potatoLaunchersUnlock = new Project({
     }
 });
 
-let taterTotBombs = new Project({
+var taterTotBombs = new Project({
     title: "Tater Tot Bombs",
     phrase: "Better than grenades.",
     description: "Tater Tot Bombs shock enemies and drive them back early.",
@@ -585,7 +585,7 @@ let taterTotBombs = new Project({
     }
 });
 
-let ultrafarms = new Project({
+var ultrafarms = new Project({
     title: "Ultrafarms",
     phrase: "Farms inside farms inside...",
     description: "Farm work improves 100x.",
@@ -599,7 +599,7 @@ let ultrafarms = new Project({
     }
 });
 
-let catScouts = new Project({
+var catScouts = new Project({
     title: "Cat Scouts",
     phrase: "Don't bring a knife to a gun fight.",
     description: "A difficulty rating of the upcoming battle appears.",
@@ -610,10 +610,10 @@ let catScouts = new Project({
     effect: () => {
         scouts = true;
         addMessage('"We dump buckets of green paint on cats..." - Beeba');
-        projects.push(chaplainCats)
+        projects.push(chaplainCats);
     }
 });
-let chaplainCats = new Project({
+var chaplainCats = new Project({
     title: "Chaplain Cats",
     phrase: "Your faith in the potato god will make you strong.",
     description: "Religious fervor unlocks Chaplain Cats, cats that boost the effeciency of <br> other cats.",
@@ -623,12 +623,12 @@ let chaplainCats = new Project({
     ideaCost: parseNum("10s"),
     effect: () => {
         $("#chaplainCats").show();
-        addMessage('"I am the eternal potato." - Potato God')
+        addMessage('"I am the eternal potato." - Potato God');
         chaplainCatsUnlocked = true;
     }
-})
+});
 
-let strategums = new Project({
+var strategums = new Project({
     title: "Strategums",
     phrase: "Sometimes, blindly charging at the enemy isn't a good idea.",
     description: "Convert creativity and ideas into battlefield strategums.",
@@ -644,7 +644,7 @@ let strategums = new Project({
     }
 });
 
-let flanking = new Project({
+var flanking = new Project({
     title: "Flanking",
     phrase: "Look behind you.",
     description: "Strategums are 1.5x as effective.",
@@ -659,9 +659,9 @@ let flanking = new Project({
     }
 });
 
-let catAI = new Project({
+var catAI = new Project({
     title: "Cat AI",
-    phrase: "Organic matter is obsolete.",
+    phrase: "Organic matter is obsovare.",
     description: "Upload the student cats, multiplying their potency by 1000x.",
     costPhrase: "(1s potatoes, 1T creativity, 1T ideas)",
     potatoCost: parseNum("1s"),
@@ -673,7 +673,7 @@ let catAI = new Project({
     }
 });
 
-let takeOverTheWorld = new Project({
+var takeOverTheWorld = new Project({
     title: "Take Over the World",
     phrase: "All your potatoes are belong to us.",
     description: "Humanity falls, leads to more great things.",
@@ -687,7 +687,7 @@ let takeOverTheWorld = new Project({
     }
 });
 
-let metafolding = new Project({
+var metafolding = new Project({
     title: "Metafolding",
     phrase: "A potato within a potato.",
     description: "Potatoes can now be contained within potatoes. You win the game.",
@@ -696,7 +696,7 @@ let metafolding = new Project({
     creatCost: parseNum("1S"),
     potatoCost: parseNum("1S"),
     effect: () => {
-        for (let i = 0; i < 5; i++) potatoz **= 2;
+        for (var i = 0; i < 5; i++) potatoz **= 2;
         addMessage("Potatoz.");
         addMessage("A game by Nathan Breslow.");
         addMessage("Coding by Nathan Breslow, and nice people on Stack Overflow.");
@@ -709,7 +709,7 @@ let metafolding = new Project({
         addMessage("You can keep playing, but there are no new projects or features to be found. Reset when you are ready.");
     }
 })
-let projectKey = {
+var projectKey = {
     "Watering Cans": wateringCans,
     "Potatonalysis": potatonalysis,
     "Bribe your owner for Gardening Space": bribeForPatches,
