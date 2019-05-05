@@ -376,6 +376,7 @@ var unlockCats = new Project({
     creatCost: 500,
     ideaCost: 300,
     effect: () => {
+        $("#cats-tab").show();
         $("#cats").show();
         catsUnlocked = true;
         addMessage('"Calling all neighborhood cats. We have potatoz!" - Bonnie');
@@ -696,7 +697,7 @@ var metafolding = new Project({
     creatCost: parseNum("1S"),
     potatoCost: parseNum("1S"),
     effect: () => {
-        for (var i = 0; i < 5; i++) potatoz **= 2;
+        for (var i = 0; i < 5; i++) potatoz *= 2;
         addMessage("Potatoz.");
         addMessage("A game by Nathan Breslow.");
         addMessage("Coding by Nathan Breslow, and nice people on Stack Overflow.");
@@ -708,7 +709,7 @@ var metafolding = new Project({
         addMessage('See this animation: <a href="Potatoz.mp4" target="_blank">here</a>');
         addMessage("You can keep playing, but there are no new projects or features to be found. Reset when you are ready.");
     }
-})
+});
 var projectKey = {
     "Watering Cans": wateringCans,
     "Potatonalysis": potatonalysis,
@@ -754,4 +755,4 @@ var projectKey = {
 projectKey[takeOverTheWorld.title] = takeOverTheWorld;
 projectKey[metafolding.title] = metafolding;
 projectKey[popQuizzes.title] = popQuizzes;
-projectKey[unlockSoldierCats.title]
+projectKey[unlockSoldierCats.title];

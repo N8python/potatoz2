@@ -24,7 +24,7 @@
     </header>
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4" style="height:500px; overflow-y: auto;">
                 <h4 id="unusedPotatozAmount">Available Potatoes: 0</h4>
                 <button id="potatozPlus" class="btn btn-primary">Make Potato</button>
                 <section>
@@ -59,10 +59,9 @@
                 <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="brain" role="tabpanel" aria-labelledby="brain-tab">
                             <section id="brain">
-                                <p id="iq">IQ: 20</p> <button id="increaseIQ">+1
-                                    IQ for 5 potatoes</button>
-                                <br> <br> <button id="convertAll">Convert all
-                                    Thoughts to Ideas and Creativity</button>
+                                <p id="iq">IQ: 20</p> 
+                                <button id="increaseIQ" class="btn btn-primary">+1 IQ for 5 potatoes</button>
+                                <button id="convertAll" class="btn btn-primary">Convert all Thoughts to Ideas and Creativity</button>
                                 <p id="thoughts">Thoughts: 0 / 10B</p>
                                 <div id="thoughtProduction">
                                     <p id="productionPercentDisplay">Percent allocated to production: 1%</p>
@@ -70,15 +69,15 @@
                                 </div>
                             </section>
                             <section id="buyThoughts">
-                                <button id="buyCreat" class="btn btn-primary">Convert 5 thoughts to 1
-                                    creativity</button>
-                                <button id="buyIdea" class="btn btn-primary">Convert 10 thoughts to 1
-                                    idea</button>
                                 <p id="creat">Creativity: 0</p>
+                                <button id="buyCreat" class="btn btn-primary">Convert 5 thoughts to 1
+                                        creativity</button>
                                 <p id="ideas">Ideas: 0</p>
+                                <button id="buyIdea" class="btn btn-primary">Convert 10 thoughts to 1
+                                        idea</button>
                             </section>
                         </div>
-                        <div class="tab-pane fade" id="cats" role="tabpanel" aria-labelledby="cats-tab">
+                        <div class="tab-pane fade" id="cats" role="tabpanel" aria-labelledby="cats-tab" style="height: 500px; overflow-y: auto;">
                             <section id="cats" class="col-container w3-margin-top">
                                 <section class="mb-2 mt-2">
                                     <h5><span id="catAmount">Cats: 0 / 0</span> <span class="pull-right"><span>recall</span></h5>
@@ -87,8 +86,8 @@
                                 </section>
                                 <section id="farmerCats" class="mb-2">
                                     <h5 id="farmerCatAmount">Farmer Cats: 0</h5>
-                                    <button id="assignFarmer" class="w3-button w3-text-white w3-grey w3-hover-lightgrey">Assign <input
-                                            type="text" id="numFarmerCats" style="width: 50px" value="1"> Farmer Cats</button>
+                                    <button id="assignFarmer" class="btn btn-primary">Assign <input
+                                            type="number" id="numFarmerCats" style="width: 50px" value="1"> Farmer Cats</button>
                                     <p id="eachBoostFarmer">Each farmer cat adds a 10% boost to potato production.</p>
                                     <p id="totalBoostFarmer">Total Farmer Cat Boost: 0%</p>
                                 </section>
@@ -111,9 +110,11 @@
                 </div>
                 
             </div>
-            <div class="col-sm-4">
-                <section id="projects">
-                    <h4>Projects:</h4>
+            <div class="col-sm-4" >
+                <h4>Projects:</h4>
+                <section id="projects" style="height: 500px; overflow-y: auto;">
+                    
+                    
                 </section>
             </div>
         </div>
