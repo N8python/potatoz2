@@ -15,10 +15,16 @@ class Project {
         this.set = true;
         this.$elem = $("<span>");
         this.$elem.html(`
-      <div class="w3-border w3-button w3-text-white w3-grey w3-hover-lightgrey w3-padding" style="display: inline-block;">
-        <p>${this.title} ${this.costPhrase}</p>
-        <p class="w3-small"><em>${this.phrase}</em></p>
-        <p>${this.description}</p>
+      <div class="card" style="margin-bottom: .5em;">
+        <div class="card-body">
+            <h5 class="card-title">${this.title}</h5>
+            <h4 class="card-subtitle mb-2 text-muted" style="font-size: smaller">${this.costPhrase}</h4>
+        <blockquote class="blockquote text-center mb-0" style="font-size: small; background-color: lightgray;">
+            <p class="mb-0">${this.phrase}</p>
+            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+        </blockquote>
+        <div class="card-text">${this.description}</div>
+        </div>
       <div>
     `);
         this.$elem.click(() => {

@@ -308,10 +308,10 @@ let updateId = setInterval(() => {
     $("#unusedPotatozAmount").html(`Available potatoz: ${format(unusedPotatoz)}`);
     $("#buyAPatch").html(`Buy a patch for ${format(patchPrice)} potatoes.`);
     $("#patchesAmount").html(`Patches: ${format(patches)}`);
-    $("#patchMax").html(`Patch Max: ${format(patchMax)}`);
+    $("#patchMax").html(`${format(patchMax)}`);
     $("#buyAFarm").html(`Buy a farm for ${format(farmPrice)} potatoes.`);
     $("#farmAmount").html(`Farms: ${format(farms)}`);
-    $("#farmMax").html(`Farm Max: ${format(farmMax)}`);
+    $("#farmMax").html(`${format(farmMax)}`);
     $("#buyACat").html(`Buy a cat for ${format(catPrice)} potatoes.`);
     $("#catAmount").html(`Cats: ${format(availableCats.A())} / ${format(cats.A())}`);
     $("#eachBoostFarmer").html(`Each farmer cat adds a ${format(farmerBoost*100)}% boost to potato production.`);
