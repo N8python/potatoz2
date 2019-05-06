@@ -57,10 +57,12 @@ localStore("flankingUnlocked", false);
 localStore("takeoverAdded", false);
 
 var randInt = new Random().getRandomNumber;
+
 projects = projects.map(project => projectKey[project.title]);
 projects.forEach(project => {
     project.set = false;
 });
+
 $("#patches").hide();
 $("#self-tabs").hide();
 $("#brain-tab").hide();
@@ -77,10 +79,11 @@ $("#cats-tab").hide();
 $("#farmerCats").hide();
 $("#studentCats").hide();
 $("#surveyorCats").hide();
-$("#battles").show();
-$("#battleField").show();
-$("#strategums").show();
-$("#chaplainCats").show();
+$("#battles-tab").hide();
+$("#battles").hide();
+$("#battleField").hide();
+$("#strategums").hide();
+$("#chaplainCats").hide();
 if (patchFertilizer) {
     setInterval(() => {
         patchBoost = (patchBoost + 0.05).A();
@@ -181,71 +184,96 @@ $("#recallAllCats").click(() => {
     availableCats = cats;
 });
 
-// $("#numFarmerCats").click(e => e.stopPropagation());
-// $("#numStudentCats").click(e => e.stopPropagation());
-// $("#numSurveyorCats").click(e => e.stopPropagation());
-// $("#numSoldierCats").click(e => e.stopPropagation());
-// $("#numChaplainCats").click(e => e.stopPropagation());
+function checkaddAmount(id) {
+    let addAmount = Math.max(parseNum($(id).val()), 0);
+    return addAmount > availableCats ? false : true;
+}
+
+function checkRemoveAmount(id, value) {
+    let removeAmount = Math.max(parseNum($(id).val()), 0);
+    return removeAmount > value ? false : true;
+}
 
 $("#assignFarmer").click(() => {
     if (availableCats > 0) {
-        availableCats --;
-        farmers ++;        
+        if (checkaddAmount('#numFarmerCats')) {
+            availableCats --;
+            farmers ++;
+        }    
     }
 });
 $('#removeFarmer').click(() => {
     if (farmers > 0) {
-        availableCats ++;
-        farmers --;
+        if (checkRemoveAmount('#numFarmerCats', farmers)) {
+            availableCats ++;
+            farmers --;
+        }
     }    
-})
+});
 
 $("#assignStudent").click(() => {
-    if (availableCats > 0) {        
-        availableCats --;
-        students ++;
+    if (availableCats > 0) {     
+        if (checkaddAmount('#numStudentCats')) {
+            availableCats --;
+            students ++;
+        }   
+        
     }
 });
 $("#removeStudent").click(() => {
-    if (students > 0) {        
-        availableCats ++;
-        students --;
+    if (students > 0) {    
+        if (checkRemoveAmount('#numStudentCats', students)) {    
+            availableCats ++;
+            students --;
+        }
     }
 });
 $("#assignSurveyor").click(() => {
-    if (availableCats > 0) {        
-        availableCats --;
-        surveyors ++;
+    if (availableCats > 0) {  
+        if (checkaddAmount('#numSurveyorCats')) {      
+            availableCats --;
+            surveyors ++;
+        }
     }    
 });
 $("#removeSurveyor").click(() => {
-    if (surveyors > 0) {        
-        availableCats ++;
-        surveyors --;
+    if (surveyors > 0) {  
+        if (checkRemoveAmount('#numSurveyorCats', surveyors)) {          
+            availableCats ++;
+            surveyors --;
+        }
     }    
 });
 $("#assignSoldier").click(() => {
-    if (availableCats > 0) {        
-        availableCats --;
-        soldierCats ++;
+    if (availableCats > 0) {    
+        if (checkaddAmount('#numSoldierCats')) {    
+            availableCats --;
+            soldierCats ++;
+        }
     }     
 });
 $("#removeSoldier").click(() => {
-    if (soldierCats > 0) {        
-        availableCats ++;
-        soldierCats --;
+    if (soldierCats > 0) {  
+        if (checkRemoveAmount('#numSoldierCats', soldierCats)) {                
+            availableCats ++;
+            soldierCats --;
+        }
     }     
 });
 $("#assignChaplain").click(() => {
     if (availableCats > 0) {        
-        availableCats --;
-        chaplains ++;
+        if (checkaddAmount('#numChaplainCats')) {    
+            availableCats --;
+            chaplains ++;
+        }
     }      
 });
 $("#removeChaplain").click(() => {
     if (availableCats > 0) {        
-        availableCats ++;
-        chaplains --;
+        if (checkRemoveAmount('#numChaplainCats', chaplains)) {                
+            availableCats ++;
+            chaplains --;
+        }
     }      
 });
 
@@ -463,6 +491,7 @@ var updateButtons = setInterval(() => {
         $("#assignSoldier").removeAttr("disabled");
         $("#assignChaplain").removeAttr("disabled");
     }
+
     if (availableCats === cats) {
         $("#recallAllCats").attr("disabled", "");
     } else {
@@ -483,7 +512,7 @@ var updateButtons = setInterval(() => {
     } else {
         $("#buyIdea").removeAttr("disabled", "");
     }
-    if (soldierCats < 0) {
+    if (soldierCats == 0) {
         $("#battle").attr("disabled", "");
     } else {
         $("#battle").removeAttr("disabled");
@@ -506,6 +535,10 @@ function reset() {
     $("#brain").hide();
     $("#cats-tab").hide();
     $("#cats").hide();
+    $("#battles-tab").hide();
+    $("#battles").hide();
+    $("#strategums").hide();
+    $("#chaplainCats").hide();
     $("#patches").hide();
     $("#projects").hide();
     $("#self-tabs").hide();
@@ -574,14 +607,14 @@ function dogRaid() {
         var loss = Math.floor(Math.sqrt(soldierCats) * 3);
         loss += randInt(-30, 30);
         if (loss >= raidingDogs) {
-            addMessage("Your soldier cats stopped and destroyed a dog raid!");
+            addMessage("Your soldier cats stopped and destroyed a dog raid!", "paw", "success");
             return;
         }
-        addMessage(`Your soldier cats intercepted ${loss} dogs`);
+        addMessage(`Your soldier cats intercepted ${loss} dogs`,"paw","warning");
         raidingDogs -= loss;
     }
     var potatoesLost = Math.floor(unusedPotatoz * (Math.sqrt(raidingDogs) * 0.04));
-    addMessage(`${raidingDogs} dogs raided your potato empire. ${format(potatoesLost)} potatoes lost.`, "danger");
+    addMessage(`${raidingDogs} dogs raided your potato empire. ${format(potatoesLost)} potatoes lost.`, "paw", "danger");
     
     // addMessage(``);
     unusedPotatoz -= potatoesLost;
@@ -623,8 +656,6 @@ function askForReset() {
         if (willReset) reset();
     });
 }
-setTimeout(() => {
-    $("#console").html(`
-<button class="w3-right w3-button w3-text-white w3-grey w3-hover-lightgrey"><a href="numbers.txt" target="_blank">What do those weird letter abbreviations mean?</a></button>
-You're a cat, producting potatoz!`);
+setTimeout(() => {    
+    $("#console").html(' Welcome Back!');
 }, 10);

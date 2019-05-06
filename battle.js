@@ -46,7 +46,7 @@ function battle(catPower, enemyPower) {
     }
     frontLine += chosenNum;
     if (frontLine > 20) {
-      addMessage("Victory!");
+      addMessage("Victory!", "construct", "success");
       let catsLiberated = randInt(1, 5);
       catsLiberated*=battleIntensity;
       addMessage(`You liberated ${format(Math.floor(catsLiberated))} cats.`);
@@ -66,7 +66,7 @@ function battle(catPower, enemyPower) {
       battleOn = false;
       clearInterval(currBattle);
     } else if (frontLine < 0) {
-      addMessage("Defeat...");
+      addMessage("Defeat...", "construct", "danger");
       battleOn = false;
       clearInterval(currBattle);
     }

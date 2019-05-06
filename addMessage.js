@@ -1,11 +1,11 @@
-function addMessage(message, badgeType) {
+function addMessage(message, icon, badgeType) {
 
-  var bt = badgeType == null ? "info" : badgeType;
-  
+  var _badgeType = badgeType == null ? "info" : badgeType;
+  var _icon = icon == null ? "help-circle-outline" : icon;
 
-  var icon = "<div class=\"mt-1 ml-1\" style=\"font-size: small\"><span class=\"badge badge-" + bt + "\"><i style=\"font-size: small\" class=\"material-icons\">error</i></span> <span>" + message + "</span></div>";
+  var msgHtml = "<div class=\"mt-1 ml-1\"><span class=\"badge badge-" + _badgeType + "\"><ion-icon name=" + _icon + "></ion-icon></span> <span>" + message + "</span></div>";
 
-  $("#console").append(icon);
+  $("#console").append(msgHtml);
   setTimeout(() => {
     let consoleElem = document.getElementById("console");
     $('#console').animate({
