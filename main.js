@@ -135,6 +135,7 @@ if (surveyorCatsUnlocked) {
     $("#surveyorCats").show();
 }
 if (soldierCatsUnlocked) {
+    $("#battles-tab").show();
     $("#battles").show();
 }
 if (battlesUnlocked) {
