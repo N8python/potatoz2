@@ -135,6 +135,7 @@ if (surveyorCatsUnlocked) {
     $("#surveyorCats").show();
 }
 if (soldierCatsUnlocked) {
+    $("#battles-tab").show();
     $("#battles").show();
 }
 if (battlesUnlocked) {
@@ -197,84 +198,84 @@ function checkRemoveAmount(id, value) {
 $("#assignFarmer").click(() => {
     if (availableCats > 0) {
         if (checkaddAmount('#numFarmerCats')) {
-            availableCats --;
-            farmers ++;
-        }    
+            availableCats -= parseNum($('#numFarmerCats').val());
+            farmers += parseNum($('#numFarmerCats').val());
+        }
     }
 });
 $('#removeFarmer').click(() => {
     if (farmers > 0) {
         if (checkRemoveAmount('#numFarmerCats', farmers)) {
-            availableCats ++;
-            farmers --;
+            availableCats += parseNum($('#numFarmerCats').val());
+            farmers -= parseNum($('#numFarmerCats').val());
         }
-    }    
+    }
 });
 
 $("#assignStudent").click(() => {
-    if (availableCats > 0) {     
+    if (availableCats > 0) {
         if (checkaddAmount('#numStudentCats')) {
-            availableCats --;
-            students ++;
-        }   
-        
+            availableCats -= parseNum($("#numStudentCats").val());
+            students += parseNum($("#numStudentCats").val());
+        }
+
     }
 });
 $("#removeStudent").click(() => {
-    if (students > 0) {    
-        if (checkRemoveAmount('#numStudentCats', students)) {    
-            availableCats ++;
-            students --;
+    if (students > 0) {
+        if (checkRemoveAmount('#numStudentCats', students)) {
+            availableCats += parseNum($('#numStudentCats').val());
+            students -= parseNum($('#numStudentCats').val());
         }
     }
 });
 $("#assignSurveyor").click(() => {
-    if (availableCats > 0) {  
-        if (checkaddAmount('#numSurveyorCats')) {      
-            availableCats --;
-            surveyors ++;
+    if (availableCats > 0) {
+        if (checkaddAmount('#numSurveyorCats')) {
+            availableCats -= parseNum($("#numSurveyorCats").val());
+            surveyors += parseNum($("#numSurveyorCats").val());
         }
-    }    
+    }
 });
 $("#removeSurveyor").click(() => {
-    if (surveyors > 0) {  
-        if (checkRemoveAmount('#numSurveyorCats', surveyors)) {          
-            availableCats ++;
-            surveyors --;
+    if (surveyors > 0) {
+        if (checkRemoveAmount('#numSurveyorCats', surveyors)) {
+            availableCats += parseNum($("#numSurveyorCats").val());
+            surveyors -= parseNum($("#numSurveyorCats").val());
         }
-    }    
+    }
 });
 $("#assignSoldier").click(() => {
-    if (availableCats > 0) {    
-        if (checkaddAmount('#numSoldierCats')) {    
-            availableCats --;
-            soldierCats ++;
+    if (availableCats > 0) {
+        if (checkaddAmount('#numSoldierCats')) {
+            availableCats -= parseNum($("#numSoldierCats").val());
+            soldierCats += parseNum($("#numSoldierCats").val());
         }
-    }     
+    }
 });
 $("#removeSoldier").click(() => {
-    if (soldierCats > 0) {  
-        if (checkRemoveAmount('#numSoldierCats', soldierCats)) {                
-            availableCats ++;
-            soldierCats --;
+    if (soldierCats > 0) {
+        if (checkRemoveAmount('#numSoldierCats', soldierCats)) {
+            availableCats += parseNum($("#numSoldierCats").val());
+            soldierCats -= parseNum($("#numSoldierCats").val());
         }
-    }     
+    }
 });
 $("#assignChaplain").click(() => {
-    if (availableCats > 0) {        
-        if (checkaddAmount('#numChaplainCats')) {    
-            availableCats --;
-            chaplains ++;
+    if (availableCats > 0) {
+        if (checkaddAmount('#numChaplainCats')) {
+            availableCats -= parseNum($("#numChaplainCats").val());
+            chaplains += parseNum($("#numChaplainCats").val());
         }
-    }      
+    }
 });
 $("#removeChaplain").click(() => {
-    if (availableCats > 0) {        
-        if (checkRemoveAmount('#numChaplainCats', chaplains)) {                
-            availableCats ++;
-            chaplains --;
+    if (availableCats > 0) {
+        if (checkRemoveAmount('#numChaplainCats', chaplains)) {
+            availableCats += parseNum($("#numChaplainCats").val());
+            chaplains -= parseNum($("#numChaplainCats").val());
         }
-    }      
+    }
 });
 
 $("#buyCreat").click(() => {
@@ -298,7 +299,7 @@ $("#increaseIQ").click(() => {
     if (unusedPotatoz >= iqCost) {
         iq++;
         unusedPotatoz -= iqCost;
-        iqCost = Math.ceil(iqCost * 1.05);
+        iqCost = Math.ceil(iqCost ** 1.05);
     }
 });
 $("#buyStrategum").click(() => {
@@ -447,7 +448,7 @@ var updatePotatoz = setInterval(() => {
     $("#patchProduces").html(`Each patch produces: ${format(patchBoost)} per sec`);
     $("#farmProduces").html(`Each farm produces: ${format(farmBoost*5000)} per sec`);
     if (doneMessages.includes("self")) {
-        var thoughtInc = Math.floor((Math.ceil(iq * 2 / 200)) * thoughtBoost);
+        var thoughtInc = Math.floor((Math.ceil(iq ** 2 / 200)) * thoughtBoost);
         if (!thoughtSlider) {
             thoughts += thoughtInc;
         } else {
@@ -610,12 +611,12 @@ function dogRaid() {
             addMessage("Your soldier cats stopped and destroyed a dog raid!", "paw", "success");
             return;
         }
-        addMessage(`Your soldier cats intercepted ${loss} dogs`,"paw","warning");
+        addMessage(`Your soldier cats intercepted ${loss} dogs`, "paw", "warning");
         raidingDogs -= loss;
     }
     var potatoesLost = Math.floor(unusedPotatoz * (Math.sqrt(raidingDogs) * 0.04));
     addMessage(`${raidingDogs} dogs raided your potato empire. ${format(potatoesLost)} potatoes lost.`, "paw", "danger");
-    
+
     // addMessage(``);
     unusedPotatoz -= potatoesLost;
 }
@@ -656,6 +657,6 @@ function askForReset() {
         if (willReset) reset();
     });
 }
-setTimeout(() => {    
+setTimeout(() => {
     $("#console").html(' Welcome Back!');
 }, 10);
