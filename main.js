@@ -298,7 +298,7 @@ $("#increaseIQ").click(() => {
     if (unusedPotatoz >= iqCost) {
         iq++;
         unusedPotatoz -= iqCost;
-        iqCost = Math.ceil(iqCost * 1.05);
+        iqCost = Math.ceil(iqCost ** 1.05);
     }
 });
 $("#buyStrategum").click(() => {
@@ -447,7 +447,7 @@ var updatePotatoz = setInterval(() => {
     $("#patchProduces").html(`Each patch produces: ${format(patchBoost)} per sec`);
     $("#farmProduces").html(`Each farm produces: ${format(farmBoost*5000)} per sec`);
     if (doneMessages.includes("self")) {
-        var thoughtInc = Math.floor((Math.ceil(iq * 2 / 200)) * thoughtBoost);
+        var thoughtInc = Math.floor((Math.ceil(iq ** 2 / 200)) * thoughtBoost);
         if (!thoughtSlider) {
             thoughts += thoughtInc;
         } else {
