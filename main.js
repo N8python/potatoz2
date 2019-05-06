@@ -197,84 +197,84 @@ function checkRemoveAmount(id, value) {
 $("#assignFarmer").click(() => {
     if (availableCats > 0) {
         if (checkaddAmount('#numFarmerCats')) {
-            availableCats --;
-            farmers ++;
-        }    
+            availableCats -= +$('#numFarmerCats').val();
+            farmers += +$('#numFarmerCats').val();
+        }
     }
 });
 $('#removeFarmer').click(() => {
     if (farmers > 0) {
         if (checkRemoveAmount('#numFarmerCats', farmers)) {
-            availableCats ++;
-            farmers --;
+            availableCats += +$('#numFarmerCats').val();
+            farmers -= +$('#numFarmerCats').val();
         }
-    }    
+    }
 });
 
 $("#assignStudent").click(() => {
-    if (availableCats > 0) {     
+    if (availableCats > 0) {
         if (checkaddAmount('#numStudentCats')) {
-            availableCats --;
-            students ++;
-        }   
-        
+            availableCats -= +$("#numStudentCats").val();
+            students += +$("#numStudentCats").val();
+        }
+
     }
 });
 $("#removeStudent").click(() => {
-    if (students > 0) {    
-        if (checkRemoveAmount('#numStudentCats', students)) {    
-            availableCats ++;
-            students --;
+    if (students > 0) {
+        if (checkRemoveAmount('#numStudentCats', students)) {
+            availableCats += +$('#numStudentCats').val();
+            students -= +$('#numStudentCats').val();
         }
     }
 });
 $("#assignSurveyor").click(() => {
-    if (availableCats > 0) {  
-        if (checkaddAmount('#numSurveyorCats')) {      
-            availableCats --;
-            surveyors ++;
+    if (availableCats > 0) {
+        if (checkaddAmount('#numSurveyorCats')) {
+            availableCats -= +$("#numSurveyorCats").val();
+            surveyors += +$("#numSurveyorCats").val();
         }
-    }    
+    }
 });
 $("#removeSurveyor").click(() => {
-    if (surveyors > 0) {  
-        if (checkRemoveAmount('#numSurveyorCats', surveyors)) {          
-            availableCats ++;
-            surveyors --;
+    if (surveyors > 0) {
+        if (checkRemoveAmount('#numSurveyorCats', surveyors)) {
+            availableCats += +$("#numSurveyorCats").val();
+            surveyors -= +$("#numSurveyorCats").val();
         }
-    }    
+    }
 });
 $("#assignSoldier").click(() => {
-    if (availableCats > 0) {    
-        if (checkaddAmount('#numSoldierCats')) {    
-            availableCats --;
-            soldierCats ++;
+    if (availableCats > 0) {
+        if (checkaddAmount('#numSoldierCats')) {
+            availableCats -= +$("#numSoldierCats").val();
+            soldierCats += +$("#numSoldierCats").val();
         }
-    }     
+    }
 });
 $("#removeSoldier").click(() => {
-    if (soldierCats > 0) {  
-        if (checkRemoveAmount('#numSoldierCats', soldierCats)) {                
-            availableCats ++;
-            soldierCats --;
+    if (soldierCats > 0) {
+        if (checkRemoveAmount('#numSoldierCats', soldierCats)) {
+            availableCats += +$("#numSoldierCats").val();
+            soldierCats -= +$("#numSoldierCats").val();
         }
-    }     
+    }
 });
 $("#assignChaplain").click(() => {
-    if (availableCats > 0) {        
-        if (checkaddAmount('#numChaplainCats')) {    
-            availableCats --;
-            chaplains ++;
+    if (availableCats > 0) {
+        if (checkaddAmount('#numChaplainCats')) {
+            availableCats -= +$("#numChaplainCats").val();
+            chaplains += +$("#numChaplainCats").val();
         }
-    }      
+    }
 });
 $("#removeChaplain").click(() => {
-    if (availableCats > 0) {        
-        if (checkRemoveAmount('#numChaplainCats', chaplains)) {                
-            availableCats ++;
-            chaplains --;
+    if (availableCats > 0) {
+        if (checkRemoveAmount('#numChaplainCats', chaplains)) {
+            availableCats += +$("#numChaplainCats").val();
+            chaplains -= +$("#numChaplainCats").val();
         }
-    }      
+    }
 });
 
 $("#buyCreat").click(() => {
