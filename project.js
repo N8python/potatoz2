@@ -21,7 +21,6 @@ class Project {
             <h4 class="card-subtitle mb-2 text-muted" style="font-size: smaller">${this.costPhrase}</h4>
         <blockquote class="blockquote text-center mb-0" style="font-size: small; background-color: lightgray;">
             <p class="mb-0">${this.phrase}</p>
-            <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
         </blockquote>
         <div class="card-text">${this.description}</div>
         </div>
@@ -52,7 +51,7 @@ var wateringCans = new Project({
         patchBoost = (patchBoost * 1.5).A();
         projects.push(potatonalysis);
         projects.push(bribeForPatches);
-        addMessage('"A river flows out of Eden to water the potato..." - The Potato Bible','quote','info');
+        addMessage('"A river flows out of Eden to water the potato..." - The Potato Bible', 'quote', 'info');
     }
 });
 
@@ -67,7 +66,7 @@ var potatonalysis = new Project({
         $("#advancedPotatonomics").show();
         advancedNomics = true;
         projects.push(potatoMath);
-        addMessage('"I spy with my little eye..., something brownish, bland, and round." - Bonnie, the cat','quote','info');
+        addMessage('"I spy with my little eye..., something brownish, bland, and round." - Bonnie, the cat', 'quote', 'info');
     }
 });
 
@@ -82,7 +81,7 @@ var bribeForPatches = new Project({
         patchMax += 5;
         projects.push(patchArc);
         projects.push(fertilizer);
-        addMessage('"Across history, corrupt officials have been susceptible to bribes. Especially potato bribes." - Beeba, the cat','quote','info');
+        addMessage('"Across history, corrupt officials have been susceptible to bribes. Especially potato bribes." - Beeba, the cat', 'quote', 'info');
     }
 });
 
@@ -95,7 +94,7 @@ var patchArc = new Project({
     effect: () => {
         patchBoost *= 1.75;
         projects.push(potatoCabin);
-        addMessage('"Potatoes will never be destroyed from the outside. If we falter and lose our freedoms, it will be because we were overripe." - Potatoham Lincoln','quote','info');
+        addMessage('"Potatoes will never be destroyed from the outside. If we falter and lose our freedoms, it will be because we were overripe." - Potatoham Lincoln', 'quote', 'info');
     }
 });
 
@@ -113,7 +112,7 @@ var fertilizer = new Project({
             patchBoost = (patchBoost + 0.05).A();
         }, 5000);
         projects.push(turnTheBackyard);
-        addMessage('"Now we\'re really environmentally friendly. No sewage!" - Bonnie','quote','info');
+        addMessage('"Now we\'re really environmentally friendly. No sewage!" - Bonnie', 'quote', 'info');
     }
 });
 
@@ -127,7 +126,7 @@ var potatoMath = new Project({
     effect: () => {
         patchMultiplier = 1.1;
         projects.push(potateanTheorem);
-        addMessage('"Potato. potato. potato. More important than calculus." - Beeba','quote','info');
+        addMessage('"Potato. potato. potato. More important than calculus." - Beeba', 'quote', 'info');
     }
 });
 
@@ -141,7 +140,7 @@ var potateanTheorem = new Project({
     effect: () => {
         patchPrice = Math.floor(patchPrice / 4);
         projects.push(potatoDiet);
-        addMessage('"There is roundness in the humming of the potatoes, there is blandness in the spacing of potatoes." - Potatogras','quote','info');
+        addMessage('"There is roundness in the humming of the potatoes, there is blandness in the spacing of potatoes." - Potatogras', 'quote', 'info');
     }
 });
 
@@ -155,7 +154,7 @@ var potatoCabin = new Project({
     ideaCost: 10,
     effect: () => {
         patchMax += 10;
-        addMessage('"A cabin for storing potatoes - the greatest breakthrough of our century." - Bonnie','quote','info');
+        addMessage('"A cabin for storing potatoes - the greatest breakthrough of our century." - Bonnie', 'quote', 'info');
     }
 });
 
@@ -170,7 +169,7 @@ var turnTheBackyard = new Project({
     effect: () => {
         patchMax += 30;
         projects.push(ropeCat);
-        addMessage('"No, I am your potato." - Darth Potato','quote','info');
+        addMessage('"No, I am your potato." - Darth Potato', 'quote', 'info');
     }
 });
 
@@ -185,7 +184,7 @@ var ropeCat = new Project({
     effect: () => {
         thoughtBoost *= 2;
         projects.push(driveYourOwnerOut);
-        addMessage('"Hey, Beeba, thanks for helping out!" - Bonnie','quote','info');
+        addMessage('"Hey, Beeba, thanks for helping out!" - Bonnie', 'quote', 'info');
     }
 });
 
@@ -200,7 +199,7 @@ var potatoDiet = new Project({
         iqButton = true;
         $("#increaseIQ").show();
         projects.push(productiveThinking);
-        addMessage('"MmM.HMM...MMMMM..." - Bonnie, chewing potatoes','quote','info');
+        addMessage('"MmM.HMM...MMMMM..." - Bonnie, chewing potatoes', 'quote', 'info');
     }
 });
 
@@ -218,7 +217,7 @@ var productiveThinking = new Project({
         projects.push(industryPatches);
         projects.push(selfReflection);
         addMessage('"Think productively. But only about potatoes." - Beeba');
-        addMessage("The slider controls what percent of thoughts are automatically converted to creativity and ideas.",'quote','info');
+        addMessage("The slider controls what percent of thoughts are automatically converted to creativity and ideas.", 'quote', 'info');
     }
 });
 
@@ -233,7 +232,7 @@ var selfReflection = new Project({
     effect: () => {
         selfReflectionUnlocked = true;
         $("#convertAll").show();
-        addMessage('"I have no regrets. Yet." - A Baby Kitten','quote','info');
+        addMessage('"I have no regrets. Yet." - A Baby Kitten', 'quote', 'info');
     }
 });
 
@@ -247,7 +246,7 @@ var industryPatches = new Project({
     ideaCost: 50,
     effect: () => {
         patchBoost *= 5;
-        addMessage('"So much for being eco-friendly. I thought we had something going with the fertitlizer." - Bonnie','quote','info');
+        addMessage('"So much for being eco-friendly. I thought we had something going with the fertitlizer." - Bonnie', 'quote', 'info');
     }
 });
 
@@ -260,7 +259,7 @@ var driveYourOwnerOut = new Project({
     creatCost: 200,
     ideaCost: 100,
     effect: () => {
-        addMessage('"It\'s not that I love my owner less, but that I love potatoes more." - Bonnie','quote','info');
+        addMessage('"It\'s not that I love my owner less, but that I love potatoes more." - Bonnie', 'quote', 'info');
         projects.push(theFarm);
     }
 });
@@ -280,7 +279,7 @@ var theFarm = new Project({
         $("#patches").hide();
         doneMessages = doneMessages.remove("patches");
         $("#farms").show();
-        addMessage("Farms unlocked! These massive potato producting behemoths produce 5000 potatoes a second.",'quote','info');
+        addMessage("Farms unlocked! These massive potato producting behemoths produce 5000 potatoes a second.", 'quote', 'info');
         projects.push(organizedFarms);
         projects.push(unlockCats);
     }
@@ -297,7 +296,7 @@ var organizedFarms = new Project({
     effect: () => {
         farmBoost *= 1.25;
         farmMax += 8;
-        addMessage("\"Once the potato gets rolling, there's no stopping it\" - Beeba",'quote','info');
+        addMessage("\"Once the potato gets rolling, there's no stopping it\" - Beeba", 'quote', 'info');
         projects.push(irrigation);
     }
 });
@@ -315,7 +314,7 @@ var irrigation = new Project({
             farmBoost = (farmBoost + 0.1).A();
         }, 5000);
         farmsIrrigated = true;
-        addMessage('"Irrigation is almost as good as a sink." - Beeba','quote','info');
+        addMessage('"Irrigation is almost as good as a sink." - Beeba', 'quote', 'info');
         projects.push(fences);
     }
 });
@@ -330,7 +329,7 @@ var fences = new Project({
     ideaCost: parseNum("10K"),
     effect: () => {
         raidChance /= 10;
-        addMessage('"A dog that climbs a mountain first has to get over the fence that the cats built." - Bonnie','quote','info');
+        addMessage('"A dog that climbs a mountain first has to get over the fence that the cats built." - Bonnie', 'quote', 'info');
         projects.push(superFarms);
     }
 });
@@ -345,7 +344,7 @@ var superFarms = new Project({
     ideaCost: parseNum("1M"),
     effect: () => {
         farmBoost *= 100;
-        addMessage('"How these farms farms are going to save Louis Lane, I do not know." - Beeba','quote','info');
+        addMessage('"How these farms farms are going to save Louis Lane, I do not know." - Beeba', 'quote', 'info');
         projects.push(unlockSoldierCats);
     }
 });
@@ -363,7 +362,7 @@ var unlockSoldierCats = new Project({
         $("#battles").show();
         soldierCatsUnlocked = true;
         addMessage('Soldier cats now available. Battle with them for more resources.');
-        addMessage('"The only thing we have to fear is the carrot itself." - Potatodore Roosevelt','quote','info');
+        addMessage('"The only thing we have to fear is the carrot itself." - Potatodore Roosevelt', 'quote', 'info');
         projects.push(battles);
     }
 });
@@ -381,7 +380,7 @@ var unlockCats = new Project({
         $("#cats").show();
         catsUnlocked = true;
         addMessage('"Calling all neighborhood cats. We have potatoz!" - Bonnie');
-        addMessage("Cats available. But before you can do anything with them, you must buy the next set of projects.",'quote','info');
+        addMessage("Cats available. But before you can do anything with them, you must buy the next set of projects.", 'quote', 'info');
         projects.push(farmerCats);
         projects.push(studentCats);
         projects.push(surveyorCats);
@@ -398,7 +397,7 @@ var farmerCats = new Project({
     effect: () => {
         $("#farmerCats").show();
         farmerCatsUnlocked = true;
-        addMessage('"You need to have thumbs to plant crops. But we don\'t care." - Bonnie','quote','info');
+        addMessage('"You need to have thumbs to plant crops. But we don\'t care." - Bonnie', 'quote', 'info');
         projects.push(enhancedFarmerCats);
     }
 });
@@ -414,7 +413,7 @@ var enhancedFarmerCats = new Project({
     effect: () => {
         farmerBoost *= 5;
         farmerReduce = true;
-        addMessage('"Steroids are illegal in baseball, not in farming." - Beeba','quote','info');
+        addMessage('"Steroids are illegal in baseball, not in farming." - Beeba', 'quote', 'info');
         projects.push(superFarmerCats);
     }
 });
@@ -428,7 +427,7 @@ var superFarmerCats = new Project({
     creatCost: 1000,
     ideaCost: 600,
     effect: () => {
-        addMessage('"Aspire to be Clark Kent." - Beeba, to the farmer cats.','quote','info');
+        addMessage('"Aspire to be Clark Kent." - Beeba, to the farmer cats.', 'quote', 'info');
         farmerBoost *= 10;
     }
 });
@@ -459,7 +458,7 @@ var quizzes = new Project({
     ideaCost: 250,
     effect: () => {
         studentBoost *= 10;
-        addMessage('"Quizzes are like bubbles, they tend to pop often." - Bonnie','quote','info');
+        addMessage('"Quizzes are like bubbles, they tend to pop often." - Bonnie', 'quote', 'info');
         projects.push(tests);
     }
 });
@@ -473,7 +472,7 @@ var tests = new Project({
     creatCost: 4000,
     ideaCost: 1000,
     effect: () => {
-        addMessage('"I got an 87..." - Student Cat #2"','quote','info');
+        addMessage('"I got an 87..." - Student Cat #2"', 'quote', 'info');
         studentBoost *= 5;
         projects.push(popQuizzes);
     }
@@ -488,7 +487,7 @@ var popQuizzes = new Project({
     creatCost: parseNum("15K"),
     ideaCost: parseNum("10K"),
     effect: () => {
-        addMessage('"I guess there is something to scaring students after all..." - Bonnie','quote','info');
+        addMessage('"I guess there is something to scaring students after all..." - Bonnie', 'quote', 'info');
         studentBoost *= 20;
     }
 });
@@ -504,7 +503,7 @@ var surveyorCats = new Project({
     effect: () => {
         $("#surveyorCats").show();
         surveyorCatsUnlocked = true;
-        addMessage('"Snoopy was the first surveyor. I\'ll be the second." - Beeba','quote','info');
+        addMessage('"Snoopy was the first surveyor. I\'ll be the second." - Beeba', 'quote', 'info');
         projects.push(betterGlasses);
     }
 });
@@ -519,7 +518,7 @@ var betterGlasses = new Project({
     ideaCost: 2000,
     effect: () => {
         surveyorBoost *= 5;
-        addMessage('"Night vision was not meant for examining land." - Bonnie','quote','info');
+        addMessage('"Night vision was not meant for examining land." - Bonnie', 'quote', 'info');
         projects.push(farmerSurveyors);
     }
 });
@@ -533,7 +532,7 @@ var farmerSurveyors = new Project({
     creatCost: 1000000,
     ideaCost: 500000,
     effect: () => {
-        addMessage('"The farmer cats might file a lawsuit..." - Bonnie','quote','info');
+        addMessage('"The farmer cats might file a lawsuit..." - Bonnie', 'quote', 'info');
         surveyorFarm = true;
     }
 
@@ -550,7 +549,7 @@ var battles = new Project({
     effect: () => {
         $("#battleField").show();
         battlesUnlocked = true;
-        addMessage('"This isn;t a pillow fight, folks." - Beeba, to the first squadron of soldier cats','quote','info');
+        addMessage('"This isn;t a pillow fight, folks." - Beeba, to the first squadron of soldier cats', 'quote', 'info');
         projects.push(potatoLaunchersUnlock);
         projects.push(catScouts);
         projects.push(strategums);
@@ -567,7 +566,7 @@ var potatoLaunchersUnlock = new Project({
     ideaCost: parseNum("100M"),
     effect: () => {
         potatoLaunchers = true;
-        addMessage('"We based them off nerf guns..." - Bonnie','quote','info');
+        addMessage('"We based them off nerf guns..." - Bonnie', 'quote', 'info');
         projects.push(taterTotBombs);
     }
 });
@@ -582,7 +581,7 @@ var taterTotBombs = new Project({
     ideaCost: parseNum("500M"),
     effect: () => {
         taterBombs = true;
-        addMessage('"Grenades, but potato shaped." - Beeba','quote','info');
+        addMessage('"Grenades, but potato shaped." - Beeba', 'quote', 'info');
         projects.push(ultrafarms);
     }
 });
@@ -596,7 +595,7 @@ var ultrafarms = new Project({
     creatCost: parseNum("300B"),
     ideaCost: parseNum("150B"),
     effect: () => {
-        addMessage('"Our farms are to good for Louis Lane." - Bonnie','quote','info');
+        addMessage('"Our farms are too good for Louis Lane." - Bonnie', 'quote', 'info');
         farmBoost *= 100;
     }
 });
@@ -611,7 +610,7 @@ var catScouts = new Project({
     ideaCost: parseNum("500M"),
     effect: () => {
         scouts = true;
-        addMessage('"We dump buckets of green paint on cats..." - Beeba','quote','info');
+        addMessage('"We dump buckets of green paint on cats..." - Beeba', 'quote', 'info');
         projects.push(chaplainCats);
     }
 });
@@ -625,7 +624,7 @@ var chaplainCats = new Project({
     ideaCost: parseNum("10s"),
     effect: () => {
         $("#chaplainCats").show();
-        addMessage('"I am the eternal potato." - Potato God','quote','info');
+        addMessage('"I am the eternal potato." - Potato God', 'quote', 'info');
         chaplainCatsUnlocked = true;
     }
 });
@@ -641,7 +640,7 @@ var strategums = new Project({
     effect: () => {
         $("#strategums").show();
         stratsUnlocked = true;
-        addMessage("'On the offensive, cats are great. On the defensive, they get bored, and start licking themselves.' - Bonnie",'quote','info');
+        addMessage("'On the offensive, cats are great. On the defensive, they get bored, and start licking themselves.' - Bonnie", 'quote', 'info');
         projects.push(flanking);
     }
 });
@@ -656,21 +655,21 @@ var flanking = new Project({
     ideaCost: parseNum("100M"),
     effect: () => {
         flankingUnlocked = true;
-        addMessage('"I love flank attacks. I have no idea what they are, but they might have something to do with Hank." - Frank the cat, a friend of Hank the cat','quote','info');
+        addMessage('"I love flank attacks. I have no idea what they are, but they might have something to do with Hank." - Frank the cat, a friend of Hank the cat', 'quote', 'info');
         projects.push(catAI);
     }
 });
 
 var catAI = new Project({
     title: "Cat AI",
-    phrase: "Organic matter is obsovare.",
+    phrase: "Organic matter is obsolete.",
     description: "Upload the student cats, multiplying their potency by 1000x.",
     costPhrase: "(1s potatoes, 1T creativity, 1T ideas)",
     potatoCost: parseNum("1s"),
     creatCost: parseNum("1T"),
     ideaCost: parseNum("1T"),
     effect: () => {
-        addMessage('"The potatolarity!" - Bonnie','quote','info');
+        addMessage('"The potatolarity!" - Bonnie', 'quote', 'info');
         studentBoost *= 1000;
     }
 });
@@ -684,7 +683,7 @@ var takeOverTheWorld = new Project({
     creatCost: parseNum("10s"),
     potatoCost: parseNum("10s"),
     effect: () => {
-        addMessage('"Not cookies, nor paperclips, nor money, nor catnip can stop us. POTATOZ FOREVER!" - The cat national anthem','quote','info');
+        addMessage('"Not cookies, nor paperclips, nor money, nor catnip can stop us. POTATOZ FOREVER!" - The cat national anthem', 'quote', 'info');
         projects.push(metafolding);
     }
 });
@@ -693,22 +692,23 @@ var metafolding = new Project({
     title: "Metafolding",
     phrase: "A potato within a potato.",
     description: "Potatoes can now be contained within potatoes. You win the game.",
-    costPhrase: "(1000D potatoes, 1S creativity, 1S ideas)",
-    potatoCost: parseNum("1000D"),
+    costPhrase: "(1D potatoes, 1S creativity, 1S ideas)",
+    potatoCost: parseNum("1D"),
     creatCost: parseNum("1S"),
-    potatoCost: parseNum("1S"),
+    ideaCost: parseNum("1S"),
     effect: () => {
         for (var i = 0; i < 5; i++) potatoz *= 2;
-        addMessage("Potatoz.",'quote','info');
-        addMessage("A game by Nathan Breslow.",'quote','info');
-        addMessage("Coding by Nathan Breslow, and nice people on Stack Overflow.",'quote','info');
-        addMessage("Ideas from Nathan Breslow and Claire.",'quote','info');
-        addMessage("Beeba, Claire's friend's cat.",'quote','info');
-        addMessage("Bonnie, my cat, for starting it all.",'quote','info');
-        addMessage("Since you worked so hard, you get a reward.",'quote','info');
-        addMessage("An animaiton. After a game of buttons and text.",'quote','info');
-        addMessage('See this animation: <a href="Potatoz.mp4" target="_blank">here</a>','quote','info');
-        addMessage("You can keep playing, but there are no new projects or features to be found. Reset when you are ready.",'quote','info');
+        addMessage("Potatoz.", 'quote', 'info');
+        addMessage("A game by Nathan Breslow.", 'quote', 'info');
+        addMessage("UI by pjlasl, and duncan93", "quote", "info");
+        addMessage("Coding by Nathan Breslow, and nice people on Stack Overflow.", 'quote', 'info');
+        addMessage("Ideas from Nathan Breslow and Claire.", 'quote', 'info');
+        addMessage("Beeba, Claire's friend's cat.", 'quote', 'info');
+        addMessage("Bonnie, my cat, for starting it all.", 'quote', 'info');
+        addMessage("Since you worked so hard, you get a reward.", 'quote', 'info');
+        addMessage("An animaiton. After a game of buttons and text.", 'quote', 'info');
+        addMessage('See this animation: <a href="Potatoz.mp4" target="_blank">here</a>', 'quote', 'info');
+        addMessage("You can keep playing, but there are no new projects or features to be found. Reset when you are ready.", 'quote', 'info');
     }
 });
 var projectKey = {
