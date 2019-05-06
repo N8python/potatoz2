@@ -77,10 +77,10 @@ $("#cats-tab").hide();
 $("#farmerCats").hide();
 $("#studentCats").hide();
 $("#surveyorCats").hide();
-$("#battles").hide();
-$("#battleField").hide();
-$("#strategums").hide();
-$("#chaplainCats").hide();
+$("#battles").show();
+$("#battleField").show();
+$("#strategums").show();
+$("#chaplainCats").show();
 if (patchFertilizer) {
     setInterval(() => {
         patchBoost = (patchBoost + 0.05).A();
@@ -181,66 +181,72 @@ $("#recallAllCats").click(() => {
     availableCats = cats;
 });
 
-$("#numFarmerCats").click(e => e.stopPropagation());
-$("#numStudentCats").click(e => e.stopPropagation());
-$("#numSurveyorCats").click(e => e.stopPropagation());
-$("#numSoldierCats").click(e => e.stopPropagation());
-$("#numChaplainCats").click(e => e.stopPropagation());
+// $("#numFarmerCats").click(e => e.stopPropagation());
+// $("#numStudentCats").click(e => e.stopPropagation());
+// $("#numSurveyorCats").click(e => e.stopPropagation());
+// $("#numSoldierCats").click(e => e.stopPropagation());
+// $("#numChaplainCats").click(e => e.stopPropagation());
 
 $("#assignFarmer").click(() => {
     if (availableCats > 0) {
-        var withdrawAmount = Math.max(parseNum($("#numFarmerCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
-        }
-        availableCats -= withdrawAmount;
-        farmers += withdrawAmount;
+        availableCats --;
+        farmers ++;        
     }
 });
+$('#removeFarmer').click(() => {
+    if (farmers > 0) {
+        availableCats ++;
+        farmers --;
+    }    
+})
+
 $("#assignStudent").click(() => {
-    if (availableCats > 0) {
-        var withdrawAmount = Math.max(parseNum($("#numStudentCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
-        }
-        availableCats -= withdrawAmount;
-        students += withdrawAmount;
+    if (availableCats > 0) {        
+        availableCats --;
+        students ++;
+    }
+});
+$("#removeStudent").click(() => {
+    if (students > 0) {        
+        availableCats ++;
+        students --;
     }
 });
 $("#assignSurveyor").click(() => {
-    if (availableCats > 0) {
-        var withdrawAmount = Math.max(parseNum($("#numSurveyorCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
-        }
-        availableCats -= withdrawAmount;
-        surveyors += withdrawAmount;
-    }
+    if (availableCats > 0) {        
+        availableCats --;
+        surveyors ++;
+    }    
+});
+$("#removeSurveyor").click(() => {
+    if (surveyors > 0) {        
+        availableCats ++;
+        surveyors --;
+    }    
 });
 $("#assignSoldier").click(() => {
-    if (availableCats > 0) {
-        var withdrawAmount = Math.max(parseNum($("#numSoldierCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
-        }
-        availableCats -= withdrawAmount;
-        soldierCats += withdrawAmount;
-    }
+    if (availableCats > 0) {        
+        availableCats --;
+        soldierCats ++;
+    }     
+});
+$("#removeSoldier").click(() => {
+    if (soldierCats > 0) {        
+        availableCats ++;
+        soldierCats --;
+    }     
 });
 $("#assignChaplain").click(() => {
-    if (availableCats > 0) {
-        var withdrawAmount = Math.max(parseNum($("#numChaplainCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
-        }
-        availableCats -= withdrawAmount;
-        chaplains += withdrawAmount;
-    }
+    if (availableCats > 0) {        
+        availableCats --;
+        chaplains ++;
+    }      
+});
+$("#removeChaplain").click(() => {
+    if (availableCats > 0) {        
+        availableCats ++;
+        chaplains --;
+    }      
 });
 
 $("#buyCreat").click(() => {
