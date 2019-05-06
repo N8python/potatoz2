@@ -143,6 +143,8 @@ if (stratsUnlocked) {
 if (chaplainCatsUnlocked) {
     $("#chaplainCats").show();
 }
+
+// Button clicks
 $("#potatozPlus").click(() => {
     potatoz++;
     unusedPotatoz++;
@@ -178,6 +180,7 @@ $("#recallAllCats").click(() => {
     chaplains = 0;
     availableCats = cats;
 });
+
 $("#numFarmerCats").click(e => e.stopPropagation());
 $("#numStudentCats").click(e => e.stopPropagation());
 $("#numSurveyorCats").click(e => e.stopPropagation());
@@ -239,6 +242,7 @@ $("#assignChaplain").click(() => {
         chaplains += withdrawAmount;
     }
 });
+
 $("#buyCreat").click(() => {
     if (thoughts > 4) {
         thoughts -= 5;
@@ -309,9 +313,10 @@ function format(number, decPlaces = 2) {
 
     return number;
 }
+
 var updateId = setInterval(() => {
-    $("#potatozAmount").html(`Total Potatoz: ${format(potatoz)}`);
-    $("#unusedPotatozAmount").html(`Available potatoz: ${format(unusedPotatoz)}`);
+    $("#potatozAmount").html(`${format(potatoz)}`);
+    $("#unusedPotatozAmount").html(`${format(unusedPotatoz)}`);
     $("#buyAPatch").html(`Buy a patch for ${format(patchPrice)} potatoes.`);
     $("#patchesAmount").html(`Patches: ${format(patches)}`);
     $("#patchMax").html(`${format(patchMax)}`);
@@ -338,9 +343,7 @@ var updateId = setInterval(() => {
     (scouts) ?
     "Battle Difficulty: " + calcDiff(soldierCats, 100*battleIntensity)
     :
-    ""
-  }
-  `);
+    ""}`);
     $("#iq").html(`IQ: ${format(iq)}`);
     $("#thoughts").html(`Thoughts: ${format(thoughts)}`);
     $("#creat").html(`Creativity: ${format(creativity)}`);
@@ -350,6 +353,7 @@ var updateId = setInterval(() => {
     $("#weapons").html(`Weapons Equipped: ${(potatoLaunchers) ? "<br> Potato Launchers" : ""} ${(taterBombs) ? "<br> Tater Tot Bombs" : ""}`);
     $("#stratCount").html(`Strategums: ${strats}`);
 }, 1);
+
 var consoleId = setInterval(() => {
     if (potatoz > 19 && !doneMessages.includes("patches") && !farmsUnlocked) {
         doneMessages.push("patches");
@@ -379,6 +383,7 @@ var consoleId = setInterval(() => {
         takeoverAdded = true;
     }
 }, 1);
+
 var updatePotatoz = setInterval(() => {
     if (potatoz > parseNum("1B") && Math.random() < raidChance) {
         dogRaid();
@@ -569,9 +574,10 @@ function dogRaid() {
         addMessage(`Your soldier cats intercepted ${loss} dogs`);
         raidingDogs -= loss;
     }
-    addMessage(`${raidingDogs} dogs raided your potato empire.`);
     var potatoesLost = Math.floor(unusedPotatoz * (Math.sqrt(raidingDogs) * 0.04));
-    addMessage(`${format(potatoesLost)} potatoes lost.`);
+    addMessage(`${raidingDogs} dogs raided your potato empire. ${format(potatoesLost)} potatoes lost.`, "danger");
+    
+    // addMessage(``);
     unusedPotatoz -= potatoesLost;
 }
 

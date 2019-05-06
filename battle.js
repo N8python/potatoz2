@@ -29,8 +29,8 @@ function battle(catPower, enemyPower) {
     for (let i = 0; i < canvas.width / blockWidth; i++) {
       for (let j = 0; j < canvas.height / blockWidth; j++) {
         if (i < frontLine) ctx.fillStyle = "White";
-        else ctx.fillStyle = "Black"
-        ctx.fillRect(i * blockWidth, j * blockWidth, blockWidth, blockWidth)
+        else ctx.fillStyle = "Black";
+        ctx.fillRect(i * blockWidth, j * blockWidth, blockWidth, blockWidth);
       }
     }
     ctx.fillStyle = "Black";
@@ -68,7 +68,7 @@ function battle(catPower, enemyPower) {
     } else if (frontLine < 0) {
       addMessage("Defeat...");
       battleOn = false;
-      clearInterval(currBattle)
+      clearInterval(currBattle);
     }
-  }, 100)
+  }, 100);
 }
