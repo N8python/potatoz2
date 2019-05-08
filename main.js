@@ -393,8 +393,8 @@ var consoleId = setInterval(() => {
     if (potatoz > 19 && !doneMessages.includes("patches") && !farmsUnlocked) {
         doneMessages.push("patches");
         $("#patches").show();
-        addMessage("If you put a potato in the ground, maybe another one will grow. Hmmm.");
-        addMessage("Potato patches are now available for purchase. They generate one potato a second.");
+        addMessage("If you put a potato in the ground, maybe another one will grow. Hmmm.", "quote", "info");
+        addMessage("Potato patches are now available for purchase. They generate one potato a second.", "quote", "info");
     }
     if (potatoz > 249 && !doneMessages.includes("self")) {
         doneMessages.push("self");
@@ -404,16 +404,16 @@ var consoleId = setInterval(() => {
         $("#buyThoughts").show();
         $("#projects").show();
         projects.push(wateringCans);
-        addMessage("Self-awareness achieved. Thoughts to be redirected to maximize potato production.");
-        addMessage("Rumor is that potatoes make you smarter.");
+        addMessage("Self-awareness achieved. Thoughts to be redirected to maximize potato production.", "quote", "info");
+        addMessage("Rumor is that potatoes make you smarter.", "quote", "info");
         setTimeout(() => {
-            addMessage("Creativity and Ideas are bound to come from thoughts.");
-            addMessage("And then you can use them to complete projects.");
+            addMessage("Creativity and Ideas are bound to come from thoughts.", "quote", "info");
+            addMessage("And then you can use them to complete projects.", "quote", "info");
         }, 500);
     }
     if (percentWorldConquered >= 100 && !takeoverAdded) {
-        addMessage("World conquered.");
-        addMessage("Battles are still available to fight local uprisings, and to aquire resources.");
+        addMessage("World conquered.", "construct", "success");
+        addMessage("Battles are still available to fight local uprisings, and to aquire resources.", "quote", "info");
         projects.push(takeOverTheWorld);
         takeoverAdded = true;
     }
