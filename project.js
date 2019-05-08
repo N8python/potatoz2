@@ -379,7 +379,7 @@ var unlockCats = new Project({
         $("#cats-tab").show();
         $("#cats").show();
         catsUnlocked = true;
-        addMessage('"Calling all neighborhood cats. We have potatoz!" - Bonnie');
+        addMessage('"Calling all neighborhood cats. We have potatoz!" - Bonnie',"quote","info");
         addMessage("Cats available. But before you can do anything with them, you must buy the next set of projects.", 'quote', 'info');
         projects.push(farmerCats);
         projects.push(studentCats);
