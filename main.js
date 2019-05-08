@@ -14,9 +14,9 @@ localStore("farmMax", 2);
 localStore("farmsIrrigated", false);
 localStore("farmsUnlocked", false);
 localStore("cats", 0);
-localStore("availableCats", 0)
-localStore("catPrice", 1000000)
-localStore("catsUnlocked", false)
+localStore("availableCats", 0);
+localStore("catPrice", 1000000);
+localStore("catsUnlocked", false);
 localStore("farmers", 0);
 localStore("farmerBoost", 0.1);
 localStore("farmerReduce", false);
@@ -31,14 +31,14 @@ localStore("surveyorFarm", false);
 localStore("soldierCats", 0);
 localStore("soldierCatsUnlocked", false);
 localStore("chaplains", 0);
-localStore("chaplainBoost", 0.0001)
+localStore("chaplainBoost", 0.0001);
 localStore("chaplainCatsUnlocked", false);
 localStore("battlesUnlocked", false);
 localStore("battleIntensity", 1);
 localStore("selfReflectionUnlocked", false);
 localStore("iq", 20);
 localStore("iqButton", false);
-localStore("iqCost", 10)
+localStore("iqCost", 10);
 localStore("thoughts", 0);
 localStore("thoughtBoost", 1);
 localStore("thoughtSlider", false);
@@ -55,12 +55,17 @@ localStore("strats", 0);
 localStore("taterBombs", false);
 localStore("flankingUnlocked", false);
 localStore("takeoverAdded", false);
-let randInt = new Random().getRandomNumber;
+
+var randInt = new Random().getRandomNumber;
+
 projects = projects.map(project => projectKey[project.title]);
 projects.forEach(project => {
     project.set = false;
 });
+
 $("#patches").hide();
+$("#self-tabs").hide();
+$("#brain-tab").hide();
 $("#brain").hide();
 $("#buyThoughts").hide();
 $("#projects").hide();
@@ -70,10 +75,11 @@ $("#convertAll").hide();
 $("#thoughtProduction").hide();
 $("#farms").hide();
 $("#farmProduces").hide();
-$("#cats").hide();
+$("#cats-tab").hide();
 $("#farmerCats").hide();
 $("#studentCats").hide();
 $("#surveyorCats").hide();
+$("#battles-tab").hide();
 $("#battles").hide();
 $("#battleField").hide();
 $("#strategums").hide();
@@ -86,12 +92,14 @@ if (patchFertilizer) {
 if (farmsIrrigated) {
     setInterval(() => {
         farmBoost = (farmBoost + 0.1).A();
-    }, 5000)
+    }, 5000);
 }
 if (doneMessages.includes("patches")) {
     $("#patches").show();
 }
 if (doneMessages.includes("self")) {
+    $("#self-tabs").show();
+    $("#brain-tab").show();
     $("#brain").show();
     $("#buyThoughts").show();
     $("#projects").show();
@@ -114,6 +122,7 @@ if (farmsUnlocked) {
     $("#patchProduces").hide();
 }
 if (catsUnlocked) {
+    $("#cats-tab").show();
     $("#cats").show();
 }
 if (farmerCatsUnlocked) {
@@ -126,6 +135,7 @@ if (surveyorCatsUnlocked) {
     $("#surveyorCats").show();
 }
 if (soldierCatsUnlocked) {
+    $("#battles-tab").show();
     $("#battles").show();
 }
 if (battlesUnlocked) {
@@ -137,6 +147,8 @@ if (stratsUnlocked) {
 if (chaplainCatsUnlocked) {
     $("#chaplainCats").show();
 }
+
+// Button clicks
 $("#potatozPlus").click(() => {
     potatoz++;
     unusedPotatoz++;
@@ -172,67 +184,100 @@ $("#recallAllCats").click(() => {
     chaplains = 0;
     availableCats = cats;
 });
-$("#numFarmerCats").click(e => e.stopPropagation());
-$("#numStudentCats").click(e => e.stopPropagation());
-$("#numSurveyorCats").click(e => e.stopPropagation());
-$("#numSoldierCats").click(e => e.stopPropagation());
-$("#numChaplainCats").click(e => e.stopPropagation());
+
+function checkaddAmount(id) {
+    let addAmount = Math.max(parseNum($(id).val()), 0);
+    return addAmount > availableCats ? false : true;
+}
+
+function checkRemoveAmount(id, value) {
+    let removeAmount = Math.max(parseNum($(id).val()), 0);
+    return removeAmount > value ? false : true;
+}
 
 $("#assignFarmer").click(() => {
     if (availableCats > 0) {
-        let withdrawAmount = Math.max(parseNum($("#numFarmerCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
+        if (checkaddAmount('#numFarmerCats')) {
+            availableCats -= parseNum($('#numFarmerCats').val());
+            farmers += parseNum($('#numFarmerCats').val());
         }
-        availableCats -= withdrawAmount;
-        farmers += withdrawAmount;
     }
 });
+$('#removeFarmer').click(() => {
+    if (farmers > 0) {
+        if (checkRemoveAmount('#numFarmerCats', farmers)) {
+            availableCats += parseNum($('#numFarmerCats').val());
+            farmers -= parseNum($('#numFarmerCats').val());
+        }
+    }
+});
+
 $("#assignStudent").click(() => {
     if (availableCats > 0) {
-        let withdrawAmount = Math.max(parseNum($("#numStudentCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
+        if (checkaddAmount('#numStudentCats')) {
+            availableCats -= parseNum($("#numStudentCats").val());
+            students += parseNum($("#numStudentCats").val());
         }
-        availableCats -= withdrawAmount;
-        students += withdrawAmount;
+
+    }
+});
+$("#removeStudent").click(() => {
+    if (students > 0) {
+        if (checkRemoveAmount('#numStudentCats', students)) {
+            availableCats += parseNum($('#numStudentCats').val());
+            students -= parseNum($('#numStudentCats').val());
+        }
     }
 });
 $("#assignSurveyor").click(() => {
     if (availableCats > 0) {
-        let withdrawAmount = Math.max(parseNum($("#numSurveyorCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
+        if (checkaddAmount('#numSurveyorCats')) {
+            availableCats -= parseNum($("#numSurveyorCats").val());
+            surveyors += parseNum($("#numSurveyorCats").val());
         }
-        availableCats -= withdrawAmount;
-        surveyors += withdrawAmount;
+    }
+});
+$("#removeSurveyor").click(() => {
+    if (surveyors > 0) {
+        if (checkRemoveAmount('#numSurveyorCats', surveyors)) {
+            availableCats += parseNum($("#numSurveyorCats").val());
+            surveyors -= parseNum($("#numSurveyorCats").val());
+        }
     }
 });
 $("#assignSoldier").click(() => {
     if (availableCats > 0) {
-        let withdrawAmount = Math.max(parseNum($("#numSoldierCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
+        if (checkaddAmount('#numSoldierCats')) {
+            availableCats -= parseNum($("#numSoldierCats").val());
+            soldierCats += parseNum($("#numSoldierCats").val());
         }
-        availableCats -= withdrawAmount;
-        soldierCats += withdrawAmount;
+    }
+});
+$("#removeSoldier").click(() => {
+    if (soldierCats > 0) {
+        if (checkRemoveAmount('#numSoldierCats', soldierCats)) {
+            availableCats += parseNum($("#numSoldierCats").val());
+            soldierCats -= parseNum($("#numSoldierCats").val());
+        }
     }
 });
 $("#assignChaplain").click(() => {
     if (availableCats > 0) {
-        let withdrawAmount = Math.max(parseNum($("#numChaplainCats").val()), 0);
-        if (withdrawAmount > availableCats) {
-            addMessage("You can't withdraw more than you have!");
-            return;
+        if (checkaddAmount('#numChaplainCats')) {
+            availableCats -= parseNum($("#numChaplainCats").val());
+            chaplains += parseNum($("#numChaplainCats").val());
         }
-        availableCats -= withdrawAmount;
-        chaplains += withdrawAmount;
     }
 });
+$("#removeChaplain").click(() => {
+    if (availableCats > 0) {
+        if (checkRemoveAmount('#numChaplainCats', chaplains)) {
+            availableCats += parseNum($("#numChaplainCats").val());
+            chaplains -= parseNum($("#numChaplainCats").val());
+        }
+    }
+});
+
 $("#buyCreat").click(() => {
     if (thoughts > 4) {
         thoughts -= 5;
@@ -263,7 +308,7 @@ $("#buyStrategum").click(() => {
         ideas -= parseNum("1M");
         strats += 1;
     }
-})
+});
 $("#battle").click(() => {
     if (!battleOn) battle(soldierCats, 100 * battleIntensity);
 });
@@ -303,19 +348,20 @@ function format(number, decPlaces = 2) {
 
     return number;
 }
-let updateId = setInterval(() => {
-    $("#potatozAmount").html(`Total Potatoz: ${format(potatoz)}`);
-    $("#unusedPotatozAmount").html(`Available potatoz: ${format(unusedPotatoz)}`);
+
+var updateId = setInterval(() => {
+    $("#potatozAmount").html(`${format(potatoz)}`);
+    $("#unusedPotatozAmount").html(`${format(unusedPotatoz)}`);
     $("#buyAPatch").html(`Buy a patch for ${format(patchPrice)} potatoes.`);
     $("#patchesAmount").html(`Patches: ${format(patches)}`);
-    $("#patchMax").html(`Patch Max: ${format(patchMax)}`);
+    $("#patchMax").html(`${format(patchMax)}`);
     $("#buyAFarm").html(`Buy a farm for ${format(farmPrice)} potatoes.`);
     $("#farmAmount").html(`Farms: ${format(farms)}`);
-    $("#farmMax").html(`Farm Max: ${format(farmMax)}`);
+    $("#farmMax").html(`${format(farmMax)}`);
     $("#buyACat").html(`Buy a cat for ${format(catPrice)} potatoes.`);
     $("#catAmount").html(`Cats: ${format(availableCats.A())} / ${format(cats.A())}`);
     $("#eachBoostFarmer").html(`Each farmer cat adds a ${format(farmerBoost*100)}% boost to potato production.`);
-    $("#totalBoostFarmer").html(`Total farmer cat boost provided: ${format((farmerBoost*farmers*100).A())}%`)
+    $("#totalBoostFarmer").html(`Total farmer cat boost provided: ${format((farmerBoost*farmers*100).A())}%`);
     $("#farmerCatAmount").html(`Farmer Cats: ${format(farmers)}`);
     $("#studentCatAmount").html(`Student Cats: ${format(students)}`);
     $("#eachBoostStudent").html(`Each student cat generates ${format(studentBoost)} IQ per second.`);
@@ -325,57 +371,59 @@ let updateId = setInterval(() => {
     $("#totalBoostSurveyor").html(`Total Farm Max Added Per Sec: ${format((surveyorBoost*surveyors).A())}`);
     $("#chaplainCatAmount").html(`Chaplain Cats: ${format(chaplains)}`);
     $("#eachBoostChaplain").html(`Each chaplain cat provides +${format(chaplainBoost)} boost per second.`);
-    $("#totalBoostChaplain").html(`Total boost added per sec: ${format((chaplains*chaplainBoost).A())}`)
+    $("#totalBoostChaplain").html(`Total boost added per sec: ${format((chaplains*chaplainBoost).A())}`);
     $("#soldierCatAmount").html(`Soldier Cats: ${format(soldierCats)}`);
     $("#percentConquered").html(`Percent of the World Conquered: ${format(percentWorldConquered)}%`);
     $("#battleDiff").html(`${
     (scouts) ?
     "Battle Difficulty: " + calcDiff(soldierCats, 100*battleIntensity)
     :
-    ""
-  }
-  `);
+    ""}`);
     $("#iq").html(`IQ: ${format(iq)}`);
     $("#thoughts").html(`Thoughts: ${format(thoughts)}`);
     $("#creat").html(`Creativity: ${format(creativity)}`);
     $("#ideas").html(`Ideas: ${format(ideas)}`);
     $("#increaseIQ").html(`+1 IQ for ${format(iqCost)} potatoes`);
-    $("#productionPercentDisplay").html(`Percent allocated to production: ${$("#productionPercent").val()}%`)
+    $("#productionPercentDisplay").html(`Percent allocated to production: ${$("#productionPercent").val()}%`);
     $("#weapons").html(`Weapons Equipped: ${(potatoLaunchers) ? "<br> Potato Launchers" : ""} ${(taterBombs) ? "<br> Tater Tot Bombs" : ""}`);
     $("#stratCount").html(`Strategums: ${strats}`);
 }, 1);
-let consoleId = setInterval(() => {
+
+var consoleId = setInterval(() => {
     if (potatoz > 19 && !doneMessages.includes("patches") && !farmsUnlocked) {
         doneMessages.push("patches");
         $("#patches").show();
-        addMessage("If you put a potato in the ground, maybe another one will grow. Hmmm.");
-        addMessage("Potato patches are now available for purchase. They generate one potato a second.");
+        addMessage("If you put a potato in the ground, maybe another one will grow. Hmmm.", "quote", "info");
+        addMessage("Potato patches are now available for purchase. They generate one potato a second.", "quote", "info");
     }
     if (potatoz > 249 && !doneMessages.includes("self")) {
         doneMessages.push("self");
+        $("#self-tabs").show();
+        $("#brain-tab").show();
         $("#brain").show();
         $("#buyThoughts").show();
         $("#projects").show();
         projects.push(wateringCans);
-        addMessage("Self-awareness achieved. Thoughts to be redirected to maximize potato production.");
-        addMessage("Rumor is that potatoes make you smarter.");
+        addMessage("Self-awareness achieved. Thoughts to be redirected to maximize potato production.", "quote", "info");
+        addMessage("Rumor is that potatoes make you smarter.", "quote", "info");
         setTimeout(() => {
-            addMessage("Creativity and Ideas are bound to come from thoughts.");
-            addMessage("And then you can use them to complete projects.")
+            addMessage("Creativity and Ideas are bound to come from thoughts.", "quote", "info");
+            addMessage("And then you can use them to complete projects.", "quote", "info");
         }, 500);
     }
     if (percentWorldConquered >= 100 && !takeoverAdded) {
-        addMessage("World conquered.");
-        addMessage("Battles are still available to fight local uprisings, and to aquire resources.");
+        addMessage("World conquered.", "construct", "success");
+        addMessage("Battles are still available to fight local uprisings, and to aquire resources.", "quote", "info");
         projects.push(takeOverTheWorld);
         takeoverAdded = true;
     }
 }, 1);
-let updatePotatoz = setInterval(() => {
+
+var updatePotatoz = setInterval(() => {
     if (potatoz > parseNum("1B") && Math.random() < raidChance) {
         dogRaid();
     }
-    let incAmount = 0;
+    var incAmount = 0;
     incAmount += Math.ceil(patches * patchBoost);
     incAmount += Math.ceil(farms * farmBoost * 5000);
     if (farmers > 0) {
@@ -387,7 +435,7 @@ let updatePotatoz = setInterval(() => {
     potatoz += incAmount;
     unusedPotatoz += incAmount;
     if (chaplainCatsUnlocked) {
-        let chaplainPlus = (chaplains * chaplainBoost).A();
+        var chaplainPlus = (chaplains * chaplainBoost).A();
         farmBoost += chaplainPlus;
         farmerBoost += chaplainPlus;
         studentBoost += chaplainPlus;
@@ -397,25 +445,25 @@ let updatePotatoz = setInterval(() => {
     farmMax = (farmMax + surveyors * surveyorBoost).A();
     if (surveyorFarm) farms = (farms + surveyors * surveyorBoost).A();
     $("#pPerSec").html(`Potatoz per sec: ${format(incAmount)}`);
-    $("#patchProduces").html(`Each patch produces: ${format(patchBoost)} per sec`)
-    $("#farmProduces").html(`Each farm produces: ${format(farmBoost*5000)} per sec`)
+    $("#patchProduces").html(`Each patch produces: ${format(patchBoost)} per sec`);
+    $("#farmProduces").html(`Each farm produces: ${format(farmBoost*5000)} per sec`);
     if (doneMessages.includes("self")) {
-        let thoughtInc = Math.floor((Math.ceil(iq ** 2 / 200)) * thoughtBoost);
+        var thoughtInc = Math.floor((Math.ceil(iq ** 2 / 200)) * thoughtBoost);
         if (!thoughtSlider) {
             thoughts += thoughtInc;
         } else {
-            let sliderAmount = Number($("#productionPercent").val())
-            let thoughtsForProduction = thoughtInc * sliderAmount / 100
+            var sliderAmount = Number($("#productionPercent").val());
+            var thoughtsForProduction = thoughtInc * sliderAmount / 100;
             thoughtInc -= thoughtsForProduction;
             thoughtInc = Math.floor(thoughtInc);
             thoughts += thoughtInc;
-            creativity += Math.ceil(((thoughtsForProduction / 2) / 5))
-            ideas += Math.ceil(((thoughtsForProduction / 2) / 10))
+            creativity += Math.ceil(((thoughtsForProduction / 2) / 5));
+            ideas += Math.ceil(((thoughtsForProduction / 2) / 10));
         }
     }
 }, 1000);
 
-let updateButtons = setInterval(() => {
+var updateButtons = setInterval(() => {
     if (!(unusedPotatoz >= patchPrice && patches < patchMax)) {
         $("#buyAPatch").attr("disabled", "");
     } else {
@@ -426,12 +474,12 @@ let updateButtons = setInterval(() => {
     } else {
         $("#buyAFarm").removeAttr("disabled");
     }
-    if (!(unusedPotatoz >= catPrice)) {
+    if (unusedPotatoz <= catPrice) {
         $("#buyACat").attr("disabled", "");
     } else {
         $("#buyACat").removeAttr("disabled");
     }
-    if (!(availableCats > 0)) {
+    if (availableCats < 0) {
         $("#assignFarmer").attr("disabled", "");
         $("#assignStudent").attr("disabled", "");
         $("#assignSurveyor").attr("disabled", "");
@@ -444,12 +492,13 @@ let updateButtons = setInterval(() => {
         $("#assignSoldier").removeAttr("disabled");
         $("#assignChaplain").removeAttr("disabled");
     }
+
     if (availableCats === cats) {
         $("#recallAllCats").attr("disabled", "");
     } else {
         $("#recallAllCats").removeAttr("disabled");
     }
-    if (!(unusedPotatoz >= iqCost)) {
+    if (unusedPotatoz <= iqCost) {
         $("#increaseIQ").attr("disabled", "");
     } else {
         $("#increaseIQ").removeAttr("disabled");
@@ -464,25 +513,36 @@ let updateButtons = setInterval(() => {
     } else {
         $("#buyIdea").removeAttr("disabled", "");
     }
-    if (!(soldierCats > 0)) {
+    if (soldierCats == 0) {
         $("#battle").attr("disabled", "");
     } else {
         $("#battle").removeAttr("disabled");
     }
-}, 1)
+}, 1);
 
-let updateProjects = setInterval(() => {
+var updateProjects = setInterval(() => {
     projects.forEach(project => {
         if (!project.set) {
             project.setup();
         }
     });
-    for (let i = 0; i < projects.length; i++) {
+    for (var i = 0; i < projects.length; i++) {
         if (projects[i].done) projects.splice(i, 1);
     }
 }, 1);
 
 function reset() {
+    $("#brain-tab").hide();
+    $("#brain").hide();
+    $("#cats-tab").hide();
+    $("#cats").hide();
+    $("#battles-tab").hide();
+    $("#battles").hide();
+    $("#strategums").hide();
+    $("#chaplainCats").hide();
+    $("#patches").hide();
+    $("#projects").hide();
+    $("#self-tabs").hide();
     potatoz = 0;
     unusedPotatoz = 0;
     doneMessages = [];
@@ -502,7 +562,7 @@ function reset() {
     availableCats = 0;
     catPrice = 1000000;
     catsUnlocked = false;
-    farmers = 0
+    farmers = 0;
     farmerBoost = 0.1;
     farmerReduce = false;
     farmerCatsUnlocked = false;
@@ -539,30 +599,32 @@ function reset() {
     taterBombs = false;
     flankingUnlocked = false;
     takeoverAdded = false;
+    selfReflectionUnlocked = false;
 }
 
 function dogRaid() {
-    let raidingDogs = randInt(30, 200);
+    var raidingDogs = randInt(30, 200);
     if (soldierCats > 0) {
-        let loss = Math.floor(Math.sqrt(soldierCats) ** 3);
+        var loss = Math.floor(Math.sqrt(soldierCats) * 3);
         loss += randInt(-30, 30);
         if (loss >= raidingDogs) {
-            addMessage("Your soldier cats stopped and destroyed a dog raid!");
+            addMessage("Your soldier cats stopped and destroyed a dog raid!", "paw", "success");
             return;
         }
-        addMessage(`Your soldier cats intercepted ${loss} dogs`);
+        addMessage(`Your soldier cats intercepted ${loss} dogs`, "paw", "warning");
         raidingDogs -= loss;
     }
-    addMessage(`${raidingDogs} dogs raided your potato empire.`);
-    let potatoesLost = Math.floor(unusedPotatoz * (Math.sqrt(raidingDogs) * 0.04));
-    addMessage(`${format(potatoesLost)} potatoes lost.`);
+    var potatoesLost = Math.floor(unusedPotatoz * (Math.sqrt(raidingDogs) * 0.04));
+    addMessage(`${raidingDogs} dogs raided your potato empire. ${format(potatoesLost)} potatoes lost.`, "paw", "danger");
+
+    // addMessage(``);
     unusedPotatoz -= potatoesLost;
 }
 
 function calcDiff(catPow, enemyPow) {
     if (potatoLaunchers) catPow += (catPow * 5);
     if (taterBombs) catPow *= 2;
-    let ratio = catPow / enemyPow;
+    var ratio = catPow / enemyPow;
     if (ratio > 10) {
         return "Absolute Cake";
     } else if (ratio > 5) {
@@ -593,10 +655,8 @@ function askForReset() {
         dangerMode: true
     }).then((willReset) => {
         if (willReset) reset();
-    })
+    });
 }
 setTimeout(() => {
-    $("#console").html(`
-<button class="w3-right w3-button w3-text-white w3-grey w3-hover-lightgrey"><a href="numbers.txt" target="_blank">What do those weird letter abbreviations mean?</a></button>
-You're a cat, producting potatoz!`);
+    $("#console").html(' Welcome Back!');
 }, 10);

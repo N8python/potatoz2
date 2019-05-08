@@ -29,8 +29,8 @@ function battle(catPower, enemyPower) {
     for (let i = 0; i < canvas.width / blockWidth; i++) {
       for (let j = 0; j < canvas.height / blockWidth; j++) {
         if (i < frontLine) ctx.fillStyle = "White";
-        else ctx.fillStyle = "Black"
-        ctx.fillRect(i * blockWidth, j * blockWidth, blockWidth, blockWidth)
+        else ctx.fillStyle = "Black";
+        ctx.fillRect(i * blockWidth, j * blockWidth, blockWidth, blockWidth);
       }
     }
     ctx.fillStyle = "Black";
@@ -46,7 +46,7 @@ function battle(catPower, enemyPower) {
     }
     frontLine += chosenNum;
     if (frontLine > 20) {
-      addMessage("Victory!");
+      addMessage("Victory!", "construct", "success");
       let catsLiberated = randInt(1, 5);
       catsLiberated*=battleIntensity;
       addMessage(`You liberated ${format(Math.floor(catsLiberated))} cats.`);
@@ -66,9 +66,9 @@ function battle(catPower, enemyPower) {
       battleOn = false;
       clearInterval(currBattle);
     } else if (frontLine < 0) {
-      addMessage("Defeat...");
+      addMessage("Defeat...", "construct", "danger");
       battleOn = false;
-      clearInterval(currBattle)
+      clearInterval(currBattle);
     }
-  }, 100)
+  }, 100);
 }
