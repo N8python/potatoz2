@@ -9,8 +9,7 @@
     <meta name="keywords" content="Potatoes, potatoes, Potatoz, potatoes, Cats, cats, Clicker games, clicker games, Clicker Games">
     <meta name="viewport" content="user-scalable=no" />
     <title>Potatoz</title>
-    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -43,7 +42,9 @@
         <div class="row">
             <div class="col-sm-4" style="height:500px; overflow-y: auto;">
                 <h4>Available Potatoes: <span id="unusedPotatozAmount">0</span></h4>
-                <button id="potatozPlus" class="btn btn-primary btn-sm">Make Potato</button>
+                <button type="button" id="potatozPlus" class="btn btn-labeled btn-primary btn-sm">
+                    <span class="btn-label"><ion-icon name="construct"></ion-icon>
+                    </span>Make Potato</button>
 
                 <section id="patches">
                     <h4><span id="patchesAmount">0</span> / <span id="patchMax">5</span></h4>
@@ -116,7 +117,7 @@
                                 <h5 id="farmerCatAmount">Farmer Cats: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignFarmer" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numFarmerCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 75px;" value="1" />
+                                    <input id="numFarmerCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
                                     <button id="removeFarmer" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="eachBoostFarmer">Each farmer cat adds a 10% boost to potato production.</p>
@@ -126,7 +127,7 @@
                                 <h5 id="studentCatAmount">Student Cats: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignStudent" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numStudentCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 75px;" value="1" />
+                                    <input id="numStudentCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
                                     <button id="removeStudent" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="eachBoostStudent">Each student cat generates 0.001 IQ per second.</p>
@@ -136,7 +137,7 @@
                                 <h5 id="surveyorCatAmount">Surveyor Cats: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignSurveyor" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numSurveyorCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 75px;" value="1" />
+                                    <input id="numSurveyorCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
                                     <button id="removeSurveyor" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="eachBoostSurveyor">Each surveyor cat generates 0.001 farm max per second.</p>
@@ -150,7 +151,7 @@
                                 <h5 id="soldierCatAmount">Soldier Cat: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignSoldier" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numSoldierCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 75px;" value="1" />
+                                    <input id="numSoldierCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
                                     <button id="removeSoldier" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="weapons">Weapons Equipped:
@@ -166,7 +167,7 @@
                                 <h5 id="chaplainCatAmount">Chaplian Cats: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignChaplain" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numChaplainCats" type="text" class="form-control ml-1 mr-1" style="width: 75px;" value="1" />
+                                    <input id="numChaplainCats" type="text" class="form-control ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
                                     <button id="removeChaplain" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="eachBoostChaplain">Each chaplain cat provides +0.0001 boost per second.</p>
