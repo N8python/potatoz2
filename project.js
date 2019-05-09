@@ -699,10 +699,10 @@ var metafolding = new Project({
     effect: () => {
         for (var i = 0; i < 5; i++) potatoz *= 2;
         addMessage("Potatoz.", 'quote', 'info');
-        addMessage("A game by Nathan Breslow.", 'quote', 'info');
+        addMessage("A game by N8.", 'quote', 'info');
         addMessage("UI by pjlasl, and duncan93", "quote", "info");
-        addMessage("Coding by Nathan Breslow, and nice people on Stack Overflow.", 'quote', 'info');
-        addMessage("Ideas from Nathan Breslow and Claire.", 'quote', 'info');
+        addMessage("Coding by N8, and nice people on Stack Overflow.", 'quote', 'info');
+        addMessage("Ideas from N8 and Claire.", 'quote', 'info');
         addMessage("Beeba, Claire's friend's cat.", 'quote', 'info');
         addMessage("Bonnie, my cat, for starting it all.", 'quote', 'info');
         addMessage("Since you worked so hard, you get a reward.", 'quote', 'info');
