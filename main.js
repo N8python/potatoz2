@@ -314,7 +314,6 @@ $("#battle").click(() => {
 });
 
 function format(number, decPlaces = 2) {
-    // Abbreviations to enumerate over
     const abbrev = ["", "K", "M", "B", "T", "q", "Q", "s", "S", "O", "N", "D"];
     let exponent = Math.max(0, Math.log10(number));
     let suffixIdx = Math.min(abbrev.length - 1, Math.floor(exponent / 3));
@@ -330,6 +329,11 @@ function format(number, decPlaces = 2) {
     if (Math.round(number * Math.pow(10, decPlaces)) / Math.pow(10, decPlaces) % 1 === 0)
         decPlaces = 0;
     return `${number.toFixed(decPlaces)}${abbrev[suffixIdx]}`;
+
+    // Trim zeros off the decimal portion of the number
+    if (decPlaces > 0)
+        result = result.replace(/0+$/, "");
+    return result;
 }
 
 var updateId = setInterval(() => {
