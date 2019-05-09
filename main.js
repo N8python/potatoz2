@@ -167,7 +167,7 @@ $("#btnBuyAFarm").click(() => {
         farms += 1;
     }
 });
-$("#buyACat").click(() => {
+$("#btnBuyACat").click(() => {
     if (unusedPotatoz >= catPrice) {
         unusedPotatoz -= catPrice;
         catPrice = Math.floor(catPrice * 1.05);
@@ -358,7 +358,7 @@ var updateId = setInterval(() => {
     $("#buyAFarm").html(`${format(farmPrice)}`);
     $("#farmAmount").html(`${format(farms)}`);
     $("#farmMax").html(`${format(farmMax)}`);
-    $("#buyACat").html(`Buy a cat for ${format(catPrice)} potatoes.`);
+    $("#buyACat").html(`${format(catPrice)}`);
     $("#catAmount").html(`Cats: ${format(availableCats.A())} / ${format(cats.A())}`);
     $("#eachBoostFarmer").html(`Each farmer cat adds a ${format(farmerBoost*100)}% boost to potato production.`);
     $("#totalBoostFarmer").html(`Total farmer cat boost provided: ${format((farmerBoost*farmers*100).A())}%`);
@@ -617,7 +617,7 @@ function dogRaid() {
         raidingDogs -= loss;
     }
     var potatoesLost = Math.floor(unusedPotatoz * (Math.sqrt(raidingDogs) * 0.04));
-    addMessage(`${raidingDogs} dogs raided your potato empire. ${format(potatoesLost)} potatoes lost.`, "paw", "danger");
+    addMessage(`${raidingDogs} dogs raided your potato empire. ${format(potatoesLost)} potatoz lost.`, "paw", "danger");
 
     // addMessage(``);
     unusedPotatoz -= potatoesLost;

@@ -118,8 +118,12 @@
                         <section id="cats">
                             <section class="mb-2 mt-2">
                                 <h5><span id="catAmount">Cats: 0 / 0</span></h5>
-                                <button id="buyACat" class="btn btn-primary btn-sm">Buy a cat for 1M potatoes.</button>
-                                <button id="recallAllCats" class="btn btn-danger btn-sm">Recall all cats</button>
+                                <button id="btnBuyACat" class="btn btn-primary btn-primary btn-sm">
+                                    <span class="btn-label"><i class="fas fa-dollar-sign fa-fw"></i></span>
+                                    <span id="buyACat">1M</span> potatoz</button>
+                                <button id="recallAllCats" class="btn btn-labeled btn-danger btn-sm">
+                                    <span class="btn-label"><i class="fas fa-undo fa-fw"></i></span>
+                                    Recall all</button>
                             </section>
                             <section id="farmerCats" class="mb-2" style="border-left: .5em solid #ccc; padding-left: .5em;">
                                 <h5 id="farmerCatAmount">Farmer Cats: 0</h5>
@@ -166,9 +170,11 @@
 
                                 </p>
                                 <section id="strategums">
-                                    <button id="buyStrategum" class="btn btn-primary btn-sm" role="button">Purchase strategum
-                                        for 1M creativity, 1M ideas</button>
-                                    <p id="stratCount">Strategums: 0</p>
+                                    <h6 id="stratCount">Strategums: 0</h6>
+                                    <button id="buyStrategum" class="btn btn-labeled btn-primary btn-sm" role="button">
+                                        <span class="btn-label"><i class="fas fa-dollar-sign fa-fw"></i></span>
+                                        1M creativity & 1M ideas</button>
+                                    
                                 </section>
                             </section>
                             <section id="chaplainCats" style="border-left: .5em solid #ccc; padding-left: .5em;">
@@ -184,7 +190,9 @@
                             <section id="battleField">
                                 <p id="percentConquered">Percent of the World Conquered: 0%</p>
                                 <p id="battleDiff"></p>
-                                <button id="battle" class="btn btn-primary btn-sm" role="button">Battle</button>
+                                <button id="battle" class="btn btn-labeled btn-primary btn-sm" role="button">
+                                    <span class="btn-label"><i class="fas fa-tools fa-fw"></i></span>
+                                    Battle</button>
                                 <br>
                                 <br>
                                 <canvas id="canvas" width="200px" height="120px"></canvas>
