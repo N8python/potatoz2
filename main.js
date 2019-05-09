@@ -548,7 +548,7 @@ function reset() {
     potatoz = 0;
     unusedPotatoz = 0;
     doneMessages = [];
-    patchPrice = 50;
+    patchPrice = 20;
     patches = 0;
     patchBoost = 1;
     patchMax = 5;
@@ -656,7 +656,10 @@ function askForReset() {
         buttons: true,
         dangerMode: true
     }).then((willReset) => {
-        if (willReset) reset();
+        if (willReset) {
+            reset();
+            location.href = location.href;
+        }
     });
 }
 setTimeout(() => {
