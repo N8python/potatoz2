@@ -318,7 +318,7 @@ function format(number, decPlaces = 2) {
     const abbrev = ["", "K", "M", "B", "T", "q", "Q", "s", "S", "O", "N", "D"];
     let exponent = Math.max(0, Math.log10(number));
     let suffixIdx = Math.min(abbrev.length - 1, Math.floor(exponent / 3));
-    number = number / Math.pow(10, suffixIdx * 3);
+    number /= Math.pow(10, suffixIdx * 3);
 
     // Handle special case where we round up to the next abbreviation
     if ((Math.round(number) === 1000) && (exponent / 3 < abbrev.length - 1)) {
@@ -326,10 +326,8 @@ function format(number, decPlaces = 2) {
         ++suffixIdx;
     }
 
-    // Return the string with a decimal place if decimal portion is nonzero
-    // We compare against an epsilon here because for very large numbers
-    // (> 999D) floating point imprecision makes a direct comparison against 1 impractical
-    if (Math.abs(number - Math.pow(10, Math.round(Math.log10(number)))) <= 1e-7)
+    // Return the string without a decimal place if decimal portion is zero
+    if (Math.round(number * Math.pow(10, decPlaces)) / Math.pow(10, decPlaces) % 1 === 0)
         decPlaces = 0;
     return `${number.toFixed(decPlaces)}${abbrev[suffixIdx]}`;
 }
