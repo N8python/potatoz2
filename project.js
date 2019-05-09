@@ -277,8 +277,10 @@ var theFarm = new Project({
         farms = 1;
         patches = 0;
         $("#patches").hide();
+        $('#patchProduces').hide();
         doneMessages = doneMessages.remove("patches");
         $("#farms").show();
+        $('#farmProduces').show();
         addMessage("Farms unlocked! These massive potato producting behemoths produce 5000 potatoes a second.", 'quote', 'info');
         projects.push(organizedFarms);
         projects.push(unlockCats);

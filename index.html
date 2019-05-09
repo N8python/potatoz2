@@ -11,7 +11,7 @@
     <title>Potatoz</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
@@ -41,20 +41,22 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4" style="height:500px; overflow-y: auto;">
-                <h4>Available Potatoes: <span id="unusedPotatozAmount">0</span></h4>
+                <h4>Available Potatoz: <span id="unusedPotatozAmount">0</span></h4>
                 <button type="button" id="potatozPlus" class="btn btn-labeled btn-primary btn-sm">
-                    <span class="btn-label"><ion-icon name="construct"></ion-icon>
-                    </span>Make Potato</button>
+                    <span class="btn-label"><i class="fas fa-seedling fa-fw "></i></span>
+                    Make Potato</button>
 
                 <section id="patches">
-                    <h4><span id="patchesAmount">0</span> / <span id="patchMax">5</span></h4>
-                    <button id="buyAPatch" class="btn btn-primary btn-sm">Buy a patch for 50
-                        potatoes.</button>
+                    <h4>Patches: <span id="patchesAmount">0</span> / <span id="patchMax">5</span></h4>
+                    <button id="btnBuyAPatch" class="btn btn-labeled btn-primary btn-sm">
+                        <span class="btn-label"><i class="fas fa-dollar-sign fa-fw"></i></span>
+                        <span id="buyAPatch">50</span> potatoz</button>
                 </section>
                 <section id="farms" class="mt-2">
-                    <h5><span id="farmAmount">0</span> / <span id="farmMax">2</span></h5>
-                    <button id="buyAFarm" class="btn btn-primary btn-sm">Buy a farm for 200K
-                        potatoes.</button>
+                    <h4>Farms: <span id="farmAmount">0</span> / <span id="farmMax">2</span></h4>
+                    <button id="btnBuyAFarm" class="btn btn-labeled btn-primary btn-sm">
+                        <span class="btn-label"><i class="fas fa-dollar-sign fa-fw"></i></span>
+                        <span id="buyAFarm">200K</span> potatoz</button>
                 </section>
                 <section class="mt-2">
                     <div class="card">
@@ -88,22 +90,28 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="one" role="tabpanel" aria-labelledby="brain-tab">
                         <section id="brain">
-                            <p id="iq">IQ: 20</p>
-                            <button id="increaseIQ" class="btn btn-primary btn-sm">+1 IQ for 5 potatoes</button>
-                            <p id="thoughts">Thoughts: 0 / 10B</p>
-                            <button id="convertAll" class="btn btn-primary btn-sm">Convert all Thoughts to Ideas and Creativity</button>
+                            <h4 id="iq">IQ: 20</h4>
+                            <button id="btnIncreaseIQ" class="btn btn-labeled btn-primary btn-sm">
+                                <span class="btn-label"><i class="fas fa-brain fa-fw"></i></span>
+                                <span id="increaseIQ">5</span> potatoz</button>
+                            <h4 id="thoughts">Thoughts: 0 / 10B</h4>
+                            <button id="convertAll" class="btn btn-labeled btn-primary btn-sm">
+                                <span class="btn-label"><i class="fas fa-exchange-alt fa-fw"></i></span>
+                                All Thoughts > Ideas & Creativity</button>
                             <div id="thoughtProduction">
-                                <p id="productionPercentDisplay">Percent allocated to production: 1%</p>
-                                <input id="productionPercent" class="form-control" type="range" min="1" max="100">
+                                <h6 id="productionPercentDisplay">Percent allocated to production: 1%</h6>
+                                <input id="productionPercent" class="form-control-range" type="range" min="1" max="100">
                             </div>
                         </section>
                         <section id="buyThoughts">
-                            <p id="creat">Creativity: 0</p>
-                            <button id="buyCreat" class="btn btn-primary btn-sm">Convert 5 thoughts to 1
-                                    creativity</button>
-                            <p id="ideas">Ideas: 0</p>
-                            <button id="buyIdea" class="btn btn-primary btn-sm">Convert 10 thoughts to 1
-                                    idea</button>
+                            <h6 id="creat">Creativity: 0</h6>
+                            <button id="buyCreat" class="btn btn-labeled btn-primary btn-sm">
+                                <span class="btn-label"><i class="fas fa-exchange-alt fa-fw"></i></span>
+                                5 thoughts > 1 creativity</button>
+                            <h6 id="ideas">Ideas: 0</h6>
+                            <button id="buyIdea" class="btn btn-labeled btn-primary btn-sm">
+                                <span class="btn-label"><i class="fas fa-exchange-alt fa-fw"></i></span>
+                                10 thoughts > 1 idea</button>
                         </section>
                     </div>
                     <div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="cats-tab">
@@ -117,7 +125,7 @@
                                 <h5 id="farmerCatAmount">Farmer Cats: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignFarmer" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numFarmerCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
+                                    <input id="numFarmerCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em;" value="1" />
                                     <button id="removeFarmer" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="eachBoostFarmer">Each farmer cat adds a 10% boost to potato production.</p>
@@ -127,7 +135,7 @@
                                 <h5 id="studentCatAmount">Student Cats: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignStudent" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numStudentCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
+                                    <input id="numStudentCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em;" value="1" />
                                     <button id="removeStudent" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="eachBoostStudent">Each student cat generates 0.001 IQ per second.</p>
@@ -137,7 +145,7 @@
                                 <h5 id="surveyorCatAmount">Surveyor Cats: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignSurveyor" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numSurveyorCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
+                                    <input id="numSurveyorCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em;" value="1" />
                                     <button id="removeSurveyor" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="eachBoostSurveyor">Each surveyor cat generates 0.001 farm max per second.</p>
@@ -151,7 +159,7 @@
                                 <h5 id="soldierCatAmount">Soldier Cat: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignSoldier" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numSoldierCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
+                                    <input id="numSoldierCats" type="text" class="form-control form-control-sm ml-1 mr-1" style="width: 5em;" value="1" />
                                     <button id="removeSoldier" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="weapons">Weapons Equipped:
@@ -167,7 +175,7 @@
                                 <h5 id="chaplainCatAmount">Chaplian Cats: 0</h5>
                                 <div class="form-inline">
                                     <button id="assignChaplain" class="btn btn-success btn-sm"><ion-icon name="add"></ion-icon></button>
-                                    <input id="numChaplainCats" type="text" class="form-control ml-1 mr-1" style="width: 5em; margin-top: -.7em;" value="1" />
+                                    <input id="numChaplainCats" type="text" class="form-control ml-1 mr-1" style="width: 5em;" value="1" />
                                     <button id="removeChaplain" class="btn btn-danger btn-sm"><ion-icon name="remove"></ion-icon></button>
                                 </div>
                                 <p id="eachBoostChaplain">Each chaplain cat provides +0.0001 boost per second.</p>
@@ -195,7 +203,7 @@
             </div>
         </div>
     </div>
-    <a href="https://clustrmaps.com/site/1amtl" title="Visit tracker" hidden><img src="//www.clustrmaps.com/map_v2.png?d=ljRDZ4hpR6brBGH3RJI3_p_E4c0osI2zs-IjS4jbuuk&cl=ffffff"></a>
+    <!-- <a href="https://clustrmaps.com/site/1amtl" title="Visit tracker" hidden><img src="//www.clustrmaps.com/map_v2.png?d=ljRDZ4hpR6brBGH3RJI3_p_E4c0osI2zs-IjS4jbuuk&cl=ffffff"></a> -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">

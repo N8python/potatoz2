@@ -153,14 +153,14 @@ $("#potatozPlus").click(() => {
     potatoz++;
     unusedPotatoz++;
 });
-$("#buyAPatch").click(() => {
+$("#btnBuyAPatch").click(() => {
     if (unusedPotatoz >= patchPrice && patches < patchMax) {
         unusedPotatoz -= patchPrice;
         patchPrice = Math.floor(patchPrice * patchMultiplier);
         patches += 1;
     }
 });
-$("#buyAFarm").click(() => {
+$("#btnBuyAFarm").click(() => {
     if (unusedPotatoz >= farmPrice && farms < Math.floor(farmMax)) {
         unusedPotatoz -= farmPrice;
         farmPrice = Math.floor(farmPrice * 1.5);
@@ -295,7 +295,7 @@ $("#convertAll").click(() => {
     creativity += Math.floor(thoughts / 10);
     thoughts = 0;
 });
-$("#increaseIQ").click(() => {
+$("#btnIncreaseIQ").click(() => {
     if (unusedPotatoz >= iqCost) {
         iq++;
         unusedPotatoz -= iqCost;
@@ -352,11 +352,11 @@ function format(number, decPlaces = 2) {
 var updateId = setInterval(() => {
     $("#potatozAmount").html(`${format(potatoz)}`);
     $("#unusedPotatozAmount").html(`${format(unusedPotatoz)}`);
-    $("#buyAPatch").html(`Buy a patch for ${format(patchPrice)} potatoes.`);
-    $("#patchesAmount").html(`Patches: ${format(patches)}`);
+    $("#buyAPatch").html(`${format(patchPrice)}`);
+    $("#patchesAmount").html(`${format(patches)}`);
     $("#patchMax").html(`${format(patchMax)}`);
-    $("#buyAFarm").html(`Buy a farm for ${format(farmPrice)} potatoes.`);
-    $("#farmAmount").html(`Farms: ${format(farms)}`);
+    $("#buyAFarm").html(`${format(farmPrice)}`);
+    $("#farmAmount").html(`${format(farms)}`);
     $("#farmMax").html(`${format(farmMax)}`);
     $("#buyACat").html(`Buy a cat for ${format(catPrice)} potatoes.`);
     $("#catAmount").html(`Cats: ${format(availableCats.A())} / ${format(cats.A())}`);
@@ -383,7 +383,7 @@ var updateId = setInterval(() => {
     $("#thoughts").html(`Thoughts: ${format(thoughts)}`);
     $("#creat").html(`Creativity: ${format(creativity)}`);
     $("#ideas").html(`Ideas: ${format(ideas)}`);
-    $("#increaseIQ").html(`+1 IQ for ${format(iqCost)} potatoes`);
+    $("#increaseIQ").html(`${format(iqCost)}`);
     $("#productionPercentDisplay").html(`Percent allocated to production: ${$("#productionPercent").val()}%`);
     $("#weapons").html(`Weapons Equipped: ${(potatoLaunchers) ? "<br> Potato Launchers" : ""} ${(taterBombs) ? "<br> Tater Tot Bombs" : ""}`);
     $("#stratCount").html(`Strategums: ${strats}`);
@@ -532,6 +532,8 @@ var updateProjects = setInterval(() => {
 }, 1);
 
 function reset() {
+    $("#farms").hide();
+    $("#farmProduces").hide();
     $("#brain-tab").hide();
     $("#brain").hide();
     $("#cats-tab").hide();
