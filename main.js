@@ -330,9 +330,8 @@ function format(number, decPlaces = 2) {
     // We compare against an epsilon here because for very large numbers
     // (> 999D) floating point imprecision makes a direct comparison against 1 impractical
     if (Math.abs(number - Math.pow(10, Math.round(Math.log10(number)))) <= 1e-7)
-        return `${number.toFixed(0)}${abbrev[suffixIdx]}`;
-    else
-        return `${number.toFixed(decPlaces)}${abbrev[suffixIdx]}`;
+        decPlaces = 0;
+    return `${number.toFixed(decPlaces)}${abbrev[suffixIdx]}`;
 }
 
 var updateId = setInterval(() => {
