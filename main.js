@@ -528,6 +528,7 @@ var updateProjects = setInterval(() => {
     });
     for (var i = 0; i < projects.length; i++) {
         if (projects[i].done) projects.splice(i, 1);
+        projects[i].canBuy();
     }
 }, 1);
 
