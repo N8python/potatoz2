@@ -531,7 +531,7 @@ var updateProjects = setInterval(() => {
         projects[i].canBuy();
     }
 }, 1);
-
+ 
 function reset() {
     $("#farms").hide();
     $("#farmProduces").hide();
