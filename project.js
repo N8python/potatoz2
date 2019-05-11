@@ -43,6 +43,34 @@ class Project {
     }
 }
 
+function _updateProjectCard(project) {
+    
+    let updateCard = false;
+    if (project.creatCost) {
+        updateCard = creativity >= project.creatCost ? true : false;
+    }
+    if (project.ideaCost) {
+        updateCard = ideas >= project.ideaCost ? true : false;
+    }
+    if (project.potatoCost) {
+        updateCard = unusedPotatoz >= project.potatoCost ? true : false;
+    }
+
+    let el = document.getElementById('project' + project.id);
+    let cursor = 'auto';
+    let border = '1px solid rgba(0,0,0,.125)';
+
+    if (updateCard) {
+        if (creativity >= project.creatCost && ideas >= project.ideaCost) {
+            cursor = 'pointer';
+            border = '2px solid #5CB85C';
+        }         
+    }
+
+    el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        
+}
+
 var wateringCans = new Project({
     title: "Watering Cans",
     phrase: "When you water plants, they tend to grow faster.",
@@ -58,15 +86,7 @@ var wateringCans = new Project({
         addMessage('"A river flows out of Eden to water the potato..." - The Potato Bible', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = wateringCans;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(wateringCans);
     }
 });
 
@@ -85,15 +105,7 @@ var potatonalysis = new Project({
         addMessage('"I spy with my little eye..., something brownish, bland, and round." - Bonnie, the cat', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = potatonalysis;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(potatonalysis);
     }
 });
 
@@ -112,15 +124,7 @@ var bribeForPatches = new Project({
         addMessage('"Across history, corrupt officials have been susceptible to bribes. Especially potato bribes." - Beeba, the cat', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = bribeForPatches;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(bribeForPatches);        
     }
 });
 
@@ -137,15 +141,7 @@ var patchArc = new Project({
         addMessage('"Potatoes will never be destroyed from the outside. If we falter and lose our freedoms, it will be because we were overripe." - Potatoham Lincoln', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = patchArc;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (ideas >= obj.ideaCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(patchArc);        
     }
 });
 
@@ -167,15 +163,7 @@ var fertilizer = new Project({
         addMessage('"Now we\'re really environmentally friendly. No sewage!" - Bonnie', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = fertilizer;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (unusedPotatoz >= obj.potatoCost && creativity >= obj.creatCost && ideas >= obj.ideaCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(fertilizer);        
     }
 });
 
@@ -185,22 +173,14 @@ var potatoMath = new Project({
     description: "The rate at which patches increase in price is halved.",
     costPhrase: "(20 creativity, 10 ideas)",
     creatCost: 20,
-    ideaCost: 5,
+    ideaCost: 10,
     effect: () => {
         patchMultiplier = 1.1;
         projects.push(potateanTheorem);
         addMessage('"Potato. potato. potato. More important than calculus." - Beeba', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = potatoMath;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(potatoMath);    
     }
 });
 
@@ -218,15 +198,7 @@ var potateanTheorem = new Project({
         addMessage('"There is roundness in the humming of the potatoes, there is blandness in the spacing of potatoes." - Potatogras', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = potateanTheorem;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(potateanTheorem);
     }
 });
 
@@ -244,15 +216,7 @@ var potatoCabin = new Project({
         addMessage('"A cabin for storing potatoes - the greatest breakthrough of our century." - Bonnie', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = potatoCabin;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(potatoCabin);
     }
 });
 
@@ -271,15 +235,7 @@ var turnTheBackyard = new Project({
         addMessage('"No, I am your potato." - Darth Potato', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = turnTheBackyard;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(turnTheBackyard);
     }
 });
 
@@ -298,15 +254,7 @@ var ropeCat = new Project({
         addMessage('"Hey, Beeba, thanks for helping out!" - Bonnie', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = ropeCat;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(ropeCat);
     }
 });
 
@@ -320,20 +268,12 @@ var potatoDiet = new Project({
     id: 'potatoDiet',
     effect: () => {
         iqButton = true;
-        $("#increaseIQ").show();
+        $("#btnIncreaseIQ").show();
         projects.push(productiveThinking);
         addMessage('"MmM.HMM...MMMMM..." - Bonnie, chewing potatoes', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = potatoDiet;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(potatoDiet);
     }
 });
 
@@ -355,15 +295,7 @@ var productiveThinking = new Project({
         addMessage("The slider controls what percent of thoughts are automatically converted to creativity and ideas.", 'quote', 'info');
     },
     canBuy: () => {
-        let obj = productiveThinking;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(productiveThinking);
     }
 });
 
@@ -382,15 +314,7 @@ var selfReflection = new Project({
         addMessage('"I have no regrets. Yet." - A Baby Kitten', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = selfReflection;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(selfReflection);
     }
 });
 
@@ -408,15 +332,7 @@ var industryPatches = new Project({
         addMessage('"So much for being eco-friendly. I thought we had something going with the fertitlizer." - Bonnie', 'quote', 'info');
     },
     canBuy: () => {
-        let obj = industryPatches;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(industryPatches);
     }
 });
 
@@ -434,15 +350,7 @@ var driveYourOwnerOut = new Project({
         projects.push(theFarm);
     },
     canBuy: () => {
-        let obj = driveYourOwnerOut;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(driveYourOwnerOut);
     }
 });
 
@@ -469,15 +377,7 @@ var theFarm = new Project({
         projects.push(unlockCats);
     },
     canBuy: () => {
-        let obj = theFarm;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(theFarm);
     }
 });
 
@@ -497,15 +397,7 @@ var organizedFarms = new Project({
         projects.push(irrigation);
     },
     canBuy: () => {
-        let obj = organizedFarms;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(organizedFarms);
     }
 });
 
@@ -527,15 +419,7 @@ var irrigation = new Project({
         projects.push(fences);
     },
     canBuy: () => {
-        let obj = irrigation;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(irrigation);
     }
 });
 
@@ -554,15 +438,7 @@ var fences = new Project({
         projects.push(superFarms);
     },
     canBuy: () => {
-        let obj = fences;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(fences);
     }
 });
 
@@ -581,15 +457,7 @@ var superFarms = new Project({
         projects.push(unlockSoldierCats);
     },
     canBuy: () => {
-        let obj = superFarms;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(superFarms);
     }
 });
 
@@ -611,15 +479,7 @@ var unlockSoldierCats = new Project({
         projects.push(battles);
     },
     canBuy: () => {
-        let obj = unlockSoldierCats;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(unlockSoldierCats);
     }
 });
 
@@ -643,15 +503,7 @@ var unlockCats = new Project({
         projects.push(surveyorCats);
     },
     canBuy: () => {
-        let obj = unlockCats;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(unlockCats);
     }
 });
 var farmerCats = new Project({
@@ -670,15 +522,7 @@ var farmerCats = new Project({
         projects.push(enhancedFarmerCats);
     },
     canBuy: () => {
-        let obj = farmerCats;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(farmerCats);
     }
 });
 
@@ -698,15 +542,7 @@ var enhancedFarmerCats = new Project({
         projects.push(superFarmerCats);
     },
     canBuy: () => {
-        let obj = enhancedFarmerCats;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(enhancedFarmerCats);
     }
 });
 
@@ -724,15 +560,7 @@ var superFarmerCats = new Project({
         farmerBoost *= 10;
     },
     canBuy: () => {
-        let obj = superFarmerCats;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(superFarmerCats);
     }
 });
 
@@ -752,15 +580,7 @@ var studentCats = new Project({
         projects.push(quizzes);
     },
     canBuy: () => {
-        let obj = studentCats;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(studentCats);
     }
 });
 
@@ -779,15 +599,7 @@ var quizzes = new Project({
         projects.push(tests);
     },
     canBuy: () => {
-        let obj = quizzes;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(quizzes);
     }
 });
 
@@ -806,15 +618,7 @@ var tests = new Project({
         projects.push(popQuizzes);
     },
     canBuy: () => {
-        let obj = tests;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(tests);        
     }
 });
 
@@ -832,15 +636,7 @@ var popQuizzes = new Project({
         studentBoost *= 20;
     },
     canBuy: () => {
-        let obj = popQuizzes;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(popQuizzes);
     }
 });
 
@@ -860,15 +656,7 @@ var surveyorCats = new Project({
         projects.push(betterGlasses);
     },
     canBuy: () => {
-        let obj = surveyorCats;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(surveyorCats);
     }
 });
 
@@ -887,15 +675,7 @@ var betterGlasses = new Project({
         projects.push(farmerSurveyors);
     },
     canBuy: () => {
-        let obj = betterGlasses;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(betterGlasses);
     }
 });
 
@@ -913,15 +693,7 @@ var farmerSurveyors = new Project({
         surveyorFarm = true;
     },
     canBuy: () => {
-        let obj = farmerSurveyors;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(farmerSurveyors);
     }
 
 });
@@ -944,15 +716,7 @@ var battles = new Project({
         projects.push(strategums);
     },
     canBuy: () => {
-        let obj = battles;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(battles);
     }
 });
 
@@ -971,15 +735,7 @@ var potatoLaunchersUnlock = new Project({
         projects.push(taterTotBombs);
     },
     canBuy: () => {
-        let obj = potatoLaunchersUnlock;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(potatoLaunchersUnlock);
     }
 });
 
@@ -998,15 +754,7 @@ var taterTotBombs = new Project({
         projects.push(ultrafarms);
     },
     canBuy: () => {
-        let obj = taterTotBombs;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(taterTotBombs);        
     }
 });
 
@@ -1024,15 +772,7 @@ var ultrafarms = new Project({
         farmBoost *= 100;
     },
     canBuy: () => {
-        let obj = ultrafarms;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(ultrafarms);
     }
 });
 
@@ -1051,15 +791,7 @@ var catScouts = new Project({
         projects.push(chaplainCats);
     },
     canBuy: () => {
-        let obj = catScouts;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(catScouts);
     }
 });
 var chaplainCats = new Project({
@@ -1077,15 +809,7 @@ var chaplainCats = new Project({
         chaplainCatsUnlocked = true;
     },
     canBuy: () => {
-        let obj = chaplainCats;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(chaplainCats);
     }
 });
 
@@ -1105,15 +829,7 @@ var strategums = new Project({
         projects.push(flanking);
     },
     canBuy: () => {
-        let obj = strategums;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(strategums);
     }
 });
 
@@ -1132,15 +848,7 @@ var flanking = new Project({
         projects.push(catAI);
     },
     canBuy: () => {
-        let obj = flanking;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(flanking);
     }
 });
 
@@ -1158,15 +866,7 @@ var catAI = new Project({
         studentBoost *= 1000;
     },
     canBuy: () => {
-        let obj = catAI;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(catAI);
     }
 });
 
@@ -1177,22 +877,14 @@ var takeOverTheWorld = new Project({
     costPhrase: "(100O potatoes, 10s creativity, 10s ideas)",
     potatoCost: parseNum("100O"),
     creatCost: parseNum("10s"),
-    potatoCost: parseNum("10s"),
+    ideaCost: parseNum("10s"),
     id: 'takeOverTheWorld',
     effect: () => {
         addMessage('"Not cookies, nor paperclips, nor money, nor catnip can stop us. POTATOZ FOREVER!" - The cat national anthem', 'quote', 'info');
         projects.push(metafolding);
     },
     canBuy: () => {
-        let obj = takeOverTheWorld;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(takeOverTheWorld);        
     }
 });
 
@@ -1220,15 +912,7 @@ var metafolding = new Project({
         addMessage("You can keep playing, but there are no new projects or features to be found. Reset when you are ready.", 'quote', 'info');
     },
     canBuy: () => {
-        let obj = metafolding;
-        let el = document.getElementById('project' + obj.id);
-        let cursor = 'auto';
-        let border = '1px solid rgba(0,0,0,.125)';
-        if (creativity >= obj.creatCost && ideas >= obj.ideaCost && unusedPotatoz >= obj.potatoCost) {
-            cursor = 'pointer';
-            border = '1px solid #5CB85C';
-        } 
-        el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        _updateProjectCard(metafolding);
     }
     
 });

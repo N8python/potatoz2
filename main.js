@@ -68,9 +68,9 @@ $("#self-tabs").hide();
 $("#brain-tab").hide();
 $("#brain").hide();
 $("#buyThoughts").hide();
+$('#btnIncreaseIQ').hide();
 $("#projects").hide();
 $("#advancedPotatonomics").hide();
-$("#increaseIQ").hide();
 $("#convertAll").hide();
 $("#thoughtProduction").hide();
 $("#farms").hide();
@@ -108,7 +108,7 @@ if (advancedNomics) {
     $("#advancedPotatonomics").show();
 }
 if (iqButton) {
-    $("#increaseIQ").show();
+    $("#btnIncreaseIQ").show();
 }
 if (selfReflectionUnlocked) {
     $("#convertAll").show();
