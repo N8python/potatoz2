@@ -499,9 +499,9 @@ var updateButtons = setInterval(() => {
         $("#recallAllCats").removeAttr("disabled");
     }
     if (unusedPotatoz <= iqCost) {
-        $("#increaseIQ").attr("disabled", "");
+        $("#btnIncreaseIQ").attr("disabled", "");
     } else {
-        $("#increaseIQ").removeAttr("disabled");
+        $("#btnIncreaseIQ").removeAttr("disabled");
     }
     if (thoughts < 5) {
         $("#buyCreat").attr("disabled", "");
@@ -546,6 +546,7 @@ function reset() {
     $("#patches").hide();
     $("#projects").hide();
     $("#self-tabs").hide();
+    $('#buyThoughts').hide();
     potatoz = 0;
     unusedPotatoz = 0;
     doneMessages = [];
