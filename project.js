@@ -8,14 +8,16 @@ class Project {
         this.ideaCost = obj.ideaCost || 0;
         this.potatoCost = obj.potatoCost || 0;
         this.effect = obj.effect;
+        this.canBuy = obj.canBuy;
         this.set = false;
         this.done = false;
+        this.id = obj.id;
     }
     setup() {
         this.set = true;
         this.$elem = $("<span>");
         this.$elem.html(`
-      <div class="card" style="margin-bottom: .5em;">
+      <div id="project${this.id}" class="card" style="margin-bottom: .5em;">
         <div class="card-body">
             <h5 class="card-title">${this.title}</h5>
             <h4 class="card-subtitle mb-2 text-muted" style="font-size: smaller">${this.costPhrase}</h4>
@@ -26,18 +28,47 @@ class Project {
         </div>
       <div>
     `);
-        this.$elem.click(() => {
-            if (creativity >= this.creatCost && ideas >= this.ideaCost && unusedPotatoz >= this.potatoCost) {
-                creativity -= this.creatCost;
-                ideas -= this.ideaCost;
-                unusedPotatoz -= this.potatoCost;
-                this.effect();
-                this.$elem.remove();
-                this.done = true;
-            }
-        });
-        $("#projects").append(this.$elem);
+    this.$elem.click(() => {
+        if (creativity >= this.creatCost && ideas >= this.ideaCost && unusedPotatoz >= this.potatoCost) {
+            creativity -= this.creatCost;
+            ideas -= this.ideaCost;
+            unusedPotatoz -= this.potatoCost;
+            this.effect();
+            this.$elem.remove();
+            this.done = true;
+        }
+    });
+    $("#projects").append(this.$elem);
+    
     }
+}
+
+function _updateProjectCard(project) {
+    
+    let updateCard = false;
+    if (project.creatCost) {
+        updateCard = creativity >= project.creatCost ? true : false;
+    }
+    if (project.ideaCost) {
+        updateCard = ideas >= project.ideaCost ? true : false;
+    }
+    if (project.potatoCost) {
+        updateCard = unusedPotatoz >= project.potatoCost ? true : false;
+    }
+
+    let el = document.getElementById('project' + project.id);
+    let cursor = 'auto';
+    let border = '1px solid rgba(0,0,0,.125)';
+
+    if (updateCard) {
+        if (creativity >= project.creatCost && ideas >= project.ideaCost) {
+            cursor = 'pointer';
+            border = '2px solid #5CB85C';
+        }         
+    }
+
+    el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+        
 }
 
 var wateringCans = new Project({
@@ -47,11 +78,15 @@ var wateringCans = new Project({
     costPhrase: "(2 creativity, 1 idea)",
     creatCost: 2,
     ideaCost: 1,
+    id: 'WateringCans',
     effect: () => {
         patchBoost = (patchBoost * 1.5).A();
         projects.push(potatonalysis);
         projects.push(bribeForPatches);
         addMessage('"A river flows out of Eden to water the potato..." - The Potato Bible', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(wateringCans);
     }
 });
 
@@ -61,12 +96,16 @@ var potatonalysis = new Project({
     description: "Advanced tracking of potato generation becomes available.",
     costPhrase: "(10 creativity, 2 ideas)",
     creatCost: 10,
-    ideaCost: 1,
+    ideaCost: 2,
+    id: 'Potatonalysis',
     effect: () => {
         $("#advancedPotatonomics").show();
         advancedNomics = true;
         projects.push(potatoMath);
         addMessage('"I spy with my little eye..., something brownish, bland, and round." - Bonnie, the cat', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(potatonalysis);
     }
 });
 
@@ -77,11 +116,15 @@ var bribeForPatches = new Project({
     costPhrase: "(1000 potatoes, 15 creativity)",
     creatCost: 15,
     potatoCost: 1000,
+    id: 'BribeForPatches',
     effect: () => {
         patchMax += 5;
         projects.push(patchArc);
         projects.push(fertilizer);
         addMessage('"Across history, corrupt officials have been susceptible to bribes. Especially potato bribes." - Beeba, the cat', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(bribeForPatches);        
     }
 });
 
@@ -91,10 +134,14 @@ var patchArc = new Project({
     description: "Patch production increases by 75%.",
     costPhrase: "(10 ideas)",
     ideaCost: 10,
+    id: 'patchArc',
     effect: () => {
         patchBoost *= 1.75;
         projects.push(potatoCabin);
         addMessage('"Potatoes will never be destroyed from the outside. If we falter and lose our freedoms, it will be because we were overripe." - Potatoham Lincoln', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(patchArc);        
     }
 });
 
@@ -106,6 +153,7 @@ var fertilizer = new Project({
     creatCost: 10,
     ideaCost: 5,
     potatoCost: 500,
+    id: 'fertilizer',
     effect: () => {
         patchFertilizer = true;
         setInterval(() => {
@@ -113,6 +161,9 @@ var fertilizer = new Project({
         }, 5000);
         projects.push(turnTheBackyard);
         addMessage('"Now we\'re really environmentally friendly. No sewage!" - Bonnie', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(fertilizer);        
     }
 });
 
@@ -122,11 +173,14 @@ var potatoMath = new Project({
     description: "The rate at which patches increase in price is halved.",
     costPhrase: "(20 creativity, 10 ideas)",
     creatCost: 20,
-    ideaCost: 5,
+    ideaCost: 10,
     effect: () => {
         patchMultiplier = 1.1;
         projects.push(potateanTheorem);
         addMessage('"Potato. potato. potato. More important than calculus." - Beeba', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(potatoMath);    
     }
 });
 
@@ -137,10 +191,14 @@ var potateanTheorem = new Project({
     costPhrase: "(25 creativity, 5 ideas)",
     creatCost: 25,
     ideaCost: 5,
+    id: 'potateanTheorem',
     effect: () => {
         patchPrice = Math.floor(patchPrice / 4);
         projects.push(potatoDiet);
         addMessage('"There is roundness in the humming of the potatoes, there is blandness in the spacing of potatoes." - Potatogras', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(potateanTheorem);
     }
 });
 
@@ -152,9 +210,13 @@ var potatoCabin = new Project({
     potatoCost: 2000,
     creatCost: 10,
     ideaCost: 10,
+    id: 'potatoCabin',
     effect: () => {
         patchMax += 10;
         addMessage('"A cabin for storing potatoes - the greatest breakthrough of our century." - Bonnie', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(potatoCabin);
     }
 });
 
@@ -166,10 +228,14 @@ var turnTheBackyard = new Project({
     potatoCost: 3000,
     creatCost: 15,
     ideaCost: 5,
+    id: 'turnTheBackyard',
     effect: () => {
         patchMax += 30;
         projects.push(ropeCat);
         addMessage('"No, I am your potato." - Darth Potato', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(turnTheBackyard);
     }
 });
 
@@ -181,10 +247,14 @@ var ropeCat = new Project({
     potatoCost: 5000,
     creatCost: 20,
     ideaCost: 10,
+    id: 'ropeCat',
     effect: () => {
         thoughtBoost *= 2;
         projects.push(driveYourOwnerOut);
         addMessage('"Hey, Beeba, thanks for helping out!" - Bonnie', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(ropeCat);
     }
 });
 
@@ -195,11 +265,15 @@ var potatoDiet = new Project({
     costPhrase: "(3500 potatoes, 30 creativity)",
     potatoCost: 3500,
     creatCost: 30,
+    id: 'potatoDiet',
     effect: () => {
         iqButton = true;
-        $("#increaseIQ").show();
+        $("#btnIncreaseIQ").show();
         projects.push(productiveThinking);
         addMessage('"MmM.HMM...MMMMM..." - Bonnie, chewing potatoes', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(potatoDiet);
     }
 });
 
@@ -211,6 +285,7 @@ var productiveThinking = new Project({
     potatoCost: 5000,
     creatCost: 50,
     ideaCost: 30,
+    id: 'productiveThinking',
     effect: () => {
         thoughtSlider = true;
         $("#thoughtProduction").show();
@@ -218,6 +293,9 @@ var productiveThinking = new Project({
         projects.push(selfReflection);
         addMessage('"Think productively. But only about potatoes." - Beeba');
         addMessage("The slider controls what percent of thoughts are automatically converted to creativity and ideas.", 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(productiveThinking);
     }
 });
 
@@ -229,10 +307,14 @@ var selfReflection = new Project({
     potatoCost: 3000,
     creatCost: 60,
     ideaCost: 20,
+    id: 'selfReflection',
     effect: () => {
         selfReflectionUnlocked = true;
         $("#convertAll").show();
         addMessage('"I have no regrets. Yet." - A Baby Kitten', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(selfReflection);
     }
 });
 
@@ -244,9 +326,13 @@ var industryPatches = new Project({
     potatoCost: 25000,
     creatCost: 100,
     ideaCost: 50,
+    id: 'industryPatches',
     effect: () => {
         patchBoost *= 5;
         addMessage('"So much for being eco-friendly. I thought we had something going with the fertitlizer." - Bonnie', 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(industryPatches);
     }
 });
 
@@ -258,9 +344,13 @@ var driveYourOwnerOut = new Project({
     potatoCost: 100000,
     creatCost: 200,
     ideaCost: 100,
+    id: 'driveYourOwnerOut',
     effect: () => {
         addMessage('"It\'s not that I love my owner less, but that I love potatoes more." - Bonnie', 'quote', 'info');
         projects.push(theFarm);
+    },
+    canBuy: () => {
+        _updateProjectCard(driveYourOwnerOut);
     }
 });
 
@@ -272,16 +362,22 @@ var theFarm = new Project({
     potatoCost: 120000,
     creatCost: 500,
     ideaCost: 300,
+    id: 'theFarm',
     effect: () => {
         farmsUnlocked = true;
         farms = 1;
         patches = 0;
         $("#patches").hide();
+        $('#patchProduces').hide();
         doneMessages = doneMessages.remove("patches");
         $("#farms").show();
+        $('#farmProduces').show();
         addMessage("Farms unlocked! These massive potato producting behemoths produce 5000 potatoes a second.", 'quote', 'info');
         projects.push(organizedFarms);
         projects.push(unlockCats);
+    },
+    canBuy: () => {
+        _updateProjectCard(theFarm);
     }
 });
 
@@ -293,11 +389,15 @@ var organizedFarms = new Project({
     potatoCost: 150000,
     creatCost: 100,
     ideaCost: 75,
+    id: 'organizedFarms',
     effect: () => {
         farmBoost *= 1.25;
         farmMax += 8;
         addMessage("\"Once the potato gets rolling, there's no stopping it\" - Beeba", 'quote', 'info');
         projects.push(irrigation);
+    },
+    canBuy: () => {
+        _updateProjectCard(organizedFarms);
     }
 });
 
@@ -309,6 +409,7 @@ var irrigation = new Project({
     potatoCost: parseNum("300M"),
     creatCost: 2000,
     ideaCost: 2000,
+    id: 'irrigation',
     effect: () => {
         setInterval(() => {
             farmBoost = (farmBoost + 0.1).A();
@@ -316,6 +417,9 @@ var irrigation = new Project({
         farmsIrrigated = true;
         addMessage('"Irrigation is almost as good as a sink." - Beeba', 'quote', 'info');
         projects.push(fences);
+    },
+    canBuy: () => {
+        _updateProjectCard(irrigation);
     }
 });
 
@@ -327,10 +431,14 @@ var fences = new Project({
     potatoCost: parseNum("1B"),
     creatCost: parseNum("10K"),
     ideaCost: parseNum("10K"),
+    id: 'fences',
     effect: () => {
         raidChance /= 10;
         addMessage('"A dog that climbs a mountain first has to get over the fence that the cats built." - Bonnie', 'quote', 'info');
         projects.push(superFarms);
+    },
+    canBuy: () => {
+        _updateProjectCard(fences);
     }
 });
 
@@ -342,10 +450,14 @@ var superFarms = new Project({
     potatoCost: parseNum("50B"),
     creatCost: parseNum("1M"),
     ideaCost: parseNum("1M"),
+    id: 'superFarms',
     effect: () => {
         farmBoost *= 100;
         addMessage('"How these farms farms are going to save Louis Lane, I do not know." - Beeba', 'quote', 'info');
         projects.push(unlockSoldierCats);
+    },
+    canBuy: () => {
+        _updateProjectCard(superFarms);
     }
 });
 
@@ -357,6 +469,7 @@ var unlockSoldierCats = new Project({
     potatoCost: parseNum("1T"),
     creatCost: parseNum("10M"),
     ideaCost: parseNum("10M"),
+    id: 'unlockSoldierCats',
     effect: () => {
         $("#battles-tab").show();
         $("#battles").show();
@@ -364,6 +477,9 @@ var unlockSoldierCats = new Project({
         addMessage('Soldier cats now available. Battle with them for more resources.');
         addMessage('"The only thing we have to fear is the carrot itself." - Potatodore Roosevelt', 'quote', 'info');
         projects.push(battles);
+    },
+    canBuy: () => {
+        _updateProjectCard(unlockSoldierCats);
     }
 });
 
@@ -375,6 +491,7 @@ var unlockCats = new Project({
     potatoCost: 500000,
     creatCost: 500,
     ideaCost: 300,
+    id: 'unlockCats',
     effect: () => {
         $("#cats-tab").show();
         $("#cats").show();
@@ -384,6 +501,9 @@ var unlockCats = new Project({
         projects.push(farmerCats);
         projects.push(studentCats);
         projects.push(surveyorCats);
+    },
+    canBuy: () => {
+        _updateProjectCard(unlockCats);
     }
 });
 var farmerCats = new Project({
@@ -394,11 +514,15 @@ var farmerCats = new Project({
     potatoCost: 1000000,
     creatCost: 200,
     ideaCost: 100,
+    id: 'farmerCats',
     effect: () => {
         $("#farmerCats").show();
         farmerCatsUnlocked = true;
         addMessage('"You need to have thumbs to plant crops. But we don\'t care." - Bonnie', 'quote', 'info');
         projects.push(enhancedFarmerCats);
+    },
+    canBuy: () => {
+        _updateProjectCard(farmerCats);
     }
 });
 
@@ -410,11 +534,15 @@ var enhancedFarmerCats = new Project({
     potatoCost: 2500000,
     creatCost: 1000,
     ideaCost: 500,
+    id: 'enhancedFarmerCats',
     effect: () => {
         farmerBoost *= 5;
         farmerReduce = true;
         addMessage('"Steroids are illegal in baseball, not in farming." - Beeba', 'quote', 'info');
         projects.push(superFarmerCats);
+    },
+    canBuy: () => {
+        _updateProjectCard(enhancedFarmerCats);
     }
 });
 
@@ -426,9 +554,13 @@ var superFarmerCats = new Project({
     potatoCost: 50000000,
     creatCost: 1000,
     ideaCost: 600,
+    id: 'superFarmerCats',
     effect: () => {
         addMessage('"Aspire to be Clark Kent." - Beeba, to the farmer cats.', 'quote', 'info');
         farmerBoost *= 10;
+    },
+    canBuy: () => {
+        _updateProjectCard(superFarmerCats);
     }
 });
 
@@ -440,11 +572,15 @@ var studentCats = new Project({
     potatoCost: 2000000,
     creatCost: 300,
     ideaCost: 200,
+    id: 'studentCats',
     effect: () => {
         $("#studentCats").show();
         studentCatsUnlocked = true;
         addMessage('"Back to school." - Bonnie');
         projects.push(quizzes);
+    },
+    canBuy: () => {
+        _updateProjectCard(studentCats);
     }
 });
 
@@ -456,10 +592,14 @@ var quizzes = new Project({
     potatoCost: parseNum("25M"),
     creatCost: 500,
     ideaCost: 250,
+    id: 'quizzes',
     effect: () => {
         studentBoost *= 10;
         addMessage('"Quizzes are like bubbles, they tend to pop often." - Bonnie', 'quote', 'info');
         projects.push(tests);
+    },
+    canBuy: () => {
+        _updateProjectCard(quizzes);
     }
 });
 
@@ -471,10 +611,14 @@ var tests = new Project({
     potatoCost: 150000000,
     creatCost: 4000,
     ideaCost: 1000,
+    id: 'tests',
     effect: () => {
         addMessage('"I got an 87..." - Student Cat #2"', 'quote', 'info');
         studentBoost *= 5;
         projects.push(popQuizzes);
+    },
+    canBuy: () => {
+        _updateProjectCard(tests);        
     }
 });
 
@@ -486,9 +630,13 @@ var popQuizzes = new Project({
     potatoCost: parseNum("10B"),
     creatCost: parseNum("15K"),
     ideaCost: parseNum("10K"),
+    id: 'popQuizzes',
     effect: () => {
         addMessage('"I guess there is something to scaring students after all..." - Bonnie', 'quote', 'info');
         studentBoost *= 20;
+    },
+    canBuy: () => {
+        _updateProjectCard(popQuizzes);
     }
 });
 
@@ -500,11 +648,15 @@ var surveyorCats = new Project({
     potatoCost: 1500000,
     creatCost: 400,
     ideaCost: 200,
+    id: 'surveyorCats',
     effect: () => {
         $("#surveyorCats").show();
         surveyorCatsUnlocked = true;
         addMessage('"Snoopy was the first surveyor. I\'ll be the second." - Beeba', 'quote', 'info');
         projects.push(betterGlasses);
+    },
+    canBuy: () => {
+        _updateProjectCard(surveyorCats);
     }
 });
 
@@ -516,10 +668,14 @@ var betterGlasses = new Project({
     potatoCost: 65000000,
     creatCost: 3000,
     ideaCost: 2000,
+    id: 'betterGlasses',
     effect: () => {
         surveyorBoost *= 5;
         addMessage('"Night vision was not meant for examining land." - Bonnie', 'quote', 'info');
         projects.push(farmerSurveyors);
+    },
+    canBuy: () => {
+        _updateProjectCard(betterGlasses);
     }
 });
 
@@ -531,9 +687,13 @@ var farmerSurveyors = new Project({
     potatoCost: 1000000000,
     creatCost: 1000000,
     ideaCost: 500000,
+    id: 'farmerSurveyors',
     effect: () => {
         addMessage('"The farmer cats might file a lawsuit..." - Bonnie', 'quote', 'info');
         surveyorFarm = true;
+    },
+    canBuy: () => {
+        _updateProjectCard(farmerSurveyors);
     }
 
 });
@@ -546,6 +706,7 @@ var battles = new Project({
     potatoCost: parseNum("10T"),
     creatCost: parseNum("20M"),
     ideaCost: parseNum("10M"),
+    id: 'battles',
     effect: () => {
         $("#battleField").show();
         battlesUnlocked = true;
@@ -553,6 +714,9 @@ var battles = new Project({
         projects.push(potatoLaunchersUnlock);
         projects.push(catScouts);
         projects.push(strategums);
+    },
+    canBuy: () => {
+        _updateProjectCard(battles);
     }
 });
 
@@ -564,10 +728,14 @@ var potatoLaunchersUnlock = new Project({
     potatoCost: parseNum("5T"),
     creatCost: parseNum("200M"),
     ideaCost: parseNum("100M"),
+    id: 'potatoLaunchersUnlock',
     effect: () => {
         potatoLaunchers = true;
         addMessage('"We based them off nerf guns..." - Bonnie', 'quote', 'info');
         projects.push(taterTotBombs);
+    },
+    canBuy: () => {
+        _updateProjectCard(potatoLaunchersUnlock);
     }
 });
 
@@ -579,10 +747,14 @@ var taterTotBombs = new Project({
     potatoCost: parseNum("75T"),
     creatCost: parseNum("1.5B"),
     ideaCost: parseNum("500M"),
+    id: 'taterTotBombs',
     effect: () => {
         taterBombs = true;
         addMessage('"Grenades, but potato shaped." - Beeba', 'quote', 'info');
         projects.push(ultrafarms);
+    },
+    canBuy: () => {
+        _updateProjectCard(taterTotBombs);        
     }
 });
 
@@ -594,9 +766,13 @@ var ultrafarms = new Project({
     potatoCost: parseNum("1Q"),
     creatCost: parseNum("300B"),
     ideaCost: parseNum("150B"),
+    id: 'ultrafarms',
     effect: () => {
         addMessage('"Our farms are too good for Louis Lane." - Bonnie', 'quote', 'info');
         farmBoost *= 100;
+    },
+    canBuy: () => {
+        _updateProjectCard(ultrafarms);
     }
 });
 
@@ -608,10 +784,14 @@ var catScouts = new Project({
     potatoCost: parseNum("15T"),
     creatCost: parseNum("1B"),
     ideaCost: parseNum("500M"),
+    id: 'catScouts',
     effect: () => {
         scouts = true;
         addMessage('"We dump buckets of green paint on cats..." - Beeba', 'quote', 'info');
         projects.push(chaplainCats);
+    },
+    canBuy: () => {
+        _updateProjectCard(catScouts);
     }
 });
 var chaplainCats = new Project({
@@ -622,10 +802,14 @@ var chaplainCats = new Project({
     potatoCost: parseNum("1S"),
     creatCost: parseNum("10s"),
     ideaCost: parseNum("10s"),
+    id: 'chaplainCats',
     effect: () => {
         $("#chaplainCats").show();
         addMessage('"I am the eternal potato." - Potato God', 'quote', 'info');
         chaplainCatsUnlocked = true;
+    },
+    canBuy: () => {
+        _updateProjectCard(chaplainCats);
     }
 });
 
@@ -637,11 +821,15 @@ var strategums = new Project({
     potatoCost: parseNum("20T"),
     creatCost: parseNum("500M"),
     ideaCost: parseNum("250M"),
+    id: 'strategums',
     effect: () => {
         $("#strategums").show();
         stratsUnlocked = true;
         addMessage("'On the offensive, cats are great. On the defensive, they get bored, and start licking themselves.' - Bonnie", 'quote', 'info');
         projects.push(flanking);
+    },
+    canBuy: () => {
+        _updateProjectCard(strategums);
     }
 });
 
@@ -653,10 +841,14 @@ var flanking = new Project({
     potatoCost: parseNum("1q"),
     creatCost: parseNum("250M"),
     ideaCost: parseNum("100M"),
+    id: 'flanking',
     effect: () => {
         flankingUnlocked = true;
         addMessage('"I love flank attacks. I have no idea what they are, but they might have something to do with Hank." - Frank the cat, a friend of Hank the cat', 'quote', 'info');
         projects.push(catAI);
+    },
+    canBuy: () => {
+        _updateProjectCard(flanking);
     }
 });
 
@@ -668,9 +860,13 @@ var catAI = new Project({
     potatoCost: parseNum("1s"),
     creatCost: parseNum("1T"),
     ideaCost: parseNum("1T"),
+    id: 'catAI',
     effect: () => {
         addMessage('"The potatolarity!" - Bonnie', 'quote', 'info');
         studentBoost *= 1000;
+    },
+    canBuy: () => {
+        _updateProjectCard(catAI);
     }
 });
 
@@ -681,10 +877,14 @@ var takeOverTheWorld = new Project({
     costPhrase: "(100O potatoes, 10s creativity, 10s ideas)",
     potatoCost: parseNum("100O"),
     creatCost: parseNum("10s"),
-    potatoCost: parseNum("10s"),
+    ideaCost: parseNum("10s"),
+    id: 'takeOverTheWorld',
     effect: () => {
         addMessage('"Not cookies, nor paperclips, nor money, nor catnip can stop us. POTATOZ FOREVER!" - The cat national anthem', 'quote', 'info');
         projects.push(metafolding);
+    },
+    canBuy: () => {
+        _updateProjectCard(takeOverTheWorld);        
     }
 });
 
@@ -696,6 +896,7 @@ var metafolding = new Project({
     potatoCost: parseNum("1D"),
     creatCost: parseNum("1S"),
     ideaCost: parseNum("1S"),
+    id: 'metafolding',
     effect: () => {
         for (var i = 0; i < 5; i++) potatoz *= 2;
         addMessage("Potatoz.", 'quote', 'info');
@@ -709,7 +910,11 @@ var metafolding = new Project({
         addMessage("An animaiton. After a game of buttons and text.", 'quote', 'info');
         addMessage('See this animation: <a href="Potatoz.mp4" target="_blank">here</a>', 'quote', 'info');
         addMessage("You can keep playing, but there are no new projects or features to be found. Reset when you are ready.", 'quote', 'info');
+    },
+    canBuy: () => {
+        _updateProjectCard(metafolding);
     }
+    
 });
 var projectKey = {
     "Watering Cans": wateringCans,
