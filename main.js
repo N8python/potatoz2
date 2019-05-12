@@ -403,6 +403,8 @@ var consoleId = setInterval(() => {
         $("#brain").show();
         $("#buyThoughts").show();
         $("#projects").show();
+        $("#btnIncreaseIQ").show();
+        iqButton = true;
         projects.push(wateringCans);
         addMessage("Self-awareness achieved. Thoughts to be redirected to maximize potato production.", "quote", "info");
         addMessage("Rumor is that potatoes make you smarter.", "quote", "info");
@@ -531,7 +533,7 @@ var updateProjects = setInterval(() => {
         projects[i].canBuy();
     }
 }, 1);
- 
+
 function reset() {
     $("#farms").hide();
     $("#farmProduces").hide();
@@ -660,7 +662,7 @@ function askForReset() {
     }).then((willReset) => {
         if (willReset) {
             reset();
-            location.href = location.href;
+            location.reload();
         }
     });
 }
