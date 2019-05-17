@@ -660,7 +660,6 @@ function askForReset() {
     }).then((willReset) => {
         if (willReset) {
             reset();
-            location.reload();
         }
     });
 }
