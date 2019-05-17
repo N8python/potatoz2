@@ -403,8 +403,6 @@ var consoleId = setInterval(() => {
         $("#brain").show();
         $("#buyThoughts").show();
         $("#projects").show();
-        $("#btnIncreaseIQ").show();
-        iqButton = true;
         projects.push(wateringCans);
         addMessage("Self-awareness achieved. Thoughts to be redirected to maximize potato production.", "quote", "info");
         addMessage("Rumor is that potatoes make you smarter.", "quote", "info");
