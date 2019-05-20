@@ -660,7 +660,9 @@ function askForReset() {
     }).then((willReset) => {
         if (willReset) {
             reset();
-            location.reload();
+            setTimeout(() => {
+                location.reload();
+            }, 500);
         }
     });
 }
