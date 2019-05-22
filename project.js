@@ -28,23 +28,23 @@ class Project {
         </div>
       <div>
     `);
-    this.$elem.click(() => {
-        if (creativity >= this.creatCost && ideas >= this.ideaCost && unusedPotatoz >= this.potatoCost) {
-            creativity -= this.creatCost;
-            ideas -= this.ideaCost;
-            unusedPotatoz -= this.potatoCost;
-            this.effect();
-            this.$elem.remove();
-            this.done = true;
-        }
-    });
-    $("#projects").append(this.$elem);
-    
+        this.$elem.click(() => {
+            if (creativity >= this.creatCost && ideas >= this.ideaCost && unusedPotatoz >= this.potatoCost) {
+                creativity -= this.creatCost;
+                ideas -= this.ideaCost;
+                unusedPotatoz -= this.potatoCost;
+                this.effect();
+                this.$elem.remove();
+                this.done = true;
+            }
+        });
+        $("#projects").append(this.$elem);
+
     }
 }
 
 function _updateProjectCard(project) {
-    
+
     let updateCard = false;
     if (project.creatCost) {
         updateCard = creativity >= project.creatCost ? true : false;
@@ -64,11 +64,11 @@ function _updateProjectCard(project) {
         if (creativity >= project.creatCost && ideas >= project.ideaCost) {
             cursor = 'pointer';
             border = '2px solid #5CB85C';
-        }         
+        }
     }
 
-    el.setAttribute('style','margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
-        
+    el.setAttribute('style', 'margin-bottom: .5em; cursor: ' + cursor + '; border: ' + border);
+
 }
 
 var wateringCans = new Project({
@@ -124,7 +124,7 @@ var bribeForPatches = new Project({
         addMessage('"Across history, corrupt officials have been susceptible to bribes. Especially potato bribes." - Beeba, the cat', 'quote', 'info');
     },
     canBuy: () => {
-        _updateProjectCard(bribeForPatches);        
+        _updateProjectCard(bribeForPatches);
     }
 });
 
@@ -141,7 +141,7 @@ var patchArc = new Project({
         addMessage('"Potatoes will never be destroyed from the outside. If we falter and lose our freedoms, it will be because we were overripe." - Potatoham Lincoln', 'quote', 'info');
     },
     canBuy: () => {
-        _updateProjectCard(patchArc);        
+        _updateProjectCard(patchArc);
     }
 });
 
@@ -163,7 +163,7 @@ var fertilizer = new Project({
         addMessage('"Now we\'re really environmentally friendly. No sewage!" - Bonnie', 'quote', 'info');
     },
     canBuy: () => {
-        _updateProjectCard(fertilizer);        
+        _updateProjectCard(fertilizer);
     }
 });
 
@@ -180,7 +180,7 @@ var potatoMath = new Project({
         addMessage('"Potato. potato. potato. More important than calculus." - Beeba', 'quote', 'info');
     },
     canBuy: () => {
-        _updateProjectCard(potatoMath);    
+        _updateProjectCard(potatoMath);
     }
 });
 
@@ -280,7 +280,7 @@ var potatoDiet = new Project({
 var productiveThinking = new Project({
     title: "Productive Thinking",
     phrase: "Don't think about video games. Think about this, which is a video game.",
-    description: "You can now select a percent of thoughts to be allocated to ideas and creativity",
+    description: "You can now select a percent of thoughts to be allocated to ideas and creativity.",
     costPhrase: "(5000 potatoes, 50 creativity, 30 ideas)",
     potatoCost: 5000,
     creatCost: 50,
@@ -496,7 +496,7 @@ var unlockCats = new Project({
         $("#cats-tab").show();
         $("#cats").show();
         catsUnlocked = true;
-        addMessage('"Calling all neighborhood cats. We have potatoz!" - Bonnie',"quote","info");
+        addMessage('"Calling all neighborhood cats. We have potatoz!" - Bonnie', "quote", "info");
         addMessage("Cats available. But before you can do anything with them, you must buy the next set of projects.", 'quote', 'info');
         projects.push(farmerCats);
         projects.push(studentCats);
@@ -618,7 +618,7 @@ var tests = new Project({
         projects.push(popQuizzes);
     },
     canBuy: () => {
-        _updateProjectCard(tests);        
+        _updateProjectCard(tests);
     }
 });
 
@@ -754,7 +754,7 @@ var taterTotBombs = new Project({
         projects.push(ultrafarms);
     },
     canBuy: () => {
-        _updateProjectCard(taterTotBombs);        
+        _updateProjectCard(taterTotBombs);
     }
 });
 
@@ -884,7 +884,7 @@ var takeOverTheWorld = new Project({
         projects.push(metafolding);
     },
     canBuy: () => {
-        _updateProjectCard(takeOverTheWorld);        
+        _updateProjectCard(takeOverTheWorld);
     }
 });
 
@@ -914,7 +914,7 @@ var metafolding = new Project({
     canBuy: () => {
         _updateProjectCard(metafolding);
     }
-    
+
 });
 var projectKey = {
     "Watering Cans": wateringCans,

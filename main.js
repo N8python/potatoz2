@@ -55,6 +55,7 @@ localStore("strats", 0);
 localStore("taterBombs", false);
 localStore("flankingUnlocked", false);
 localStore("takeoverAdded", false);
+localStore("immortalCats", 0);
 
 var randInt = new Random().getRandomNumber;
 
@@ -291,8 +292,8 @@ $("#buyIdea").click(() => {
     }
 });
 $("#convertAll").click(() => {
-    ideas += Math.floor(thoughts / 20);
-    creativity += Math.floor(thoughts / 10);
+    ideas += Math.round(thoughts / 20);
+    creativity += Math.round(thoughts / 10);
     thoughts = 0;
 });
 $("#btnIncreaseIQ").click(() => {
@@ -387,6 +388,7 @@ var updateId = setInterval(() => {
     $("#productionPercentDisplay").html(`Percent allocated to production: ${$("#productionPercent").val()}%`);
     $("#weapons").html(`Weapons Equipped: ${(potatoLaunchers) ? "<br> Potato Launchers" : ""} ${(taterBombs) ? "<br> Tater Tot Bombs" : ""}`);
     $("#stratCount").html(`Strategums: ${strats}`);
+    $("#immortalCats").html(`Immortal Cats: ${immortalCats}`);
 }, 1);
 
 var consoleId = setInterval(() => {
@@ -432,6 +434,7 @@ var updatePotatoz = setInterval(() => {
     if (farmerReduce && farmPrice > 200000) {
         farmPrice -= (farmers * 10);
     }
+    incAmount = Math.floor(incAmount * (1 + immortalCats * 0.05));
     potatoz += incAmount;
     unusedPotatoz += incAmount;
     if (chaplainCatsUnlocked) {
@@ -449,6 +452,7 @@ var updatePotatoz = setInterval(() => {
     $("#farmProduces").html(`Each farm produces: ${format(farmBoost*5000)} per sec`);
     if (doneMessages.includes("self")) {
         var thoughtInc = Math.floor((Math.ceil(iq ** 2 / 200)) * thoughtBoost);
+        thoughtInc = Math.floor(thoughtInc * (1 + immortalCats * 0.01));
         if (!thoughtSlider) {
             thoughts += thoughtInc;
         } else {
@@ -651,15 +655,19 @@ function calcDiff(catPow, enemyPow) {
 }
 
 function askForReset() {
+    const immortalCatIncreaseAmount = Math.floor(Math.max(Math.log(potatoz * unusedPotatoz * cats * creativity * ideas) - 10, 0));
     swal({
         title: "Are you sure you want to reset?",
-        text: "Reseting means you will lose all your progress, hours of work.",
+        text: `Reseting means you will lose all your progress, hours of work.
+                Upon resetting, you will recieve ${immortalCatIncreaseAmount} immortal cats.
+                Immortal cats increase the speed that potatoz and thoughts are produced at.`,
         icon: "warning",
         buttons: true,
         dangerMode: true
     }).then((willReset) => {
         if (willReset) {
             reset();
+            immortalCats += immortalCatIncreaseAmount;
             setTimeout(() => {
                 location.reload();
             }, 500);
