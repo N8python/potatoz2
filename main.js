@@ -655,7 +655,7 @@ function calcDiff(catPow, enemyPow) {
 }
 
 function askForReset() {
-    const immortalCatIncreaseAmount = Math.floor(Math.max(Math.log(potatoz) + Math.log(unusedPotatoz) + Math.log(creativity) + Math.log(ideas) + Math.log(thoughts) - 10, 0));
+    const immortalCatIncreaseAmount = Math.floor(Math.max(Math.log(potatoz + 1) + Math.log(unusedPotatoz + 1) + Math.log(creativity + 1) + Math.log(ideas + 1) + Math.log(thoughts + 1) - 10, 0));
     swal({
         title: "Are you sure you want to reset?",
         text: `Reseting means you will lose all your progress, hours of work.
