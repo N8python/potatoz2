@@ -272,7 +272,7 @@ $("#assignChaplain").click(() => {
 });
 $("#removeChaplain").click(() => {
     if (availableCats > 0) {
-        if (checkRemoveAmount('#numChaplainCats', chaplain)) {
+        if (checkRemoveAmount('#numChaplainCats', chaplains)) {
             availableCats += parseNum($("#numChaplainCats").val());
             chaplains -= parseNum($("#numChaplainCats").val());
         }
