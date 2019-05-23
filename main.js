@@ -164,14 +164,14 @@ $("#btnBuyAPatch").click(() => {
 $("#btnBuyAFarm").click(() => {
     if (unusedPotatoz >= farmPrice && farms < Math.floor(farmMax)) {
         unusedPotatoz -= farmPrice;
-        farmPrice = Math.floor(farmPrice * 1.5);
+        farmPrice = Math.round(farmPrice * 1.5);
         farms += 1;
     }
 });
 $("#btnBuyACat").click(() => {
     if (unusedPotatoz >= catPrice) {
         unusedPotatoz -= catPrice;
-        catPrice = Math.floor(catPrice * 1.05);
+        catPrice = Math.round(catPrice * 1.05);
         cats += 1;
         availableCats += 1;
     }
