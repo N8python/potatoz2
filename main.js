@@ -188,12 +188,12 @@ $("#recallAllCats").click(() => {
 
 function checkaddAmount(id) {
     let addAmount = Math.max(parseNum($(id).val()), 0);
-    return addAmount > availableCats ? false : true;
+    return (addAmount > availableCats) ? false : true;
 }
 
 function checkRemoveAmount(id, value) {
     let removeAmount = Math.max(parseNum($(id).val()), 0);
-    return removeAmount > value ? false : true;
+    return (removeAmount > value) ? true : false;
 }
 
 $("#assignFarmer").click(() => {
@@ -206,7 +206,7 @@ $("#assignFarmer").click(() => {
 });
 $('#removeFarmer').click(() => {
     if (farmers > 0) {
-        if (checkRemoveAmount('#numFarmerCats', farmers)) {
+        if (checkRemoveAmount('#numFarmerCats', 0)) {
             availableCats += parseNum($('#numFarmerCats').val());
             farmers -= parseNum($('#numFarmerCats').val());
         }
@@ -224,7 +224,7 @@ $("#assignStudent").click(() => {
 });
 $("#removeStudent").click(() => {
     if (students > 0) {
-        if (checkRemoveAmount('#numStudentCats', students)) {
+        if (checkRemoveAmount('#numStudentCats', 0)) {
             availableCats += parseNum($('#numStudentCats').val());
             students -= parseNum($('#numStudentCats').val());
         }
@@ -240,7 +240,7 @@ $("#assignSurveyor").click(() => {
 });
 $("#removeSurveyor").click(() => {
     if (surveyors > 0) {
-        if (checkRemoveAmount('#numSurveyorCats', surveyors)) {
+        if (checkRemoveAmount('#numSurveyorCats', 0)) {
             availableCats += parseNum($("#numSurveyorCats").val());
             surveyors -= parseNum($("#numSurveyorCats").val());
         }
@@ -256,7 +256,7 @@ $("#assignSoldier").click(() => {
 });
 $("#removeSoldier").click(() => {
     if (soldierCats > 0) {
-        if (checkRemoveAmount('#numSoldierCats', soldierCats)) {
+        if (checkRemoveAmount('#numSoldierCats', 0)) {
             availableCats += parseNum($("#numSoldierCats").val());
             soldierCats -= parseNum($("#numSoldierCats").val());
         }
@@ -272,7 +272,7 @@ $("#assignChaplain").click(() => {
 });
 $("#removeChaplain").click(() => {
     if (availableCats > 0) {
-        if (checkRemoveAmount('#numChaplainCats', chaplains)) {
+        if (checkRemoveAmount('#numChaplainCats', 0)) {
             availableCats += parseNum($("#numChaplainCats").val());
             chaplains -= parseNum($("#numChaplainCats").val());
         }
@@ -655,7 +655,8 @@ function calcDiff(catPow, enemyPow) {
 }
 
 function askForReset() {
-    const immortalCatIncreaseAmount = Math.floor(Math.max(Math.log(potatoz + 1) + Math.log(unusedPotatoz + 1) + Math.log(creativity + 1) + Math.log(ideas + 1) + Math.log(thoughts + 1) - 10, 0));
+    const NaNEater = x => Number.isNaN(x) ? 0 : x;
+    const immortalCatIncreaseAmount = NaNEater(Math.max(Math.floor(Math.log(potatoz) - 7) * 10, 0));
     swal({
         title: "Are you sure you want to reset?",
         text: `Reseting means you will lose all your progress, hours of work.
