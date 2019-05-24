@@ -426,7 +426,7 @@ var irrigation = new Project({
 var fences = new Project({
     title: "Fences",
     phrase: "Dogs can't climb fences.",
-    description: "The dog reign of terror comes to an end.",
+    description: "The dog reign of terror comes to an end (mostly).",
     costPhrase: "(1B potatoes, 10K creativity, 10K ideas)",
     potatoCost: parseNum("1B"),
     creatCost: parseNum("10K"),
@@ -689,7 +689,7 @@ var farmerSurveyors = new Project({
     ideaCost: 500000,
     id: 'farmerSurveyors',
     effect: () => {
-        addMessage('"The farmer cats might file a lawsuit..." - Bonnie', 'quote', 'info');
+        addMessage('"The farmer cats might file a pawsuit..." - Bonnie', 'quote', 'info');
         surveyorFarm = true;
     },
     canBuy: () => {

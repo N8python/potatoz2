@@ -199,8 +199,8 @@ function checkRemoveAmount(id, value) {
 $("#assignFarmer").click(() => {
     if (availableCats > 0) {
         if (checkaddAmount('#numFarmerCats')) {
-            availableCats -= parseNum($('#numFarmerCats').val());
-            farmers += parseNum($('#numFarmerCats').val());
+            availableCats -= Math.max(parseNum($('#numFarmerCats').val()), 0);
+            farmers += Math.max(parseNum($('#numFarmerCats').val()), 0);
         }
     }
 });
@@ -216,8 +216,8 @@ $('#removeFarmer').click(() => {
 $("#assignStudent").click(() => {
     if (availableCats > 0) {
         if (checkaddAmount('#numStudentCats')) {
-            availableCats -= parseNum($("#numStudentCats").val());
-            students += parseNum($("#numStudentCats").val());
+            availableCats -= Math.max(parseNum($("#numStudentCats").val()), 0);
+            students += Math.max(parseNum($("#numStudentCats").val()), 0);
         }
 
     }
@@ -233,8 +233,8 @@ $("#removeStudent").click(() => {
 $("#assignSurveyor").click(() => {
     if (availableCats > 0) {
         if (checkaddAmount('#numSurveyorCats')) {
-            availableCats -= parseNum($("#numSurveyorCats").val());
-            surveyors += parseNum($("#numSurveyorCats").val());
+            availableCats -= Math.max(parseNum($("#numSurveyorCats").val()), 0);
+            surveyors += Math.max(parseNum($("#numSurveyorCats").val()), 0);
         }
     }
 });
@@ -249,8 +249,8 @@ $("#removeSurveyor").click(() => {
 $("#assignSoldier").click(() => {
     if (availableCats > 0) {
         if (checkaddAmount('#numSoldierCats')) {
-            availableCats -= parseNum($("#numSoldierCats").val());
-            soldierCats += parseNum($("#numSoldierCats").val());
+            availableCats -= Math.max(parseNum($("#numSoldierCats").val()), 0);
+            soldierCats += Math.max(parseNum($("#numSoldierCats").val()), 0);
         }
     }
 });
@@ -265,8 +265,8 @@ $("#removeSoldier").click(() => {
 $("#assignChaplain").click(() => {
     if (availableCats > 0) {
         if (checkaddAmount('#numChaplainCats')) {
-            availableCats -= parseNum($("#numChaplainCats").val());
-            chaplains += parseNum($("#numChaplainCats").val());
+            availableCats -= Math.max(parseNum($("#numChaplainCats").val()), 0);
+            chaplains += Math.max(parseNum($("#numChaplainCats").val()), 0);
         }
     }
 });
