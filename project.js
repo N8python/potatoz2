@@ -904,7 +904,7 @@ var metafolding = new Project({
         addMessage("UI by pjlasl, and duncan93", "quote", "info");
         addMessage("Coding by N8, and nice people on Stack Overflow.", 'quote', 'info');
         addMessage("Ideas from N8 and Claire.", 'quote', 'info');
-        addMessage("Beeba, Claire's friend's cat.", 'quote', 'info');
+        addMessage("Beeba, a friend's cat.", 'quote', 'info');
         addMessage("Bonnie, my cat, for starting it all.", 'quote', 'info');
         addMessage("Since you worked so hard, you get a reward.", 'quote', 'info');
         addMessage("An animaiton. After a game of buttons and text.", 'quote', 'info');
